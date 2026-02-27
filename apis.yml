@@ -1,0 +1,150 @@
+name: Salesforce Einstein APIs
+description: Collection of Salesforce Einstein AI and machine learning APIs for predictive analytics, natural language processing, computer vision, and intelligent automation
+image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-logo.png
+url: https://www.salesforce.com/products/einstein/overview/
+created: '2024'
+modified: '2024'
+specificationVersion: '0.18'
+tags:
+- artificial intelligence
+- machine learning
+- predictive analytics
+- natural language processing
+- computer vision
+- CRM
+- salesforce
+apis:
+- name: Einstein Vision API
+  description: Image recognition and classification API for building custom AI-powered image recognition models
+  image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-vision.png
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - computer vision
+  - image recognition
+  - machine learning
+  properties:
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: OpenAPI
+    url: https://api.einstein.ai/v2/vision/openapi.json
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: SignUp
+    url: https://api.einstein.ai/signup
+- name: Einstein Language API
+  description: Natural language processing API for sentiment analysis, intent detection, and text classification
+  image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-language.png
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/natural-language-processing/
+  baseURL: https://api.einstein.ai/v2/language
+  tags:
+  - natural language processing
+  - sentiment analysis
+  - text classification
+  - machine learning
+  properties:
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: OpenAPI
+    url: https://api.einstein.ai/v2/language/openapi.json
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+- name: Einstein Prediction Builder API
+  description: Create custom AI predictions on Salesforce data without code using Einstein AI
+  image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/prediction-builder.png
+  humanURL: https://help.salesforce.com/s/articleView?id=sf.einstein_prediction_builder.htm
+  baseURL: https://[instance].salesforce.com/services/data/v58.0/einstein/
+  tags:
+  - predictive analytics
+  - machine learning
+  - CRM
+  - no-code
+  properties:
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: API Reference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+- name: Einstein Discovery API
+  description: Advanced analytics and automated insights API for predicting outcomes and recommending actions
+  image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-discovery.png
+  humanURL: https://www.salesforce.com/products/einstein/features/
+  baseURL: https://[instance].salesforce.com/services/data/v58.0/analytics/
+  tags:
+  - predictive analytics
+  - business intelligence
+  - automated insights
+  - machine learning
+  properties:
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: API Reference
+    url: https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Authentication
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+- name: Einstein Bots API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants
+  image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-bots.png
+  humanURL: https://www.salesforce.com/products/service-cloud/features/chatbots/
+  baseURL: https://[instance].salesforce.com/services/data/v58.0/einstein/
+  tags:
+  - conversational AI
+  - chatbots
+  - natural language processing
+  - customer service
+  properties:
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: API Reference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+- name: Einstein GPT API
+  description: Generative AI API powered by OpenAI integration for creating personalized content across Salesforce
+  image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-gpt.png
+  humanURL: https://www.salesforce.com/einstein-gpt/
+  baseURL: https://[instance].salesforce.com/services/data/v58.0/einstein/
+  tags:
+  - generative AI
+  - GPT
+  - content generation
+  - large language models
+  properties:
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+common:
+- type: Portal
+  url: https://developer.salesforce.com/
+- type: Getting Started
+  url: https://developer.salesforce.com/developer-centers/einstein
+- type: Authentication
+  url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+- type: Terms of Service
+  url: https://www.salesforce.com/company/legal/agreements/
+- type: Privacy Policy
+  url: https://www.salesforce.com/company/privacy/
+- type: Status
+  url: https://status.salesforce.com/
+- type: Support
+  url: https://help.salesforce.com/
+- type: Blog
+  url: https://developer.salesforce.com/blogs
+- type: Community
+  url: https://trailhead.salesforce.com/community
+- type: LinkedIn
+  url: https://www.linkedin.com/showcase/salesforce-einstein/
+- type: Twitter
+  url: https://twitter.com/salesforce
+maintainers:
+- name: Salesforce
+  email: platform@salesforce.com
+  twitter: https://twitter.com/salesforce
