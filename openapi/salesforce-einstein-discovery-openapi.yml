@@ -1,0 +1,693 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Discovery API
+  description: >-
+    Advanced analytics and automated insights API for predicting outcomes
+    and recommending actions. Einstein Discovery leverages the Salesforce
+    Analytics (Wave) REST API to provide AI-powered stories, predictions,
+    and data insights.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+  - url: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Instance
+    variables:
+      instance:
+        default: login
+        description: Your Salesforce instance domain.
+security:
+  - oauth2: []
+tags:
+  - name: Stories
+    description: Manage Einstein Discovery stories
+  - name: Models
+    description: Manage Einstein Discovery prediction models
+  - name: Predictions
+    description: Make predictions using Discovery models
+  - name: Lenses
+    description: Manage analytics lenses (datasets)
+  - name: Dashboards
+    description: Manage analytics dashboards
+paths:
+  /wave/stories:
+    get:
+      operationId: listStories
+      summary: List stories
+      description: Returns a list of all Einstein Discovery stories.
+      tags:
+        - Stories
+      parameters:
+        - name: q
+          in: query
+          description: Search query to filter stories by name.
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          description: Number of stories to return per page.
+          schema:
+            type: integer
+            default: 25
+        - name: page
+          in: query
+          description: Page number.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with stories list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createStory
+      summary: Create a story
+      description: Creates a new Einstein Discovery story from a dataset.
+      tags:
+        - Stories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoryInput'
+      responses:
+        '201':
+          description: Story created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/stories/{storyId}:
+    get:
+      operationId: getStory
+      summary: Get a story
+      description: Returns details of a specific Einstein Discovery story.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/StoryId'
+      responses:
+        '200':
+          description: Successful response with story details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateStory
+      summary: Update a story
+      description: Updates an existing Einstein Discovery story.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/StoryId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoryInput'
+      responses:
+        '200':
+          description: Story updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteStory
+      summary: Delete a story
+      description: Deletes an Einstein Discovery story.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/StoryId'
+      responses:
+        '204':
+          description: Story deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wave/stories/{storyId}/stats:
+    get:
+      operationId: getStoryStats
+      summary: Get story statistics
+      description: Returns insights and statistical analysis from a story.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/StoryId'
+      responses:
+        '200':
+          description: Successful response with story statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryStats'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wave/models:
+    get:
+      operationId: listModels
+      summary: List prediction models
+      description: Returns a list of Einstein Discovery prediction models.
+      tags:
+        - Models
+      parameters:
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+        - name: page
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with models list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Get a prediction model
+      description: Returns details of a specific prediction model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with model details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteModel
+      summary: Delete a prediction model
+      description: Deletes an Einstein Discovery prediction model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      responses:
+        '204':
+          description: Model deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wave/prediction:
+    post:
+      operationId: predict
+      summary: Make a prediction
+      description: >-
+        Makes a prediction using an Einstein Discovery model. Provide the
+        model ID and input field values to receive a prediction with
+        explanatory factors.
+      tags:
+        - Predictions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionInput'
+      responses:
+        '200':
+          description: Successful prediction response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionOutput'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/lenses:
+    get:
+      operationId: listLenses
+      summary: List lenses
+      description: Returns a list of analytics lenses (datasets).
+      tags:
+        - Lenses
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: Successful response with lenses list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LensCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/lenses/{lensId}:
+    get:
+      operationId: getLens
+      summary: Get a lens
+      description: Returns details of a specific analytics lens.
+      tags:
+        - Lenses
+      parameters:
+        - name: lensId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with lens details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lens'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wave/dashboards:
+    get:
+      operationId: listDashboards
+      summary: List dashboards
+      description: Returns a list of analytics dashboards.
+      tags:
+        - Dashboards
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: Successful response with dashboards list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/dashboards/{dashboardId}:
+    get:
+      operationId: getDashboard
+      summary: Get a dashboard
+      description: Returns details of a specific analytics dashboard.
+      tags:
+        - Dashboards
+      parameters:
+        - name: dashboardId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with dashboard details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            wave_api: Access to Analytics APIs
+  parameters:
+    StoryId:
+      name: storyId
+      in: path
+      required: true
+      description: Unique identifier for the story.
+      schema:
+        type: string
+    ModelId:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the model.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Story:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+          enum:
+            - New
+            - Running
+            - Complete
+            - Failed
+        objectType:
+          type: string
+        outcomeVariable:
+          type: string
+        outcomeGoal:
+          type: string
+          enum:
+            - Maximize
+            - Minimize
+        storyType:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/UserReference'
+        url:
+          type: string
+          format: uri
+    StoryInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the story.
+        label:
+          type: string
+          description: Display label.
+        sourceDatasetId:
+          type: string
+          description: ID of the dataset to analyze.
+        outcomeVariable:
+          type: string
+          description: Variable to predict.
+        outcomeGoal:
+          type: string
+          enum:
+            - Maximize
+            - Minimize
+      required:
+        - name
+        - sourceDatasetId
+        - outcomeVariable
+    StoryCollection:
+      type: object
+      properties:
+        stories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    StoryStats:
+      type: object
+      properties:
+        insights:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              description:
+                type: string
+              impact:
+                type: number
+              variable:
+                type: string
+        modelMetrics:
+          type: object
+          properties:
+            r2:
+              type: number
+            rmse:
+              type: number
+            accuracy:
+              type: number
+    DiscoveryModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - Training
+            - Failed
+        storyId:
+          type: string
+        algorithmType:
+          type: string
+        predictionType:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    ModelCollection:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoveryModel'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    PredictionInput:
+      type: object
+      properties:
+        predictionDefinition:
+          type: string
+          description: ID of the prediction definition or model.
+        columnNames:
+          type: array
+          description: Names of the input columns.
+          items:
+            type: string
+        rows:
+          type: array
+          description: Input data rows for prediction.
+          items:
+            type: array
+            items:
+              type: string
+      required:
+        - predictionDefinition
+        - columnNames
+        - rows
+    PredictionOutput:
+      type: object
+      properties:
+        predictionResults:
+          type: array
+          items:
+            type: object
+            properties:
+              prediction:
+                type: object
+                properties:
+                  total:
+                    type: number
+                    description: Predicted value.
+                  baseLine:
+                    type: number
+                    description: Baseline prediction value.
+              prescriptions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                    description:
+                      type: string
+                    impact:
+                      type: number
+              middleValues:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    columnName:
+                      type: string
+                    value:
+                      type: string
+                    impact:
+                      type: number
+    Lens:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        datasetId:
+          type: string
+        datasetName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    LensCollection:
+      type: object
+      properties:
+        lenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lens'
+        totalSize:
+          type: integer
+    Dashboard:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        folderId:
+          type: string
+        folderName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    DashboardCollection:
+      type: object
+      properties:
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+        totalSize:
+          type: integer
+    UserReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string

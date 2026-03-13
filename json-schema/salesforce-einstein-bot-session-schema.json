@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/salesforce-einstein/json-schema/salesforce-einstein-bot-session-schema.json",
+  "title": "Einstein Bot Session",
+  "description": "Represents a conversational session with an Einstein Bot, including messages, status, and session metadata.",
+  "type": "object",
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "description": "Unique session identifier."
+    },
+    "botId": {
+      "type": "string",
+      "description": "ID of the Einstein Bot handling the session."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the session.",
+      "enum": ["Active", "Ended", "Transferred"]
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the session was created."
+    },
+    "lastActiveDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last activity in the session."
+    },
+    "externalSessionKey": {
+      "type": "string",
+      "description": "External key associated with the session."
+    },
+    "messages": {
+      "type": "array",
+      "description": "Messages exchanged during the session.",
+      "items": {
+        "$ref": "#/$defs/BotMessage"
+      }
+    },
+    "sessionEnded": {
+      "type": "boolean",
+      "description": "Whether the session has ended."
+    }
+  },
+  "required": ["sessionId", "botId", "status"],
+  "$defs": {
+    "BotMessage": {
+      "type": "object",
+      "description": "A message in an Einstein Bot conversation.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of bot message.",
+          "enum": [
+            "Text",
+            "Choices",
+            "Transfer",
+            "EscalateToAgent",
+            "SessionEnded"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "description": "Text content of the message."
+        },
+        "sender": {
+          "type": "string",
+          "description": "Who sent the message.",
+          "enum": ["User", "Bot"]
+        },
+        "choices": {
+          "type": "array",
+          "description": "Available choices for choice-type messages.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "index": {
+                "type": "integer"
+              }
+            },
+            "required": ["label"]
+          }
+        },
+        "sequenceId": {
+          "type": "integer",
+          "description": "Message sequence number."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the message was sent."
+        }
+      },
+      "required": ["type"]
+    }
+  }
+}

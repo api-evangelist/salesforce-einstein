@@ -1,0 +1,636 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein GPT API
+  description: >-
+    Generative AI API powered by large language model integration for creating
+    personalized content across Salesforce. Einstein GPT (now part of Einstein
+    Copilot and Einstein Generative AI) provides endpoints for text generation,
+    prompt management, and AI-powered content creation.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+  - url: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Instance
+    variables:
+      instance:
+        default: login
+        description: Your Salesforce instance domain.
+security:
+  - oauth2: []
+tags:
+  - name: Generations
+    description: Generate AI-powered content
+  - name: Prompt Templates
+    description: Manage prompt templates for content generation
+  - name: Models
+    description: Manage and list available generative AI models
+  - name: Feedback
+    description: Provide feedback on generated content
+paths:
+  /einstein/llm/prompt/generations:
+    post:
+      operationId: generateFromPrompt
+      summary: Generate content from a prompt
+      description: >-
+        Generates AI content using a prompt template. Provide a prompt
+        template ID and field values to generate personalized content.
+      tags:
+        - Generations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerationRequest'
+      responses:
+        '200':
+          description: Successful generation response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/completions:
+    post:
+      operationId: completePrompt
+      summary: Complete a prompt
+      description: >-
+        Sends a raw prompt to the configured LLM and returns the completion.
+        This provides direct access to the language model without using a
+        template.
+      tags:
+        - Generations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+      responses:
+        '200':
+          description: Successful completion response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/chat/generations:
+    post:
+      operationId: chatGeneration
+      summary: Generate a chat response
+      description: >-
+        Generates a conversational AI response using a chat-based prompt
+        with message history context.
+      tags:
+        - Generations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatGenerationRequest'
+      responses:
+        '200':
+          description: Successful chat generation response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/templates:
+    get:
+      operationId: listPromptTemplates
+      summary: List prompt templates
+      description: Returns a list of all prompt templates in the org.
+      tags:
+        - Prompt Templates
+      parameters:
+        - name: pageSize
+          in: query
+          description: Number of templates to return per page.
+          schema:
+            type: integer
+            default: 25
+        - name: page
+          in: query
+          description: Page token for pagination.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with prompt templates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplateCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPromptTemplate
+      summary: Create a prompt template
+      description: Creates a new prompt template for content generation.
+      tags:
+        - Prompt Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptTemplateInput'
+      responses:
+        '201':
+          description: Prompt template created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/templates/{templateId}:
+    get:
+      operationId: getPromptTemplate
+      summary: Get a prompt template
+      description: Returns details of a specific prompt template.
+      tags:
+        - Prompt Templates
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: Successful response with template details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePromptTemplate
+      summary: Update a prompt template
+      description: Updates an existing prompt template.
+      tags:
+        - Prompt Templates
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptTemplateInput'
+      responses:
+        '200':
+          description: Template updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePromptTemplate
+      summary: Delete a prompt template
+      description: Deletes a prompt template.
+      tags:
+        - Prompt Templates
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '204':
+          description: Template deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/llm/models:
+    get:
+      operationId: listModels
+      summary: List available models
+      description: >-
+        Returns a list of available generative AI models that can be used
+        for content generation.
+      tags:
+        - Models
+      responses:
+        '200':
+          description: Successful response with available models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Get model details
+      description: Returns details of a specific generative AI model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with model details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerativeModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/llm/feedback:
+    post:
+      operationId: submitFeedback
+      summary: Submit feedback on generated content
+      description: >-
+        Submits feedback on AI-generated content to improve future
+        generation quality.
+      tags:
+        - Feedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackInput'
+      responses:
+        '201':
+          description: Feedback submitted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein Generative AI features
+  parameters:
+    TemplateId:
+      name: templateId
+      in: path
+      required: true
+      description: Unique identifier for the prompt template.
+      schema:
+        type: string
+    ModelId:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the generative AI model.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    GenerationRequest:
+      type: object
+      properties:
+        promptTemplateDevName:
+          type: string
+          description: Developer name of the prompt template to use.
+        inputParams:
+          type: object
+          description: Key-value pairs of input parameters for the template.
+          additionalProperties:
+            type: string
+        isPreview:
+          type: boolean
+          description: If true, returns the resolved prompt without calling the LLM.
+          default: false
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+              description: Maximum number of tokens in the response.
+            temperature:
+              type: number
+              description: Sampling temperature (0.0 to 2.0).
+            applicationName:
+              type: string
+              description: Application context for the generation.
+      required:
+        - promptTemplateDevName
+        - inputParams
+    CompletionRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The prompt text to complete.
+        modelId:
+          type: string
+          description: ID of the model to use.
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+            temperature:
+              type: number
+            topP:
+              type: number
+            stopSequences:
+              type: array
+              items:
+                type: string
+      required:
+        - prompt
+    ChatGenerationRequest:
+      type: object
+      properties:
+        promptTemplateDevName:
+          type: string
+          description: Developer name of the chat prompt template.
+        inputParams:
+          type: object
+          additionalProperties:
+            type: string
+        messages:
+          type: array
+          description: Conversation history for context.
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                  - user
+                  - assistant
+                  - system
+              content:
+                type: string
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+            temperature:
+              type: number
+      required:
+        - messages
+    GenerationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique generation identifier.
+        generationId:
+          type: string
+          description: ID of this generation for feedback purposes.
+        prompt:
+          type: string
+          description: The resolved prompt that was sent to the model.
+        generation:
+          type: object
+          properties:
+            id:
+              type: string
+            generatedText:
+              type: string
+              description: The generated content.
+            contentQuality:
+              type: object
+              properties:
+                scanToxicity:
+                  type: object
+                  properties:
+                    isDetected:
+                      type: boolean
+                    categories:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          categoryName:
+                            type: string
+                          score:
+                            type: number
+            parameters:
+              type: object
+              properties:
+                finish_reason:
+                  type: string
+                token_usage:
+                  type: object
+                  properties:
+                    prompt_tokens:
+                      type: integer
+                    completion_tokens:
+                      type: integer
+                    total_tokens:
+                      type: integer
+    PromptTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+        developerName:
+          type: string
+        masterLabel:
+          type: string
+        description:
+          type: string
+        promptText:
+          type: string
+          description: The template text with merge field placeholders.
+        type:
+          type: string
+          enum:
+            - salesGeneration
+            - fieldGeneration
+            - recordSummary
+            - chatGeneration
+            - flexibleGeneration
+          description: Type of prompt template.
+        relatedEntity:
+          type: string
+          description: Salesforce object the template relates to.
+        activeVersionId:
+          type: string
+        status:
+          type: string
+          enum:
+            - Active
+            - Draft
+            - Inactive
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+    PromptTemplateInput:
+      type: object
+      properties:
+        developerName:
+          type: string
+        masterLabel:
+          type: string
+        description:
+          type: string
+        promptText:
+          type: string
+        type:
+          type: string
+          enum:
+            - salesGeneration
+            - fieldGeneration
+            - recordSummary
+            - chatGeneration
+            - flexibleGeneration
+        relatedEntity:
+          type: string
+      required:
+        - developerName
+        - masterLabel
+        - promptText
+        - type
+    PromptTemplateCollection:
+      type: object
+      properties:
+        promptTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    GenerativeModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        provider:
+          type: string
+          description: Model provider name.
+        modelType:
+          type: string
+          enum:
+            - gpt-4
+            - gpt-3.5-turbo
+            - claude
+            - custom
+          description: Type of the model.
+        capabilities:
+          type: array
+          items:
+            type: string
+          description: Capabilities supported by the model.
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+    ModelCollection:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerativeModel'
+        totalSize:
+          type: integer
+    FeedbackInput:
+      type: object
+      properties:
+        generationId:
+          type: string
+          description: ID of the generation to provide feedback on.
+        feedback:
+          type: string
+          enum:
+            - THUMBS_UP
+            - THUMBS_DOWN
+          description: Feedback signal.
+        feedbackText:
+          type: string
+          description: Optional text feedback.
+        source:
+          type: string
+          description: Source of the feedback.
+      required:
+        - generationId
+        - feedback
+    FeedbackResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        generationId:
+          type: string
+        feedback:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string

@@ -1,0 +1,820 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Vision API
+  description: >-
+    Image recognition and classification API for building custom AI-powered
+    image recognition models. Einstein Vision provides endpoints to create
+    datasets, train custom image classification and object detection models,
+    and make predictions using those models.
+  version: 2.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+  - url: https://api.einstein.ai/v2/vision
+    description: Einstein Vision Production Server
+security:
+  - bearerAuth: []
+tags:
+  - name: Datasets
+    description: Manage image datasets for training models
+  - name: Examples
+    description: Manage training examples within datasets
+  - name: Models
+    description: Train and manage image classification and detection models
+  - name: Predictions
+    description: Make predictions using trained models
+  - name: API Usage
+    description: Monitor API usage and limits
+paths:
+  /datasets:
+    get:
+      operationId: listDatasets
+      summary: List datasets
+      description: Returns a list of all datasets associated with the account.
+      tags:
+        - Datasets
+      parameters:
+        - name: offset
+          in: query
+          description: Zero-based offset of the first dataset to return.
+          schema:
+            type: integer
+            default: 0
+        - name: count
+          in: query
+          description: Maximum number of datasets to return.
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+      responses:
+        '200':
+          description: Successful response with list of datasets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDataset
+      summary: Create a dataset
+      description: Creates a new dataset for image classification or object detection.
+      tags:
+        - Datasets
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the dataset.
+                type:
+                  type: string
+                  enum:
+                    - image
+                    - image-multi-label
+                    - image-detection
+                  description: Type of the dataset.
+                path:
+                  type: string
+                  description: URL of the .zip file containing images for the dataset.
+              required:
+                - name
+                - type
+      responses:
+        '200':
+          description: Dataset created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /datasets/{datasetId}:
+    get:
+      operationId: getDataset
+      summary: Get a dataset
+      description: Returns details of a specific dataset.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Successful response with dataset details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteDataset
+      summary: Delete a dataset
+      description: Deletes a dataset and all associated examples and models.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Dataset deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /datasets/{datasetId}/examples:
+    get:
+      operationId: listExamples
+      summary: List examples in a dataset
+      description: Returns a list of examples in the specified dataset.
+      tags:
+        - Examples
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: count
+          in: query
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - name: source
+          in: query
+          description: Filter by source type.
+          schema:
+            type: string
+            enum:
+              - all
+              - upload
+              - feedback
+      responses:
+        '200':
+          description: Successful response with examples list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExampleList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addExample
+      summary: Add an example to a dataset
+      description: Adds a labeled image example to an existing dataset.
+      tags:
+        - Examples
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the example.
+                labelId:
+                  type: integer
+                  description: ID of the label to assign to the example.
+                data:
+                  type: string
+                  format: binary
+                  description: Binary content of the image file.
+              required:
+                - name
+                - labelId
+      responses:
+        '200':
+          description: Example added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /datasets/{datasetId}/models:
+    get:
+      operationId: listModelsForDataset
+      summary: List models for a dataset
+      description: Returns all models trained on the specified dataset.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Successful response with models list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /train:
+    post:
+      operationId: trainModel
+      summary: Train a model
+      description: Trains a model on a dataset. Training is asynchronous.
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name for the trained model.
+                datasetId:
+                  type: integer
+                  description: ID of the dataset to train on.
+                trainParams:
+                  type: string
+                  description: JSON string of optional training parameters.
+                algorithm:
+                  type: string
+                  description: Training algorithm to use.
+                epochs:
+                  type: integer
+                  description: Number of training epochs.
+                learningRate:
+                  type: number
+                  description: Learning rate for training.
+              required:
+                - name
+                - datasetId
+      responses:
+        '200':
+          description: Training job started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /retrain:
+    post:
+      operationId: retrainModel
+      summary: Retrain a model
+      description: Retrains an existing model with additional data.
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                modelId:
+                  type: string
+                  description: ID of the model to retrain.
+                epochs:
+                  type: integer
+                  description: Number of training epochs.
+                learningRate:
+                  type: number
+                  description: Learning rate for retraining.
+              required:
+                - modelId
+      responses:
+        '200':
+          description: Retraining job started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Get model details
+      description: Returns the details and metrics of a trained model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with model details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteModel
+      summary: Delete a model
+      description: Deletes a trained model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Model deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /models/{modelId}/lc:
+    get:
+      operationId: getModelLearningCurve
+      summary: Get model learning curve
+      description: Returns the learning curve data for a trained model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with learning curve.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningCurve'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /predict:
+    post:
+      operationId: predictImage
+      summary: Make a prediction
+      description: >-
+        Classifies an image using a trained model. Submit either an image
+        file or a URL to an image.
+      tags:
+        - Predictions
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                modelId:
+                  type: string
+                  description: ID of the model to use for prediction.
+                sampleLocation:
+                  type: string
+                  description: URL of the image to classify.
+                sampleContent:
+                  type: string
+                  format: binary
+                  description: Binary content of the image to classify.
+                sampleBase64Content:
+                  type: string
+                  description: Base64-encoded image content.
+                numResults:
+                  type: integer
+                  description: Maximum number of prediction results to return.
+                  default: 3
+              required:
+                - modelId
+      responses:
+        '200':
+          description: Successful prediction response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /detect:
+    post:
+      operationId: detectObjects
+      summary: Detect objects in an image
+      description: Detects objects and their bounding boxes in an image.
+      tags:
+        - Predictions
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                modelId:
+                  type: string
+                  description: ID of the object detection model to use.
+                sampleLocation:
+                  type: string
+                  description: URL of the image.
+                sampleContent:
+                  type: string
+                  format: binary
+                  description: Binary content of the image.
+                sampleBase64Content:
+                  type: string
+                  description: Base64-encoded image content.
+              required:
+                - modelId
+      responses:
+        '200':
+          description: Successful detection response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /apiusage:
+    get:
+      operationId: getApiUsage
+      summary: Get API usage
+      description: Returns API usage data for the account.
+      tags:
+        - API Usage
+      responses:
+        '200':
+          description: Successful response with usage data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiUsageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth 2.0 Bearer token. Generate a token using your Einstein Platform
+        Services private key.
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
+    ModelId:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the model.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique dataset identifier.
+        name:
+          type: string
+          description: Name of the dataset.
+        type:
+          type: string
+          enum:
+            - image
+            - image-multi-label
+            - image-detection
+          description: Type of the dataset.
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the dataset was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the dataset was last updated.
+        labelSummary:
+          $ref: '#/components/schemas/LabelSummary'
+        totalExamples:
+          type: integer
+          description: Total number of examples in the dataset.
+        totalLabels:
+          type: integer
+          description: Total number of labels in the dataset.
+        available:
+          type: boolean
+          description: Whether the dataset is available for use.
+        statusMsg:
+          type: string
+          description: Status message for the dataset.
+        object:
+          type: string
+          description: Object type identifier.
+    DatasetList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+    LabelSummary:
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Label'
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique label identifier.
+        datasetId:
+          type: integer
+          description: Dataset the label belongs to.
+        name:
+          type: string
+          description: Label name.
+        numExamples:
+          type: integer
+          description: Number of examples with this label.
+    Example:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique example identifier.
+        name:
+          type: string
+          description: Example name.
+        location:
+          type: string
+          description: URL to the image.
+        label:
+          $ref: '#/components/schemas/Label'
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the example was created.
+        object:
+          type: string
+    ExampleList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Example'
+    Model:
+      type: object
+      properties:
+        modelId:
+          type: string
+          description: Unique model identifier.
+        name:
+          type: string
+          description: Model name.
+        datasetId:
+          type: integer
+          description: Dataset the model was trained on.
+        datasetVersionId:
+          type: integer
+          description: Version of the dataset used.
+        status:
+          type: string
+          enum:
+            - QUEUED
+            - RUNNING
+            - SUCCEEDED
+            - FAILED
+            - DELETED
+          description: Current status of the model.
+        progress:
+          type: number
+          description: Training progress (0.0 to 1.0).
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the model was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the model was last updated.
+        learningRate:
+          type: number
+          description: Learning rate used for training.
+        epochs:
+          type: integer
+          description: Number of training epochs.
+        object:
+          type: string
+        modelType:
+          type: string
+          description: Type of model.
+        failureMsg:
+          type: string
+          description: Failure message if training failed.
+    TrainResponse:
+      type: object
+      properties:
+        modelId:
+          type: string
+          description: ID of the model being trained.
+        datasetId:
+          type: integer
+        datasetVersionId:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+        progress:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        epochs:
+          type: integer
+        learningRate:
+          type: number
+        object:
+          type: string
+    PredictionResponse:
+      type: object
+      properties:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Probability'
+        object:
+          type: string
+    Probability:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Predicted label.
+        probability:
+          type: number
+          description: Confidence score (0.0 to 1.0).
+    DetectionResponse:
+      type: object
+      properties:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectionResult'
+        object:
+          type: string
+    DetectionResult:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Detected object label.
+        probability:
+          type: number
+          description: Confidence score.
+        boundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+    BoundingBox:
+      type: object
+      properties:
+        minX:
+          type: integer
+          description: Minimum X coordinate.
+        minY:
+          type: integer
+          description: Minimum Y coordinate.
+        maxX:
+          type: integer
+          description: Maximum X coordinate.
+        maxY:
+          type: integer
+          description: Maximum Y coordinate.
+    LearningCurve:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              epoch:
+                type: integer
+              metricsData:
+                type: object
+                properties:
+                  f1:
+                    type: array
+                    items:
+                      type: number
+                  testAccuracy:
+                    type: array
+                    items:
+                      type: number
+                  trainingLoss:
+                    type: array
+                    items:
+                      type: number
+        object:
+          type: string
+    ApiUsageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUsage'
+        object:
+          type: string
+    ApiUsage:
+      type: object
+      properties:
+        id:
+          type: string
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+        plan:
+          type: object
+          properties:
+            planId:
+              type: string
+            source:
+              type: string
+        predictionsUsed:
+          type: integer
+        predictionsMax:
+          type: integer
+        object:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.

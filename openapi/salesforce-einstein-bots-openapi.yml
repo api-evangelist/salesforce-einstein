@@ -1,0 +1,489 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots API
+  description: >-
+    Conversational AI API for building intelligent chatbots and virtual
+    assistants. Einstein Bots provides REST endpoints to create, manage,
+    and interact with AI-powered bots that can handle customer service
+    conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+  - url: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Instance
+    variables:
+      instance:
+        default: login
+        description: Your Salesforce instance domain.
+security:
+  - oauth2: []
+tags:
+  - name: Bot Definitions
+    description: Manage Einstein Bot definitions
+  - name: Bot Versions
+    description: Manage bot versions
+  - name: Sessions
+    description: Manage bot conversation sessions
+  - name: Messages
+    description: Send and receive bot messages
+paths:
+  /einstein/bots:
+    get:
+      operationId: listBots
+      summary: List bots
+      description: Returns a list of all Einstein Bots configured in the org.
+      tags:
+        - Bot Definitions
+      responses:
+        '200':
+          description: Successful response with bots list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/bots/{botId}:
+    get:
+      operationId: getBot
+      summary: Get a bot
+      description: Returns details of a specific Einstein Bot.
+      tags:
+        - Bot Definitions
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+      responses:
+        '200':
+          description: Successful response with bot details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bot'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/bots/{botId}/versions:
+    get:
+      operationId: listBotVersions
+      summary: List bot versions
+      description: Returns a list of versions for a specific bot.
+      tags:
+        - Bot Versions
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+      responses:
+        '200':
+          description: Successful response with bot versions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotVersionCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/bots/{botId}/versions/{versionId}:
+    get:
+      operationId: getBotVersion
+      summary: Get a bot version
+      description: Returns details of a specific bot version.
+      tags:
+        - Bot Versions
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+        - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          description: Successful response with bot version details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotVersion'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/bots/{botId}/sessions:
+    post:
+      operationId: createSession
+      summary: Create a bot session
+      description: >-
+        Creates a new conversation session with an Einstein Bot. Returns a
+        session ID to use for sending and receiving messages.
+      tags:
+        - Sessions
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionInput'
+      responses:
+        '201':
+          description: Bot session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/bots/{botId}/sessions/{sessionId}:
+    get:
+      operationId: getSession
+      summary: Get session details
+      description: Returns the current status and details of a bot session.
+      tags:
+        - Sessions
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Successful response with session details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: endSession
+      summary: End a bot session
+      description: Ends an active bot conversation session.
+      tags:
+        - Sessions
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '204':
+          description: Session ended successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/bots/{botId}/sessions/{sessionId}/messages:
+    post:
+      operationId: sendMessage
+      summary: Send a message to a bot
+      description: >-
+        Sends a message to an Einstein Bot within an active session and
+        returns the bot's response.
+      tags:
+        - Messages
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+        - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInput'
+      responses:
+        '200':
+          description: Successful response with bot messages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      operationId: getMessages
+      summary: Get messages in a session
+      description: Returns the message history for a bot session.
+      tags:
+        - Messages
+      parameters:
+        - $ref: '#/components/parameters/BotId'
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Successful response with message history.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features
+  parameters:
+    BotId:
+      name: botId
+      in: path
+      required: true
+      description: Unique identifier for the Einstein Bot.
+      schema:
+        type: string
+    VersionId:
+      name: versionId
+      in: path
+      required: true
+      description: Unique identifier for the bot version.
+      schema:
+        type: string
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier for the bot session.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Bot:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique bot identifier.
+        developerName:
+          type: string
+          description: Developer name of the bot.
+        masterLabel:
+          type: string
+          description: Display label for the bot.
+        description:
+          type: string
+          description: Description of the bot.
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+          description: Current status of the bot.
+        botType:
+          type: string
+          description: Type of the bot.
+        language:
+          type: string
+          description: Primary language of the bot.
+        activeVersionId:
+          type: string
+          description: ID of the currently active version.
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    BotCollection:
+      type: object
+      properties:
+        bots:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bot'
+        totalSize:
+          type: integer
+    BotVersion:
+      type: object
+      properties:
+        id:
+          type: string
+        botId:
+          type: string
+        versionNumber:
+          type: integer
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - Draft
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+    BotVersionCollection:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotVersion'
+        totalSize:
+          type: integer
+    SessionInput:
+      type: object
+      properties:
+        forceConfig:
+          type: object
+          description: Configuration settings for the session.
+          properties:
+            endpoint:
+              type: string
+              description: Messaging endpoint for the bot.
+        externalSessionKey:
+          type: string
+          description: External key to associate with the session.
+      required:
+        - forceConfig
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          description: Unique session identifier.
+        botId:
+          type: string
+          description: Bot associated with the session.
+        status:
+          type: string
+          enum:
+            - Active
+            - Ended
+            - Transferred
+          description: Current status of the session.
+        createdDate:
+          type: string
+          format: date-time
+        lastActiveDate:
+          type: string
+          format: date-time
+    MessageInput:
+      type: object
+      properties:
+        message:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text message to send to the bot.
+            type:
+              type: string
+              enum:
+                - Text
+                - Choice
+                - Transfer
+              description: Type of message.
+            choiceIndex:
+              type: integer
+              description: Index of selected choice (for Choice type messages).
+            sequenceId:
+              type: integer
+              description: Sequence ID for message ordering.
+          required:
+            - text
+            - type
+      required:
+        - message
+    MessageResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotMessage'
+        sessionEnded:
+          type: boolean
+          description: Whether the session has ended.
+        processedSequenceId:
+          type: integer
+          description: Last processed sequence ID.
+    BotMessage:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - Text
+            - Choices
+            - Transfer
+            - EscalateToAgent
+            - SessionEnded
+          description: Type of bot message.
+        text:
+          type: string
+          description: Text content of the message.
+        choices:
+          type: array
+          description: Available choices (for Choices type messages).
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              value:
+                type: string
+              index:
+                type: integer
+        scheduleItem:
+          type: object
+          description: Schedule information for appointment-related responses.
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+        sequenceId:
+          type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string

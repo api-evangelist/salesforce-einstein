@@ -3,7 +3,7 @@ description: Collection of Salesforce Einstein AI and machine learning APIs for 
 image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-logo.png
 url: https://www.salesforce.com/products/einstein/overview/
 created: '2024'
-modified: '2024'
+modified: '2026-03-04'
 specificationVersion: '0.18'
 tags:
 - artificial intelligence
@@ -34,6 +34,8 @@ apis:
     url: https://www.salesforce.com/products/einstein/pricing/
   - type: SignUp
     url: https://api.einstein.ai/signup
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-vision-openapi.yml
 - name: Einstein Language API
   description: Natural language processing API for sentiment analysis, intent detection, and text classification
   image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-language.png
@@ -53,6 +55,8 @@ apis:
     url: https://metamind.readme.io/docs/generate-oauth-token
   - type: Pricing
     url: https://www.salesforce.com/products/einstein/pricing/
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-language-openapi.yml
 - name: Einstein Prediction Builder API
   description: Create custom AI predictions on Salesforce data without code using Einstein AI
   image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/prediction-builder.png
@@ -70,6 +74,8 @@ apis:
     url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
   - type: Authentication
     url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-prediction-builder-openapi.yml
 - name: Einstein Discovery API
   description: Advanced analytics and automated insights API for predicting outcomes and recommending actions
   image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-discovery.png
@@ -87,6 +93,8 @@ apis:
     url: https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
   - type: Authentication
     url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-discovery-openapi.yml
 - name: Einstein Bots API
   description: Conversational AI API for building intelligent chatbots and virtual assistants
   image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-bots.png
@@ -104,6 +112,8 @@ apis:
     url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
   - type: Setup Guide
     url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-bots-openapi.yml
 - name: Einstein GPT API
   description: Generative AI API powered by OpenAI integration for creating personalized content across Salesforce
   image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-gpt.png
@@ -121,6 +131,8 @@ apis:
     url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
   - type: Trust & Safety
     url: https://www.salesforce.com/company/ethical-and-humane-use/
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-gpt-openapi.yml
 common:
 - type: Portal
   url: https://developer.salesforce.com/
@@ -144,7 +156,18 @@ common:
   url: https://www.linkedin.com/showcase/salesforce-einstein/
 - type: Twitter
   url: https://twitter.com/salesforce
+- type: JSON-LD
+  url: json-ld/salesforce-einstein-context.jsonld
+- type: JSONSchema
+  url: json-schema/salesforce-einstein-prediction-schema.json
+- type: JSONSchema
+  url: json-schema/salesforce-einstein-dataset-schema.json
+- type: JSONSchema
+  url: json-schema/salesforce-einstein-model-schema.json
+- type: JSONSchema
+  url: json-schema/salesforce-einstein-bot-session-schema.json
+- type: JSONSchema
+  url: json-schema/salesforce-einstein-generation-schema.json
 maintainers:
-- name: Salesforce
-  email: platform@salesforce.com
-  twitter: https://twitter.com/salesforce
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/salesforce-einstein/json-schema/salesforce-einstein-generation-schema.json",
+  "title": "Einstein Generation",
+  "description": "Represents a generative AI content generation result from Einstein GPT, including the generated text, token usage, and content quality assessment.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique generation identifier."
+    },
+    "generationId": {
+      "type": "string",
+      "description": "ID used for submitting feedback on this generation."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "The resolved prompt that was sent to the model."
+    },
+    "generatedText": {
+      "type": "string",
+      "description": "The AI-generated content."
+    },
+    "modelId": {
+      "type": "string",
+      "description": "ID of the model used for generation."
+    },
+    "promptTemplateId": {
+      "type": "string",
+      "description": "ID of the prompt template used, if any."
+    },
+    "contentQuality": {
+      "type": "object",
+      "description": "Content quality and safety assessment.",
+      "properties": {
+        "scanToxicity": {
+          "type": "object",
+          "properties": {
+            "isDetected": {
+              "type": "boolean",
+              "description": "Whether toxic content was detected."
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "categoryName": {
+                    "type": "string",
+                    "description": "Name of the toxicity category."
+                  },
+                  "score": {
+                    "type": "number",
+                    "description": "Toxicity score for this category."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "tokenUsage": {
+      "type": "object",
+      "description": "Token usage statistics for the generation.",
+      "properties": {
+        "promptTokens": {
+          "type": "integer",
+          "description": "Number of tokens in the prompt."
+        },
+        "completionTokens": {
+          "type": "integer",
+          "description": "Number of tokens in the generated response."
+        },
+        "totalTokens": {
+          "type": "integer",
+          "description": "Total tokens used."
+        }
+      }
+    },
+    "finishReason": {
+      "type": "string",
+      "description": "Reason the generation stopped.",
+      "enum": ["stop", "length", "content_filter"]
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the generation was created."
+    }
+  },
+  "required": ["generationId", "generatedText"]
+}

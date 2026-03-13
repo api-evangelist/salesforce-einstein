@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/salesforce-einstein/json-schema/salesforce-einstein-model-schema.json",
+  "title": "Einstein Model",
+  "description": "Represents a trained machine learning model in Salesforce Einstein, used for image classification, object detection, text classification, or generative AI.",
+  "type": "object",
+  "properties": {
+    "modelId": {
+      "type": "string",
+      "description": "Unique model identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the model."
+    },
+    "datasetId": {
+      "type": "integer",
+      "description": "ID of the dataset the model was trained on."
+    },
+    "datasetVersionId": {
+      "type": "integer",
+      "description": "Version of the dataset used for training."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the model.",
+      "enum": [
+        "QUEUED",
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "DELETED"
+      ]
+    },
+    "progress": {
+      "type": "number",
+      "description": "Training progress from 0.0 to 1.0.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "modelType": {
+      "type": "string",
+      "description": "Type of the model.",
+      "enum": [
+        "image",
+        "image-multi-label",
+        "image-detection",
+        "text-sentiment",
+        "text-intent"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the model was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the model was last updated."
+    },
+    "epochs": {
+      "type": "integer",
+      "description": "Number of training epochs.",
+      "minimum": 1
+    },
+    "learningRate": {
+      "type": "number",
+      "description": "Learning rate used during training.",
+      "exclusiveMinimum": 0
+    },
+    "trainParams": {
+      "type": "object",
+      "description": "Additional training parameters.",
+      "additionalProperties": true
+    },
+    "trainStats": {
+      "type": "object",
+      "description": "Training statistics and metrics.",
+      "properties": {
+        "labels": {
+          "type": "integer",
+          "description": "Number of labels in the training data."
+        },
+        "examples": {
+          "type": "integer",
+          "description": "Number of training examples."
+        },
+        "totalTime": {
+          "type": "string",
+          "description": "Total training time."
+        },
+        "testAccuracy": {
+          "type": "number",
+          "description": "Model accuracy on the test set."
+        },
+        "trainingLoss": {
+          "type": "number",
+          "description": "Final training loss."
+        },
+        "f1": {
+          "type": "number",
+          "description": "F1 score of the model."
+        }
+      }
+    },
+    "failureMsg": {
+      "type": "string",
+      "description": "Failure message if training failed."
+    },
+    "object": {
+      "type": "string",
+      "description": "Object type identifier.",
+      "const": "model"
+    }
+  },
+  "required": ["modelId", "name", "status"]
+}

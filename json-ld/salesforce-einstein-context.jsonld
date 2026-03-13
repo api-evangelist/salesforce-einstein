@@ -1,0 +1,182 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "einstein": "https://developer.salesforce.com/docs/einstein/",
+    "sf": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "mlSchema": "http://www.w3.org/ns/mls#",
+
+    "EinsteinVisionAPI": {
+      "@id": "schema:WebAPI",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": "schema:url",
+        "provider": "schema:provider",
+        "documentation": "schema:documentation"
+      }
+    },
+
+    "EinsteinLanguageAPI": {
+      "@id": "schema:WebAPI",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": "schema:url",
+        "provider": "schema:provider",
+        "documentation": "schema:documentation"
+      }
+    },
+
+    "Dataset": {
+      "@id": "schema:Dataset",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "dateCreated": "schema:dateCreated",
+        "dateModified": "schema:dateModified",
+        "datasetType": "einstein:datasetType",
+        "totalExamples": "einstein:totalExamples",
+        "totalLabels": "einstein:totalLabels",
+        "available": "einstein:available",
+        "labelSummary": "einstein:labelSummary"
+      }
+    },
+
+    "Model": {
+      "@id": "mlSchema:Model",
+      "@context": {
+        "modelId": "schema:identifier",
+        "name": "schema:name",
+        "status": "einstein:modelStatus",
+        "modelType": "einstein:modelType",
+        "progress": "einstein:trainingProgress",
+        "epochs": "mlSchema:epochs",
+        "learningRate": "mlSchema:learningRate",
+        "dateCreated": "schema:dateCreated",
+        "dateModified": "schema:dateModified",
+        "trainStats": "einstein:trainStats"
+      }
+    },
+
+    "Prediction": {
+      "@id": "einstein:Prediction",
+      "@context": {
+        "score": "einstein:predictionScore",
+        "label": "einstein:predictionLabel",
+        "predictionType": "einstein:predictionType",
+        "factors": "einstein:predictionFactors",
+        "prescriptions": "einstein:prescriptions",
+        "recordId": "sf:recordId",
+        "dateCreated": "schema:dateCreated"
+      }
+    },
+
+    "PredictionFactor": {
+      "@id": "einstein:PredictionFactor",
+      "@context": {
+        "featureName": "einstein:featureName",
+        "featureValue": "einstein:featureValue",
+        "importance": "einstein:importance",
+        "direction": "einstein:direction"
+      }
+    },
+
+    "BotSession": {
+      "@id": "einstein:BotSession",
+      "@context": {
+        "sessionId": "schema:identifier",
+        "botId": "einstein:botId",
+        "status": "einstein:sessionStatus",
+        "messages": "einstein:messages",
+        "dateCreated": "schema:dateCreated"
+      }
+    },
+
+    "BotMessage": {
+      "@id": "schema:Message",
+      "@context": {
+        "text": "schema:text",
+        "messageType": "einstein:messageType",
+        "sender": "schema:sender",
+        "choices": "einstein:choices",
+        "sequenceId": "einstein:sequenceId",
+        "dateSent": "schema:dateSent"
+      }
+    },
+
+    "Generation": {
+      "@id": "einstein:Generation",
+      "@context": {
+        "generationId": "schema:identifier",
+        "prompt": "einstein:prompt",
+        "generatedText": "schema:text",
+        "modelId": "einstein:modelId",
+        "contentQuality": "einstein:contentQuality",
+        "tokenUsage": "einstein:tokenUsage",
+        "dateCreated": "schema:dateCreated"
+      }
+    },
+
+    "PromptTemplate": {
+      "@id": "einstein:PromptTemplate",
+      "@context": {
+        "developerName": "schema:identifier",
+        "masterLabel": "schema:name",
+        "description": "schema:description",
+        "promptText": "einstein:promptText",
+        "templateType": "einstein:templateType",
+        "relatedEntity": "einstein:relatedEntity",
+        "status": "einstein:status"
+      }
+    },
+
+    "Story": {
+      "@id": "einstein:DiscoveryStory",
+      "@context": {
+        "name": "schema:name",
+        "label": "schema:alternateName",
+        "status": "einstein:storyStatus",
+        "outcomeVariable": "einstein:outcomeVariable",
+        "outcomeGoal": "einstein:outcomeGoal",
+        "dateCreated": "schema:dateCreated",
+        "dateModified": "schema:dateModified"
+      }
+    },
+
+    "PredictionDefinition": {
+      "@id": "einstein:PredictionDefinition",
+      "@context": {
+        "name": "schema:name",
+        "label": "schema:alternateName",
+        "status": "einstein:definitionStatus",
+        "predictionType": "einstein:predictionType",
+        "sobjectType": "sf:sobjectType",
+        "outcome": "einstein:outcome"
+      }
+    },
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "identifier": "schema:identifier",
+    "dateCreated": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "dateModified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "provider": {
+      "@id": "schema:provider",
+      "@type": "@id"
+    },
+    "Salesforce": {
+      "@id": "https://www.salesforce.com/",
+      "@type": "schema:Organization",
+      "name": "Salesforce"
+    }
+  }
+}

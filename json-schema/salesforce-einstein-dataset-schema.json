@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/salesforce-einstein/json-schema/salesforce-einstein-dataset-schema.json",
+  "title": "Einstein Dataset",
+  "description": "Represents a dataset used for training Einstein Vision or Language models, including labels, examples, and metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique dataset identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the dataset."
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of the dataset.",
+      "enum": [
+        "image",
+        "image-multi-label",
+        "image-detection",
+        "text-sentiment",
+        "text-intent"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the dataset was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the dataset was last updated."
+    },
+    "totalExamples": {
+      "type": "integer",
+      "description": "Total number of examples in the dataset.",
+      "minimum": 0
+    },
+    "totalLabels": {
+      "type": "integer",
+      "description": "Total number of labels in the dataset.",
+      "minimum": 0
+    },
+    "available": {
+      "type": "boolean",
+      "description": "Whether the dataset is available for training and predictions."
+    },
+    "statusMsg": {
+      "type": "string",
+      "description": "Status message describing the dataset's current state."
+    },
+    "labelSummary": {
+      "type": "object",
+      "description": "Summary of labels in the dataset.",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Label"
+          }
+        }
+      }
+    },
+    "object": {
+      "type": "string",
+      "description": "Object type identifier.",
+      "const": "dataset"
+    }
+  },
+  "required": ["id", "name", "type"],
+  "$defs": {
+    "Label": {
+      "type": "object",
+      "description": "A label within a dataset used to classify examples.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique label identifier."
+        },
+        "datasetId": {
+          "type": "integer",
+          "description": "ID of the dataset this label belongs to."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the label."
+        },
+        "numExamples": {
+          "type": "integer",
+          "description": "Number of examples with this label.",
+          "minimum": 0
+        }
+      },
+      "required": ["id", "name"]
+    }
+  }
+}

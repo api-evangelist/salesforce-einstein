@@ -1,0 +1,433 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Prediction Builder API
+  description: >-
+    Create custom AI predictions on Salesforce data without code using Einstein
+    Prediction Builder. This API provides endpoints to manage prediction
+    definitions, view prediction results, and configure prediction settings
+    within Salesforce.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+  - url: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Instance
+    variables:
+      instance:
+        default: login
+        description: Your Salesforce instance domain.
+security:
+  - oauth2: []
+tags:
+  - name: Prediction Definitions
+    description: Manage Einstein prediction definitions
+  - name: Predictions
+    description: Retrieve and manage prediction results
+  - name: AI Record Insights
+    description: Access AI-generated insights on records
+paths:
+  /einstein/prediction-definitions:
+    get:
+      operationId: listPredictionDefinitions
+      summary: List prediction definitions
+      description: >-
+        Returns a list of all Einstein prediction definitions in the org.
+      tags:
+        - Prediction Definitions
+      responses:
+        '200':
+          description: Successful response with prediction definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionDefinitionList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPredictionDefinition
+      summary: Create a prediction definition
+      description: Creates a new Einstein prediction definition.
+      tags:
+        - Prediction Definitions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionDefinitionInput'
+      responses:
+        '201':
+          description: Prediction definition created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionDefinition'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/prediction-definitions/{predictionDefinitionId}:
+    get:
+      operationId: getPredictionDefinition
+      summary: Get a prediction definition
+      description: Returns details of a specific prediction definition.
+      tags:
+        - Prediction Definitions
+      parameters:
+        - $ref: '#/components/parameters/PredictionDefinitionId'
+      responses:
+        '200':
+          description: Successful response with prediction definition details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePredictionDefinition
+      summary: Update a prediction definition
+      description: Updates an existing prediction definition.
+      tags:
+        - Prediction Definitions
+      parameters:
+        - $ref: '#/components/parameters/PredictionDefinitionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionDefinitionInput'
+      responses:
+        '200':
+          description: Prediction definition updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionDefinition'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePredictionDefinition
+      summary: Delete a prediction definition
+      description: Deletes a prediction definition.
+      tags:
+        - Prediction Definitions
+      parameters:
+        - $ref: '#/components/parameters/PredictionDefinitionId'
+      responses:
+        '204':
+          description: Prediction definition deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/prediction-definitions/{predictionDefinitionId}/predictions:
+    get:
+      operationId: listPredictions
+      summary: List predictions for a definition
+      description: Returns prediction results for a given prediction definition.
+      tags:
+        - Predictions
+      parameters:
+        - $ref: '#/components/parameters/PredictionDefinitionId'
+        - name: recordId
+          in: query
+          description: Filter predictions by Salesforce record ID.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of predictions to return.
+          schema:
+            type: integer
+            default: 25
+        - name: offset
+          in: query
+          description: Offset for pagination.
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Successful response with predictions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResultList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/ai-record-insights:
+    post:
+      operationId: getAIRecordInsights
+      summary: Get AI record insights
+      description: >-
+        Returns AI-generated insights for specified Salesforce records,
+        including prediction factors and recommendations.
+      tags:
+        - AI Record Insights
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                predictionDefinition:
+                  type: string
+                  description: ID of the prediction definition.
+                inputRecords:
+                  type: array
+                  description: List of record IDs to analyze.
+                  items:
+                    type: object
+                    properties:
+                      recordId:
+                        type: string
+                        description: Salesforce record ID.
+              required:
+                - predictionDefinition
+                - inputRecords
+      responses:
+        '200':
+          description: Successful response with record insights.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIRecordInsightsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features
+  parameters:
+    PredictionDefinitionId:
+      name: predictionDefinitionId
+      in: path
+      required: true
+      description: Unique identifier for the prediction definition.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    PredictionDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique prediction definition identifier.
+        label:
+          type: string
+          description: Display label for the prediction.
+        name:
+          type: string
+          description: API name of the prediction definition.
+        status:
+          type: string
+          enum:
+            - Draft
+            - Enabled
+            - Disabled
+          description: Status of the prediction definition.
+        outcome:
+          $ref: '#/components/schemas/Outcome'
+        predictionType:
+          type: string
+          enum:
+            - Boolean
+            - Categorical
+            - Numeric
+          description: Type of prediction.
+        sobjectType:
+          type: string
+          description: Salesforce object the prediction is built on.
+        pushbackField:
+          type: string
+          description: Field where prediction scores are written.
+        countOfModels:
+          type: integer
+          description: Number of models associated with this definition.
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+    PredictionDefinitionInput:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Display label for the prediction.
+        name:
+          type: string
+          description: API name of the prediction definition.
+        outcome:
+          $ref: '#/components/schemas/Outcome'
+        predictionType:
+          type: string
+          enum:
+            - Boolean
+            - Categorical
+            - Numeric
+        sobjectType:
+          type: string
+          description: Salesforce object to predict on.
+        pushbackField:
+          type: string
+          description: Field to write prediction scores to.
+      required:
+        - label
+        - sobjectType
+        - predictionType
+    PredictionDefinitionList:
+      type: object
+      properties:
+        predictionDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionDefinition'
+        totalSize:
+          type: integer
+    Outcome:
+      type: object
+      properties:
+        field:
+          type: string
+          description: Field that stores the outcome value.
+        goal:
+          type: string
+          enum:
+            - Maximize
+            - Minimize
+          description: Optimization goal for the prediction.
+        label:
+          type: string
+          description: Label for the outcome.
+    PredictionResult:
+      type: object
+      properties:
+        recordId:
+          type: string
+          description: Salesforce record ID.
+        prediction:
+          type: object
+          properties:
+            score:
+              type: number
+              description: Prediction score.
+            label:
+              type: string
+              description: Predicted label (for categorical predictions).
+            factors:
+              type: array
+              description: Top factors influencing the prediction.
+              items:
+                $ref: '#/components/schemas/PredictionFactor'
+        predictionDefinitionId:
+          type: string
+    PredictionResultList:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionResult'
+        totalSize:
+          type: integer
+    PredictionFactor:
+      type: object
+      properties:
+        featureName:
+          type: string
+          description: Name of the feature contributing to the prediction.
+        featureValue:
+          type: string
+          description: Value of the feature.
+        importance:
+          type: number
+          description: Importance weight of the factor.
+        direction:
+          type: string
+          enum:
+            - Positive
+            - Negative
+          description: Whether the factor positively or negatively affects the prediction.
+    AIRecordInsightsResponse:
+      type: object
+      properties:
+        recordInsights:
+          type: array
+          items:
+            type: object
+            properties:
+              recordId:
+                type: string
+              insights:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    label:
+                      type: string
+                    value:
+                      type: number
+                    factors:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/PredictionFactor'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string

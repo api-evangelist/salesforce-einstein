@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/salesforce-einstein/json-schema/salesforce-einstein-prediction-schema.json",
+  "title": "Einstein Prediction",
+  "description": "Represents a prediction result from Salesforce Einstein, including score, label, and explanatory factors.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique prediction identifier."
+    },
+    "predictionDefinitionId": {
+      "type": "string",
+      "description": "ID of the prediction definition that generated this prediction."
+    },
+    "recordId": {
+      "type": "string",
+      "description": "Salesforce record ID the prediction applies to."
+    },
+    "score": {
+      "type": "number",
+      "description": "Prediction confidence score, typically between 0.0 and 1.0.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "label": {
+      "type": "string",
+      "description": "Predicted label for categorical predictions."
+    },
+    "predictionType": {
+      "type": "string",
+      "description": "Type of prediction.",
+      "enum": ["Boolean", "Categorical", "Numeric"]
+    },
+    "numericValue": {
+      "type": "number",
+      "description": "Predicted numeric value for numeric predictions."
+    },
+    "factors": {
+      "type": "array",
+      "description": "Top factors influencing the prediction.",
+      "items": {
+        "$ref": "#/$defs/PredictionFactor"
+      }
+    },
+    "prescriptions": {
+      "type": "array",
+      "description": "Recommended actions to improve the predicted outcome.",
+      "items": {
+        "$ref": "#/$defs/Prescription"
+      }
+    },
+    "modelId": {
+      "type": "string",
+      "description": "ID of the model used for the prediction."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the prediction was generated."
+    }
+  },
+  "required": ["predictionDefinitionId", "score"],
+  "$defs": {
+    "PredictionFactor": {
+      "type": "object",
+      "description": "A factor that influenced the prediction outcome.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "Name of the feature or field."
+        },
+        "featureValue": {
+          "type": "string",
+          "description": "Value of the feature for this prediction."
+        },
+        "importance": {
+          "type": "number",
+          "description": "Importance weight of the factor."
+        },
+        "direction": {
+          "type": "string",
+          "description": "Whether the factor positively or negatively affects the prediction.",
+          "enum": ["Positive", "Negative"]
+        }
+      },
+      "required": ["featureName", "importance"]
+    },
+    "Prescription": {
+      "type": "object",
+      "description": "A recommended action to improve the predicted outcome.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Recommended action to take."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the recommendation."
+        },
+        "impact": {
+          "type": "number",
+          "description": "Expected impact of the action on the outcome."
+        }
+      },
+      "required": ["action"]
+    }
+  }
+}
