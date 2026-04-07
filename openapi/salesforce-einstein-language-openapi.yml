@@ -34,7 +34,7 @@ paths:
   /datasets:
     get:
       operationId: listDatasets
-      summary: List datasets
+      summary: Salesforce Einstein List datasets
       description: Returns a list of all language datasets associated with the account.
       tags:
         - Datasets
@@ -61,7 +61,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createDataset
-      summary: Create a dataset
+      summary: Salesforce Einstein Create a dataset
       description: Creates a new text classification dataset.
       tags:
         - Datasets
@@ -101,7 +101,7 @@ paths:
   /datasets/{datasetId}:
     get:
       operationId: getDataset
-      summary: Get a dataset
+      summary: Salesforce Einstein Get a dataset
       description: Returns details of a specific language dataset.
       tags:
         - Datasets
@@ -120,7 +120,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteDataset
-      summary: Delete a dataset
+      summary: Salesforce Einstein Delete a dataset
       description: Deletes a dataset and all associated examples and models.
       tags:
         - Datasets
@@ -136,7 +136,7 @@ paths:
   /datasets/{datasetId}/examples:
     get:
       operationId: listExamples
-      summary: List examples in a dataset
+      summary: Salesforce Einstein List examples in a dataset
       description: Returns a list of text examples in the specified dataset.
       tags:
         - Examples
@@ -174,7 +174,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: addExample
-      summary: Add an example to a dataset
+      summary: Salesforce Einstein Add an example to a dataset
       description: Adds a labeled text example to an existing dataset.
       tags:
         - Examples
@@ -214,7 +214,7 @@ paths:
   /datasets/{datasetId}/models:
     get:
       operationId: listModelsForDataset
-      summary: List models for a dataset
+      summary: Salesforce Einstein List models for a dataset
       description: Returns all models trained on the specified dataset.
       tags:
         - Models
@@ -234,7 +234,7 @@ paths:
   /train:
     post:
       operationId: trainModel
-      summary: Train a model
+      summary: Salesforce Einstein Train a model
       description: >-
         Trains a text classification model on a dataset. Training is
         asynchronous.
@@ -279,7 +279,7 @@ paths:
   /retrain:
     post:
       operationId: retrainModel
-      summary: Retrain a model
+      summary: Salesforce Einstein Retrain a model
       description: Retrains an existing model with additional data.
       tags:
         - Models
@@ -313,7 +313,7 @@ paths:
   /models/{modelId}:
     get:
       operationId: getModel
-      summary: Get model details
+      summary: Salesforce Einstein Get model details
       description: Returns the details and metrics of a trained model.
       tags:
         - Models
@@ -332,7 +332,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteModel
-      summary: Delete a model
+      summary: Salesforce Einstein Delete a model
       description: Deletes a trained model.
       tags:
         - Models
@@ -348,7 +348,7 @@ paths:
   /sentiment:
     post:
       operationId: analyzeSentiment
-      summary: Analyze sentiment
+      summary: Salesforce Einstein Analyze sentiment
       description: >-
         Analyzes the sentiment of the given text. Use the pre-built
         CommunitySentiment model or a custom-trained sentiment model.
@@ -390,7 +390,7 @@ paths:
   /intent:
     post:
       operationId: detectIntent
-      summary: Detect intent
+      summary: Salesforce Einstein Detect intent
       description: >-
         Detects the intent of the given text. Requires a custom-trained
         intent model.
@@ -430,7 +430,7 @@ paths:
   /apiusage:
     get:
       operationId: getApiUsage
-      summary: Get API usage
+      summary: Salesforce Einstein Get API usage
       description: Returns API usage data for the account.
       tags:
         - API Usage

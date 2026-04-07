@@ -38,7 +38,7 @@ paths:
   /wave/stories:
     get:
       operationId: listStories
-      summary: List stories
+      summary: Salesforce Einstein List stories
       description: Returns a list of all Einstein Discovery stories.
       tags:
         - Stories
@@ -70,7 +70,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createStory
-      summary: Create a story
+      summary: Salesforce Einstein Create a story
       description: Creates a new Einstein Discovery story from a dataset.
       tags:
         - Stories
@@ -94,7 +94,7 @@ paths:
   /wave/stories/{storyId}:
     get:
       operationId: getStory
-      summary: Get a story
+      summary: Salesforce Einstein Get a story
       description: Returns details of a specific Einstein Discovery story.
       tags:
         - Stories
@@ -113,7 +113,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updateStory
-      summary: Update a story
+      summary: Salesforce Einstein Update a story
       description: Updates an existing Einstein Discovery story.
       tags:
         - Stories
@@ -140,7 +140,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteStory
-      summary: Delete a story
+      summary: Salesforce Einstein Delete a story
       description: Deletes an Einstein Discovery story.
       tags:
         - Stories
@@ -156,7 +156,7 @@ paths:
   /wave/stories/{storyId}/stats:
     get:
       operationId: getStoryStats
-      summary: Get story statistics
+      summary: Salesforce Einstein Get story statistics
       description: Returns insights and statistical analysis from a story.
       tags:
         - Stories
@@ -176,7 +176,7 @@ paths:
   /wave/models:
     get:
       operationId: listModels
-      summary: List prediction models
+      summary: Salesforce Einstein List prediction models
       description: Returns a list of Einstein Discovery prediction models.
       tags:
         - Models
@@ -202,7 +202,7 @@ paths:
   /wave/models/{modelId}:
     get:
       operationId: getModel
-      summary: Get a prediction model
+      summary: Salesforce Einstein Get a prediction model
       description: Returns details of a specific prediction model.
       tags:
         - Models
@@ -221,7 +221,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteModel
-      summary: Delete a prediction model
+      summary: Salesforce Einstein Delete a prediction model
       description: Deletes an Einstein Discovery prediction model.
       tags:
         - Models
@@ -237,7 +237,7 @@ paths:
   /wave/prediction:
     post:
       operationId: predict
-      summary: Make a prediction
+      summary: Salesforce Einstein Make a prediction
       description: >-
         Makes a prediction using an Einstein Discovery model. Provide the
         model ID and input field values to receive a prediction with
@@ -264,7 +264,7 @@ paths:
   /wave/lenses:
     get:
       operationId: listLenses
-      summary: List lenses
+      summary: Salesforce Einstein List lenses
       description: Returns a list of analytics lenses (datasets).
       tags:
         - Lenses
@@ -290,7 +290,7 @@ paths:
   /wave/lenses/{lensId}:
     get:
       operationId: getLens
-      summary: Get a lens
+      summary: Salesforce Einstein Get a lens
       description: Returns details of a specific analytics lens.
       tags:
         - Lenses
@@ -314,7 +314,7 @@ paths:
   /wave/dashboards:
     get:
       operationId: listDashboards
-      summary: List dashboards
+      summary: Salesforce Einstein List dashboards
       description: Returns a list of analytics dashboards.
       tags:
         - Dashboards
@@ -340,7 +340,7 @@ paths:
   /wave/dashboards/{dashboardId}:
     get:
       operationId: getDashboard
-      summary: Get a dashboard
+      summary: Salesforce Einstein Get a dashboard
       description: Returns details of a specific analytics dashboard.
       tags:
         - Dashboards

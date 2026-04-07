@@ -36,7 +36,7 @@ paths:
   /einstein/bots:
     get:
       operationId: listBots
-      summary: List bots
+      summary: Salesforce Einstein List bots
       description: Returns a list of all Einstein Bots configured in the org.
       tags:
         - Bot Definitions
@@ -52,7 +52,7 @@ paths:
   /einstein/bots/{botId}:
     get:
       operationId: getBot
-      summary: Get a bot
+      summary: Salesforce Einstein Get a bot
       description: Returns details of a specific Einstein Bot.
       tags:
         - Bot Definitions
@@ -72,7 +72,7 @@ paths:
   /einstein/bots/{botId}/versions:
     get:
       operationId: listBotVersions
-      summary: List bot versions
+      summary: Salesforce Einstein List bot versions
       description: Returns a list of versions for a specific bot.
       tags:
         - Bot Versions
@@ -92,7 +92,7 @@ paths:
   /einstein/bots/{botId}/versions/{versionId}:
     get:
       operationId: getBotVersion
-      summary: Get a bot version
+      summary: Salesforce Einstein Get a bot version
       description: Returns details of a specific bot version.
       tags:
         - Bot Versions
@@ -113,7 +113,7 @@ paths:
   /einstein/bots/{botId}/sessions:
     post:
       operationId: createSession
-      summary: Create a bot session
+      summary: Salesforce Einstein Create a bot session
       description: >-
         Creates a new conversation session with an Einstein Bot. Returns a
         session ID to use for sending and receiving messages.
@@ -143,7 +143,7 @@ paths:
   /einstein/bots/{botId}/sessions/{sessionId}:
     get:
       operationId: getSession
-      summary: Get session details
+      summary: Salesforce Einstein Get session details
       description: Returns the current status and details of a bot session.
       tags:
         - Sessions
@@ -163,7 +163,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: endSession
-      summary: End a bot session
+      summary: Salesforce Einstein End a bot session
       description: Ends an active bot conversation session.
       tags:
         - Sessions
@@ -180,7 +180,7 @@ paths:
   /einstein/bots/{botId}/sessions/{sessionId}/messages:
     post:
       operationId: sendMessage
-      summary: Send a message to a bot
+      summary: Salesforce Einstein Send a message to a bot
       description: >-
         Sends a message to an Einstein Bot within an active session and
         returns the bot's response.
@@ -210,7 +210,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     get:
       operationId: getMessages
-      summary: Get messages in a session
+      summary: Salesforce Einstein Get messages in a session
       description: Returns the message history for a bot session.
       tags:
         - Messages

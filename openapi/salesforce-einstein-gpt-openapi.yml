@@ -36,7 +36,7 @@ paths:
   /einstein/llm/prompt/generations:
     post:
       operationId: generateFromPrompt
-      summary: Generate content from a prompt
+      summary: Salesforce Einstein Generate content from a prompt
       description: >-
         Generates AI content using a prompt template. Provide a prompt
         template ID and field values to generate personalized content.
@@ -62,7 +62,7 @@ paths:
   /einstein/llm/prompt/completions:
     post:
       operationId: completePrompt
-      summary: Complete a prompt
+      summary: Salesforce Einstein Complete a prompt
       description: >-
         Sends a raw prompt to the configured LLM and returns the completion.
         This provides direct access to the language model without using a
@@ -89,7 +89,7 @@ paths:
   /einstein/llm/prompt/chat/generations:
     post:
       operationId: chatGeneration
-      summary: Generate a chat response
+      summary: Salesforce Einstein Generate a chat response
       description: >-
         Generates a conversational AI response using a chat-based prompt
         with message history context.
@@ -115,7 +115,7 @@ paths:
   /einstein/llm/prompt/templates:
     get:
       operationId: listPromptTemplates
-      summary: List prompt templates
+      summary: Salesforce Einstein List prompt templates
       description: Returns a list of all prompt templates in the org.
       tags:
         - Prompt Templates
@@ -142,7 +142,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createPromptTemplate
-      summary: Create a prompt template
+      summary: Salesforce Einstein Create a prompt template
       description: Creates a new prompt template for content generation.
       tags:
         - Prompt Templates
@@ -166,7 +166,7 @@ paths:
   /einstein/llm/prompt/templates/{templateId}:
     get:
       operationId: getPromptTemplate
-      summary: Get a prompt template
+      summary: Salesforce Einstein Get a prompt template
       description: Returns details of a specific prompt template.
       tags:
         - Prompt Templates
@@ -185,7 +185,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updatePromptTemplate
-      summary: Update a prompt template
+      summary: Salesforce Einstein Update a prompt template
       description: Updates an existing prompt template.
       tags:
         - Prompt Templates
@@ -212,7 +212,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deletePromptTemplate
-      summary: Delete a prompt template
+      summary: Salesforce Einstein Delete a prompt template
       description: Deletes a prompt template.
       tags:
         - Prompt Templates
@@ -228,7 +228,7 @@ paths:
   /einstein/llm/models:
     get:
       operationId: listModels
-      summary: List available models
+      summary: Salesforce Einstein List available models
       description: >-
         Returns a list of available generative AI models that can be used
         for content generation.
@@ -246,7 +246,7 @@ paths:
   /einstein/llm/models/{modelId}:
     get:
       operationId: getModel
-      summary: Get model details
+      summary: Salesforce Einstein Get model details
       description: Returns details of a specific generative AI model.
       tags:
         - Models
@@ -266,7 +266,7 @@ paths:
   /einstein/llm/feedback:
     post:
       operationId: submitFeedback
-      summary: Submit feedback on generated content
+      summary: Salesforce Einstein Submit feedback on generated content
       description: >-
         Submits feedback on AI-generated content to improve future
         generation quality.

@@ -34,7 +34,7 @@ paths:
   /datasets:
     get:
       operationId: listDatasets
-      summary: List datasets
+      summary: Salesforce Einstein List datasets
       description: Returns a list of all datasets associated with the account.
       tags:
         - Datasets
@@ -63,7 +63,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createDataset
-      summary: Create a dataset
+      summary: Salesforce Einstein Create a dataset
       description: Creates a new dataset for image classification or object detection.
       tags:
         - Datasets
@@ -104,7 +104,7 @@ paths:
   /datasets/{datasetId}:
     get:
       operationId: getDataset
-      summary: Get a dataset
+      summary: Salesforce Einstein Get a dataset
       description: Returns details of a specific dataset.
       tags:
         - Datasets
@@ -123,7 +123,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteDataset
-      summary: Delete a dataset
+      summary: Salesforce Einstein Delete a dataset
       description: Deletes a dataset and all associated examples and models.
       tags:
         - Datasets
@@ -139,7 +139,7 @@ paths:
   /datasets/{datasetId}/examples:
     get:
       operationId: listExamples
-      summary: List examples in a dataset
+      summary: Salesforce Einstein List examples in a dataset
       description: Returns a list of examples in the specified dataset.
       tags:
         - Examples
@@ -178,7 +178,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: addExample
-      summary: Add an example to a dataset
+      summary: Salesforce Einstein Add an example to a dataset
       description: Adds a labeled image example to an existing dataset.
       tags:
         - Examples
@@ -218,7 +218,7 @@ paths:
   /datasets/{datasetId}/models:
     get:
       operationId: listModelsForDataset
-      summary: List models for a dataset
+      summary: Salesforce Einstein List models for a dataset
       description: Returns all models trained on the specified dataset.
       tags:
         - Models
@@ -238,7 +238,7 @@ paths:
   /train:
     post:
       operationId: trainModel
-      summary: Train a model
+      summary: Salesforce Einstein Train a model
       description: Trains a model on a dataset. Training is asynchronous.
       tags:
         - Models
@@ -284,7 +284,7 @@ paths:
   /retrain:
     post:
       operationId: retrainModel
-      summary: Retrain a model
+      summary: Salesforce Einstein Retrain a model
       description: Retrains an existing model with additional data.
       tags:
         - Models
@@ -320,7 +320,7 @@ paths:
   /models/{modelId}:
     get:
       operationId: getModel
-      summary: Get model details
+      summary: Salesforce Einstein Get model details
       description: Returns the details and metrics of a trained model.
       tags:
         - Models
@@ -339,7 +339,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteModel
-      summary: Delete a model
+      summary: Salesforce Einstein Delete a model
       description: Deletes a trained model.
       tags:
         - Models
@@ -355,7 +355,7 @@ paths:
   /models/{modelId}/lc:
     get:
       operationId: getModelLearningCurve
-      summary: Get model learning curve
+      summary: Salesforce Einstein Get model learning curve
       description: Returns the learning curve data for a trained model.
       tags:
         - Models
@@ -375,7 +375,7 @@ paths:
   /predict:
     post:
       operationId: predictImage
-      summary: Make a prediction
+      summary: Salesforce Einstein Make a prediction
       description: >-
         Classifies an image using a trained model. Submit either an image
         file or a URL to an image.
@@ -421,7 +421,7 @@ paths:
   /detect:
     post:
       operationId: detectObjects
-      summary: Detect objects in an image
+      summary: Salesforce Einstein Detect objects in an image
       description: Detects objects and their bounding boxes in an image.
       tags:
         - Predictions
@@ -461,7 +461,7 @@ paths:
   /apiusage:
     get:
       operationId: getApiUsage
-      summary: Get API usage
+      summary: Salesforce Einstein Get API usage
       description: Returns API usage data for the account.
       tags:
         - API Usage

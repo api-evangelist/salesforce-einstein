@@ -34,7 +34,7 @@ paths:
   /einstein/prediction-definitions:
     get:
       operationId: listPredictionDefinitions
-      summary: List prediction definitions
+      summary: Salesforce Einstein List prediction definitions
       description: >-
         Returns a list of all Einstein prediction definitions in the org.
       tags:
@@ -50,7 +50,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createPredictionDefinition
-      summary: Create a prediction definition
+      summary: Salesforce Einstein Create a prediction definition
       description: Creates a new Einstein prediction definition.
       tags:
         - Prediction Definitions
@@ -74,7 +74,7 @@ paths:
   /einstein/prediction-definitions/{predictionDefinitionId}:
     get:
       operationId: getPredictionDefinition
-      summary: Get a prediction definition
+      summary: Salesforce Einstein Get a prediction definition
       description: Returns details of a specific prediction definition.
       tags:
         - Prediction Definitions
@@ -93,7 +93,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: updatePredictionDefinition
-      summary: Update a prediction definition
+      summary: Salesforce Einstein Update a prediction definition
       description: Updates an existing prediction definition.
       tags:
         - Prediction Definitions
@@ -120,7 +120,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deletePredictionDefinition
-      summary: Delete a prediction definition
+      summary: Salesforce Einstein Delete a prediction definition
       description: Deletes a prediction definition.
       tags:
         - Prediction Definitions
@@ -136,7 +136,7 @@ paths:
   /einstein/prediction-definitions/{predictionDefinitionId}/predictions:
     get:
       operationId: listPredictions
-      summary: List predictions for a definition
+      summary: Salesforce Einstein List predictions for a definition
       description: Returns prediction results for a given prediction definition.
       tags:
         - Predictions
@@ -173,7 +173,7 @@ paths:
   /einstein/ai-record-insights:
     post:
       operationId: getAIRecordInsights
-      summary: Get AI record insights
+      summary: Salesforce Einstein Get AI record insights
       description: >-
         Returns AI-generated insights for specified Salesforce records,
         including prediction factors and recommendations.
