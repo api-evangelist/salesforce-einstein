@@ -24,12 +24,12 @@ servers:
 security:
   - oauth2: []
 tags:
+  - name: AI Record Insights
+    description: Access AI-generated insights on records
   - name: Prediction Definitions
     description: Manage Einstein prediction definitions
   - name: Predictions
     description: Retrieve and manage prediction results
-  - name: AI Record Insights
-    description: Access AI-generated insights on records
 paths:
   /einstein/prediction-definitions:
     get:

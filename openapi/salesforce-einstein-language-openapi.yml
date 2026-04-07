@@ -20,6 +20,8 @@ servers:
 security:
   - bearerAuth: []
 tags:
+  - name: API Usage
+    description: Monitor API usage and limits
   - name: Datasets
     description: Manage text datasets for training models
   - name: Examples
@@ -28,8 +30,6 @@ tags:
     description: Train and manage text classification models
   - name: Predictions
     description: Analyze text using trained or pre-built models
-  - name: API Usage
-    description: Monitor API usage and limits
 paths:
   /datasets:
     get:

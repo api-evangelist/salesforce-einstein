@@ -20,6 +20,8 @@ servers:
 security:
   - bearerAuth: []
 tags:
+  - name: API Usage
+    description: Monitor API usage and limits
   - name: Datasets
     description: Manage image datasets for training models
   - name: Examples
@@ -28,8 +30,6 @@ tags:
     description: Train and manage image classification and detection models
   - name: Predictions
     description: Make predictions using trained models
-  - name: API Usage
-    description: Monitor API usage and limits
 paths:
   /datasets:
     get:

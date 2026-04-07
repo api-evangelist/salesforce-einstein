@@ -28,10 +28,10 @@ tags:
     description: Manage Einstein Bot definitions
   - name: Bot Versions
     description: Manage bot versions
-  - name: Sessions
-    description: Manage bot conversation sessions
   - name: Messages
     description: Send and receive bot messages
+  - name: Sessions
+    description: Manage bot conversation sessions
 paths:
   /einstein/bots:
     get:

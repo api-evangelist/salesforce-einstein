@@ -24,16 +24,16 @@ servers:
 security:
   - oauth2: []
 tags:
-  - name: Stories
-    description: Manage Einstein Discovery stories
+  - name: Dashboards
+    description: Manage analytics dashboards
+  - name: Lenses
+    description: Manage analytics lenses (datasets)
   - name: Models
     description: Manage Einstein Discovery prediction models
   - name: Predictions
     description: Make predictions using Discovery models
-  - name: Lenses
-    description: Manage analytics lenses (datasets)
-  - name: Dashboards
-    description: Manage analytics dashboards
+  - name: Stories
+    description: Manage Einstein Discovery stories
 paths:
   /wave/stories:
     get:

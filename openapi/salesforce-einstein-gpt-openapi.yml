@@ -24,14 +24,14 @@ servers:
 security:
   - oauth2: []
 tags:
-  - name: Generations
-    description: Generate AI-powered content
-  - name: Prompt Templates
-    description: Manage prompt templates for content generation
-  - name: Models
-    description: Manage and list available generative AI models
   - name: Feedback
     description: Provide feedback on generated content
+  - name: Generations
+    description: Generate AI-powered content
+  - name: Models
+    description: Manage and list available generative AI models
+  - name: Prompt Templates
+    description: Manage prompt templates for content generation
 paths:
   /einstein/llm/prompt/generations:
     post:
