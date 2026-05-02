@@ -1,0 +1,94 @@
+extends: spectral:oas
+rules:
+
+  einstein-operation-id-required:
+    description: All operations must have an operationId.
+    message: "Operation is missing operationId."
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  einstein-summary-not-empty:
+    description: All operations must have a summary.
+    message: "Operation must have a non-empty summary."
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  einstein-tags-required:
+    description: All operations must have at least one tag.
+    message: "Operation must have at least one tag."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  einstein-response-200-required:
+    description: All operations must define a 200 success response.
+    message: "Operation must define a 200 success response."
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          required: ["200"]
+
+  einstein-auth-required:
+    description: All Einstein APIs require bearer token or OAuth2.
+    message: "API must declare bearer or OAuth2 security scheme."
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["bearerAuth"]
+            - required: ["oauth2"]
+
+  einstein-server-url-defined:
+    description: API must define at least one server URL.
+    message: "API must define at least one server."
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+
+  einstein-content-type-json:
+    description: JSON request bodies must use application/json.
+    message: "JSON request body should declare application/json."
+    severity: warn
+    given: "$.paths[*][*].requestBody.content"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["application/json"]
+            - required: ["multipart/form-data"]
+
+  einstein-no-trailing-slash:
+    description: Paths must not have trailing slashes.
+    message: "Path must not end with a slash."
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  einstein-description-required:
+    description: API info must include a description.
+    message: "API info must include a description."
+    severity: warn
+    given: "$.info"
+    then:
+      field: description
+      function: truthy

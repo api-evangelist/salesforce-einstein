@@ -1,0 +1,68 @@
+{
+  "name": "Salesforce Einstein API Data Structures",
+  "description": "Core data structures for the Salesforce Einstein AI API collection.",
+  "version": "2.0.0",
+  "structures": [
+    {
+      "name": "Dataset",
+      "description": "A training dataset for Einstein Vision or Language models.",
+      "fields": [
+        { "name": "id", "type": "string", "required": false, "description": "Dataset ID." },
+        { "name": "name", "type": "string", "required": false, "description": "Dataset name." },
+        { "name": "type", "type": "string", "required": false, "description": "image_multi-label | image_detection | text-intent | text-sentiment." },
+        { "name": "totalExamples", "type": "integer", "required": false, "description": "Total number of training examples." },
+        { "name": "totalLabels", "type": "integer", "required": false, "description": "Total number of classification labels." },
+        { "name": "status", "type": "string", "required": false, "description": "Dataset status: UPLOADING | SUCCEEDED | FAILED." },
+        { "name": "createdAt", "type": "string (datetime)", "required": false, "description": "ISO 8601 creation timestamp." }
+      ]
+    },
+    {
+      "name": "Model",
+      "description": "A trained Einstein Vision or Language model.",
+      "fields": [
+        { "name": "modelId", "type": "string", "required": false, "description": "Unique model identifier." },
+        { "name": "name", "type": "string", "required": false, "description": "Model name." },
+        { "name": "datasetId", "type": "string", "required": false, "description": "Source dataset ID." },
+        { "name": "status", "type": "string", "required": false, "description": "Training status: TRAINING | SUCCEEDED | FAILED." },
+        { "name": "accuracy", "type": "number", "required": false, "description": "Model accuracy score (0-1)." },
+        { "name": "createdAt", "type": "string (datetime)", "required": false, "description": "ISO 8601 creation timestamp." }
+      ]
+    },
+    {
+      "name": "PredictionResult",
+      "description": "Result of an Einstein Vision or Language prediction.",
+      "fields": [
+        { "name": "probabilities", "type": "Probability[]", "required": false, "description": "Array of label predictions with confidence scores." },
+        { "name": "object", "type": "string", "required": false, "description": "Type of prediction (predictresponse, etc.)." }
+      ]
+    },
+    {
+      "name": "GenerationRequest",
+      "description": "Request body for Einstein GPT content generation.",
+      "fields": [
+        { "name": "promptTemplateName", "type": "string", "required": true, "description": "API name of the prompt template to use." },
+        { "name": "inputParams", "type": "object", "required": false, "description": "Input parameter values for the template." },
+        { "name": "additionalConfig", "type": "object", "required": false, "description": "Additional model configuration (temperature, max tokens, etc.)." }
+      ]
+    },
+    {
+      "name": "GenerationResponse",
+      "description": "Response from Einstein GPT generation.",
+      "fields": [
+        { "name": "generations", "type": "Generation[]", "required": false, "description": "Array of generated content outputs." },
+        { "name": "promptTextTokenCount", "type": "integer", "required": false, "description": "Number of tokens in the prompt." },
+        { "name": "parameters", "type": "object", "required": false, "description": "Model parameters used for generation." }
+      ]
+    },
+    {
+      "name": "BotSession",
+      "description": "An Einstein Bot conversation session.",
+      "fields": [
+        { "name": "sessionId", "type": "string", "required": false, "description": "Unique session identifier." },
+        { "name": "botId", "type": "string", "required": false, "description": "Bot ID the session is associated with." },
+        { "name": "externalSessionKey", "type": "string", "required": false, "description": "Client-provided session key." },
+        { "name": "responseEnvelope", "type": "object", "required": false, "description": "Bot response envelope with messages and actions." }
+      ]
+    }
+  ]
+}

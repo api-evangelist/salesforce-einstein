@@ -1,0 +1,130 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein Language API"
+  description: >-
+    Natural language processing API for sentiment analysis, intent detection,
+    and text classification. Train custom NLP models on text datasets.
+  tags:
+    - Intent Detection
+    - Machine Learning
+    - Natural Language Processing
+    - Salesforce Einstein
+    - Sentiment Analysis
+    - Text Classification
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      EINSTEIN_LANGUAGE_TOKEN: EINSTEIN_LANGUAGE_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: einstein-language
+      baseUri: "https://api.einstein.ai/v2/language"
+      description: "Salesforce Einstein Language NLP API."
+      authentication:
+        type: bearer
+        token: "{{env.EINSTEIN_LANGUAGE_TOKEN}}"
+      resources:
+        - name: sentiment
+          path: /sentiment
+          description: "Sentiment analysis predictions."
+          operations:
+            - name: analyze-sentiment
+              method: POST
+              description: "Analyze sentiment of text input."
+              outputRawFormat: json
+              outputParameters:
+                - name: sentiment
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  modelId: "{{tools.modelId}}"
+                  document: "{{tools.document}}"
+
+        - name: intent
+          path: /intent
+          description: "Intent detection predictions."
+          operations:
+            - name: detect-intent
+              method: POST
+              description: "Detect intent from text input."
+              outputRawFormat: json
+              outputParameters:
+                - name: intent
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  modelId: "{{tools.modelId}}"
+                  document: "{{tools.document}}"
+
+        - name: datasets
+          path: /datasets
+          description: "Text datasets for NLP model training."
+          operations:
+            - name: list-datasets
+              method: GET
+              description: "List all language datasets."
+              outputRawFormat: json
+              outputParameters:
+                - name: datasets
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: einstein-language-api
+      resources:
+        - path: /v1/sentiment
+          name: sentiment
+          operations:
+            - method: POST
+              name: analyze-sentiment
+              description: "Analyze text sentiment."
+              call: "einstein-language.analyze-sentiment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/intent
+          name: intent
+          operations:
+            - method: POST
+              name: detect-intent
+              description: "Detect text intent."
+              call: "einstein-language.detect-intent"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: einstein-language-mcp
+      transport: http
+      tools:
+        - name: analyze-sentiment
+          description: "Analyze the sentiment of text using Einstein Language."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-language.analyze-sentiment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: detect-intent
+          description: "Detect the intent expressed in a text document."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-language.detect-intent"
+          outputParameters:
+            - type: object
+              mapping: "$."

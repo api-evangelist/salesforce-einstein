@@ -1,0 +1,195 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein Generative AI"
+  description: >-
+    Workflow capability combining Einstein GPT and Einstein Bots for generative
+    AI and conversational AI workflows. Covers content generation, prompt management,
+    chatbot sessions, and AI-powered customer interactions for CRM developers
+    and customer service teams.
+  tags:
+    - Chatbots
+    - Content Generation
+    - Conversational AI
+    - CRM
+    - Generative AI
+    - GPT
+    - Large Language Models
+    - Salesforce Einstein
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SALESFORCE_EINSTEIN_GPT_TOKEN: SALESFORCE_EINSTEIN_GPT_TOKEN
+      SALESFORCE_BOTS_TOKEN: SALESFORCE_BOTS_TOKEN
+      SALESFORCE_INSTANCE_URL: SALESFORCE_INSTANCE_URL
+
+capability:
+  consumes:
+    - import: einstein-gpt
+      location: ./shared/einstein-gpt.yaml
+    - import: einstein-bots
+      location: ./shared/einstein-bots.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: einstein-generative-ai-api
+      description: "Unified REST API for Salesforce Einstein generative and conversational AI."
+      resources:
+        - path: /v1/generations
+          name: generations
+          description: "AI content generation from prompt templates."
+          operations:
+            - method: POST
+              name: generate-content
+              description: "Generate Salesforce content using an Einstein prompt template."
+              call: "einstein-gpt.generate-from-prompt"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/completions
+          name: completions
+          description: "Direct LLM prompt completions."
+          operations:
+            - method: POST
+              name: complete-prompt
+              description: "Send a raw prompt for LLM completion."
+              call: "einstein-gpt.complete-prompt"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/chat
+          name: chat
+          description: "Chat-style AI generation."
+          operations:
+            - method: POST
+              name: chat
+              description: "Generate a multi-turn chat response."
+              call: "einstein-gpt.chat-generation"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/prompt-templates
+          name: prompt-templates
+          description: "Manage Einstein prompt templates."
+          operations:
+            - method: GET
+              name: list-prompt-templates
+              description: "List available prompt templates."
+              call: "einstein-gpt.list-prompt-templates"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-prompt-template
+              description: "Create a new prompt template."
+              call: "einstein-gpt.create-prompt-template"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/bots
+          name: bots
+          description: "Einstein Bot definitions."
+          operations:
+            - method: GET
+              name: list-bots
+              description: "List all configured Einstein Bots."
+              call: "einstein-bots.list-bots"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/bot-sessions
+          name: bot-sessions
+          description: "Bot conversation sessions."
+          operations:
+            - method: POST
+              name: create-session
+              description: "Create a new conversation session with a bot."
+              call: "einstein-bots.create-session"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9081
+      namespace: einstein-generative-ai-mcp
+      transport: http
+      description: "MCP server for AI-assisted Salesforce Einstein generative AI workflows."
+      tools:
+        - name: generate-salesforce-content
+          description: "Generate Salesforce content (emails, summaries, case notes) using an Einstein prompt template."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.generate-from-prompt"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: complete-prompt
+          description: "Send a raw prompt to Einstein GPT for direct LLM completion."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.complete-prompt"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: chat-with-einstein-gpt
+          description: "Generate a multi-turn chat response using Einstein GPT."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.chat-generation"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-prompt-templates
+          description: "List all available Einstein prompt templates."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-gpt.list-prompt-templates"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-prompt-template
+          description: "Create a new Einstein prompt template for content generation."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.create-prompt-template"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-einstein-bots
+          description: "List all Einstein Bots configured in the Salesforce org."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-bots.list-bots"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-bot-conversation
+          description: "Start a new conversation session with an Einstein Bot for customer service."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-bots.create-session"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: send-bot-message
+          description: "Send a message to an active Einstein Bot conversation session."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-bots.send-message"
+          with:
+            sessionId: "tools.sessionId"
+          outputParameters:
+            - type: object
+              mapping: "$."

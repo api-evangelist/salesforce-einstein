@@ -1,0 +1,170 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein Vision API"
+  description: >-
+    Image recognition and classification API. Create datasets, upload examples,
+    train custom vision models, and make image classification or object detection predictions.
+  tags:
+    - Computer Vision
+    - Image Recognition
+    - Machine Learning
+    - Object Detection
+    - Salesforce Einstein
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      EINSTEIN_VISION_TOKEN: EINSTEIN_VISION_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: einstein-vision
+      baseUri: "https://api.einstein.ai/v2/vision"
+      description: "Salesforce Einstein Vision REST API."
+      authentication:
+        type: bearer
+        token: "{{env.EINSTEIN_VISION_TOKEN}}"
+      resources:
+        - name: datasets
+          path: /datasets
+          description: "Image datasets for training vision models."
+          operations:
+            - name: list-datasets
+              method: GET
+              description: "List all datasets for the account."
+              outputRawFormat: json
+              outputParameters:
+                - name: datasets
+                  type: object
+                  value: "$."
+            - name: create-dataset
+              method: POST
+              description: "Create a new image dataset."
+              outputRawFormat: json
+              outputParameters:
+                - name: dataset
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  type: "{{tools.type}}"
+            - name: get-dataset
+              method: GET
+              description: "Get a dataset by ID."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Dataset ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: dataset
+                  type: object
+                  value: "$."
+            - name: delete-dataset
+              method: DELETE
+              description: "Delete a dataset."
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Dataset ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: models
+          path: /train
+          description: "Train and manage vision models."
+          operations:
+            - name: train-model
+              method: POST
+              description: "Train a new model on a dataset."
+              outputRawFormat: json
+              outputParameters:
+                - name: model
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  datasetId: "{{tools.datasetId}}"
+
+        - name: predictions
+          path: /predict
+          description: "Make image predictions using trained models."
+          operations:
+            - name: predict-image
+              method: POST
+              description: "Classify an image using a trained model."
+              outputRawFormat: json
+              outputParameters:
+                - name: prediction
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  modelId: "{{tools.modelId}}"
+                  sampleBase64Content: "{{tools.sampleBase64Content}}"
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: einstein-vision-api
+      resources:
+        - path: /v1/datasets
+          name: datasets
+          operations:
+            - method: GET
+              name: list-datasets
+              description: "List all vision datasets."
+              call: "einstein-vision.list-datasets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/predictions
+          name: predictions
+          operations:
+            - method: POST
+              name: predict-image
+              description: "Classify an image."
+              call: "einstein-vision.predict-image"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: einstein-vision-mcp
+      transport: http
+      tools:
+        - name: list-vision-datasets
+          description: "List all Einstein Vision datasets for the account."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-vision.list-datasets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: classify-image
+          description: "Classify an image using a trained Einstein Vision model."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-vision.predict-image"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,190 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein GPT API"
+  description: >-
+    Generative AI API for text generation, prompt completions, chat responses,
+    and prompt template management. Part of Salesforce Einstein Generative AI.
+  tags:
+    - Content Generation
+    - Generative AI
+    - GPT
+    - Large Language Models
+    - Prompt Management
+    - Salesforce Einstein
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SALESFORCE_EINSTEIN_GPT_TOKEN: SALESFORCE_EINSTEIN_GPT_TOKEN
+      SALESFORCE_INSTANCE_URL: SALESFORCE_INSTANCE_URL
+
+capability:
+  consumes:
+    - type: http
+      namespace: einstein-gpt
+      baseUri: "{{env.SALESFORCE_INSTANCE_URL}}/services/data/v58.0"
+      description: "Salesforce Einstein GPT / Generative AI API."
+      authentication:
+        type: bearer
+        token: "{{env.SALESFORCE_EINSTEIN_GPT_TOKEN}}"
+      resources:
+        - name: generations
+          path: /einstein/llm/prompt/generations
+          description: "Generate content from prompt templates."
+          operations:
+            - name: generate-from-prompt
+              method: POST
+              description: "Generate content using a prompt template."
+              outputRawFormat: json
+              outputParameters:
+                - name: generation
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  promptTemplateName: "{{tools.promptTemplateName}}"
+                  inputParams: "{{tools.inputParams}}"
+
+        - name: completions
+          path: /einstein/llm/prompt/completions
+          description: "Direct LLM prompt completions."
+          operations:
+            - name: complete-prompt
+              method: POST
+              description: "Send a raw prompt to the LLM for completion."
+              outputRawFormat: json
+              outputParameters:
+                - name: completion
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  prompt: "{{tools.prompt}}"
+                  modelName: "{{tools.modelName}}"
+
+        - name: chat
+          path: /einstein/llm/prompt/chat
+          description: "Chat-style generation."
+          operations:
+            - name: chat-generation
+              method: POST
+              description: "Generate a chat response using conversation history."
+              outputRawFormat: json
+              outputParameters:
+                - name: chat
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  messages: "{{tools.messages}}"
+                  modelName: "{{tools.modelName}}"
+
+        - name: prompt-templates
+          path: /einstein/llm/prompt-templates
+          description: "Manage prompt templates."
+          operations:
+            - name: list-prompt-templates
+              method: GET
+              description: "List all available prompt templates."
+              outputRawFormat: json
+              outputParameters:
+                - name: templates
+                  type: object
+                  value: "$."
+            - name: create-prompt-template
+              method: POST
+              description: "Create a new prompt template."
+              outputRawFormat: json
+              outputParameters:
+                - name: template
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  templateContent: "{{tools.templateContent}}"
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: einstein-gpt-api
+      resources:
+        - path: /v1/generations
+          name: generations
+          operations:
+            - method: POST
+              name: generate-content
+              description: "Generate content from a prompt template."
+              call: "einstein-gpt.generate-from-prompt"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/completions
+          name: completions
+          operations:
+            - method: POST
+              name: complete-prompt
+              description: "Direct LLM prompt completion."
+              call: "einstein-gpt.complete-prompt"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/chat
+          name: chat
+          operations:
+            - method: POST
+              name: chat-generation
+              description: "Chat-style generation."
+              call: "einstein-gpt.chat-generation"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: einstein-gpt-mcp
+      transport: http
+      tools:
+        - name: generate-from-prompt-template
+          description: "Generate Salesforce content using an Einstein prompt template."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.generate-from-prompt"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: complete-prompt
+          description: "Send a raw prompt to Einstein LLM for direct completion."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.complete-prompt"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: chat-with-einstein
+          description: "Generate a chat response using Einstein GPT with conversation history."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-gpt.chat-generation"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-prompt-templates
+          description: "List all available Einstein prompt templates."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-gpt.list-prompt-templates"
+          outputParameters:
+            - type: object
+              mapping: "$."

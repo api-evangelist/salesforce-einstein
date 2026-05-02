@@ -1,121 +1,138 @@
 # Salesforce Einstein APIs (salesforce-einstein)
-Collection of Salesforce Einstein AI and machine learning APIs for predictive analytics, natural language processing, computer vision, and intelligent automation
+Collection of Salesforce Einstein AI and machine learning APIs for predictive analytics, natural language processing, computer vision, generative AI, and intelligent automation.
 
-**URL:** [Visit APIs.json URL](https://www.salesforce.com/products/einstein/overview/)
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/salesforce-einstein/refs/heads/main/apis.yml)
 
-## Tags:
+## Scope
 
- - artificial intelligence, machine learning, predictive analytics, natural language processing, computer vision, CRM, salesforce
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
+
+## Tags
+
+- Artificial Intelligence, Computer Vision, CRM, Machine Learning, Natural Language Processing, Predictive Analytics, Salesforce
 
 ## Timestamps
 
-- **Created:** 2024 
-- **Modified:** 2024 
+- **Created:** 2024
+- **Modified:** 2026-05-02
 
 ## APIs
 
 ### Einstein Vision API
-Image recognition and classification API for building custom AI-powered image recognition models
+Image recognition and classification API for building custom AI-powered image recognition models.
 
-**Human URL:** [https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/](https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/)
+**Human URL:** https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
 
-
-#### Tags:
-
- - computer vision, image recognition, machine learning
+#### Tags
+- Computer Vision, Image Recognition, Machine Learning
 
 #### Properties
-
 - [Documentation](https://metamind.readme.io/docs/intro-to-einstein-vision)
-- [OpenAPI](https://api.einstein.ai/v2/vision/openapi.json)
-- [Authentication](https://metamind.readme.io/docs/generate-oauth-token)
-- [Pricing](https://www.salesforce.com/products/einstein/pricing/)
-- [SignUp](https://api.einstein.ai/signup)
+- [OpenAPI](openapi/salesforce-einstein-vision-openapi.yml)
+
+---
 
 ### Einstein Language API
-Natural language processing API for sentiment analysis, intent detection, and text classification
+Natural language processing API for sentiment analysis, intent detection, and text classification.
 
-**Human URL:** [https://www.salesforce.com/products/einstein/ai-deep-dive/natural-language-processing/](https://www.salesforce.com/products/einstein/ai-deep-dive/natural-language-processing/)
+**Human URL:** https://www.salesforce.com/products/einstein/ai-deep-dive/natural-language-processing/
 
-
-#### Tags:
-
- - natural language processing, sentiment analysis, text classification, machine learning
+#### Tags
+- Machine Learning, Natural Language Processing, Sentiment Analysis, Text Classification
 
 #### Properties
-
 - [Documentation](https://metamind.readme.io/docs/intro-to-einstein-language)
-- [OpenAPI](https://api.einstein.ai/v2/language/openapi.json)
-- [Authentication](https://metamind.readme.io/docs/generate-oauth-token)
-- [Pricing](https://www.salesforce.com/products/einstein/pricing/)
+- [OpenAPI](openapi/salesforce-einstein-language-openapi.yml)
+
+---
 
 ### Einstein Prediction Builder API
-Create custom AI predictions on Salesforce data without code using Einstein AI
+Create custom AI predictions on Salesforce data without code using Einstein AI.
 
-**Human URL:** [https://help.salesforce.com/s/articleView?id=sf.einstein_prediction_builder.htm](https://help.salesforce.com/s/articleView?id=sf.einstein_prediction_builder.htm)
-
-
-#### Tags:
-
- - predictive analytics, machine learning, CRM, no-code
+**Human URL:** https://help.salesforce.com/s/articleView?id=sf.einstein_prediction_builder.htm
 
 #### Properties
-
 - [Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm)
-- [API Reference](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/)
-- [Authentication](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm)
+- [OpenAPI](openapi/salesforce-einstein-prediction-builder-openapi.yml)
+
+---
 
 ### Einstein Discovery API
-Advanced analytics and automated insights API for predicting outcomes and recommending actions
+Advanced analytics and automated insights API for predicting outcomes and recommending actions.
 
-**Human URL:** [https://www.salesforce.com/products/einstein/features/](https://www.salesforce.com/products/einstein/features/)
-
-
-#### Tags:
-
- - predictive analytics, business intelligence, automated insights, machine learning
+**Human URL:** https://www.salesforce.com/products/einstein/features/
 
 #### Properties
-
 - [Documentation](https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/)
-- [API Reference](https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm)
-- [Authentication](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm)
+- [OpenAPI](openapi/salesforce-einstein-discovery-openapi.yml)
+
+---
 
 ### Einstein Bots API
-Conversational AI API for building intelligent chatbots and virtual assistants
+Conversational AI API for building intelligent chatbots and virtual assistants.
 
-**Human URL:** [https://www.salesforce.com/products/service-cloud/features/chatbots/](https://www.salesforce.com/products/service-cloud/features/chatbots/)
-
-
-#### Tags:
-
- - conversational AI, chatbots, natural language processing, customer service
+**Human URL:** https://www.salesforce.com/products/service-cloud/features/chatbots/
 
 #### Properties
-
 - [Documentation](https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html)
-- [API Reference](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/)
-- [Setup Guide](https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm)
+- [OpenAPI](openapi/salesforce-einstein-bots-openapi.yml)
+
+---
 
 ### Einstein GPT API
-Generative AI API powered by OpenAI integration for creating personalized content across Salesforce
+Generative AI API for creating personalized content across Salesforce using LLMs.
 
-**Human URL:** [https://www.salesforce.com/einstein-gpt/](https://www.salesforce.com/einstein-gpt/)
-
-
-#### Tags:
-
- - generative AI, GPT, content generation, large language models
+**Human URL:** https://www.salesforce.com/einstein-gpt/
 
 #### Properties
-
 - [Documentation](https://developer.salesforce.com/docs/einstein/genai/overview)
-- [Announcement](https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/)
-- [Trust & Safety](https://www.salesforce.com/company/ethical-and-humane-use/)
+- [OpenAPI](openapi/salesforce-einstein-gpt-openapi.yml)
+
+---
+
+## Capabilities
+
+### Shared Definitions
+
+| File | Description |
+|------|-------------|
+| [capabilities/shared/einstein-vision.yaml](capabilities/shared/einstein-vision.yaml) | Shared definition for Einstein Vision API |
+| [capabilities/shared/einstein-language.yaml](capabilities/shared/einstein-language.yaml) | Shared definition for Einstein Language API |
+| [capabilities/shared/einstein-gpt.yaml](capabilities/shared/einstein-gpt.yaml) | Shared definition for Einstein GPT API |
+| [capabilities/shared/einstein-bots.yaml](capabilities/shared/einstein-bots.yaml) | Shared definition for Einstein Bots API |
+
+### Workflow Capabilities
+
+| File | Description | APIs |
+|------|-------------|------|
+| [capabilities/ai-analytics.yaml](capabilities/ai-analytics.yaml) | AI analytics (vision + language) | Einstein Vision, Einstein Language |
+| [capabilities/generative-ai.yaml](capabilities/generative-ai.yaml) | Generative and conversational AI | Einstein GPT, Einstein Bots |
+
+## Artifacts
+
+| Artifact | Path |
+|----------|------|
+| OpenAPI (Vision) | [openapi/salesforce-einstein-vision-openapi.yml](openapi/salesforce-einstein-vision-openapi.yml) |
+| OpenAPI (Language) | [openapi/salesforce-einstein-language-openapi.yml](openapi/salesforce-einstein-language-openapi.yml) |
+| OpenAPI (GPT) | [openapi/salesforce-einstein-gpt-openapi.yml](openapi/salesforce-einstein-gpt-openapi.yml) |
+| OpenAPI (Bots) | [openapi/salesforce-einstein-bots-openapi.yml](openapi/salesforce-einstein-bots-openapi.yml) |
+| OpenAPI (Prediction Builder) | [openapi/salesforce-einstein-prediction-builder-openapi.yml](openapi/salesforce-einstein-prediction-builder-openapi.yml) |
+| OpenAPI (Discovery) | [openapi/salesforce-einstein-discovery-openapi.yml](openapi/salesforce-einstein-discovery-openapi.yml) |
+| JSON-LD Context | [json-ld/salesforce-einstein-context.jsonld](json-ld/salesforce-einstein-context.jsonld) |
+| JSON Structure | [json-structure/salesforce-einstein-structure.json](json-structure/salesforce-einstein-structure.json) |
+| Spectral Rules | [rules/salesforce-einstein-rules.yml](rules/salesforce-einstein-rules.yml) |
+| Vocabulary | [vocabulary/salesforce-einstein-vocabulary.yml](vocabulary/salesforce-einstein-vocabulary.yml) |
+
+## Examples
+
+- [Classify Image](examples/salesforce-einstein-classify-image-example.json)
+- [Generate Content from Prompt Template](examples/salesforce-einstein-generate-content-example.json)
 
 ## Common Properties
 
-- [Portal](https://developer.salesforce.com/)
+- [Developer Portal](https://developer.salesforce.com/)
 - [Getting Started](https://developer.salesforce.com/developer-centers/einstein)
 - [Authentication](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm)
 - [Terms of Service](https://www.salesforce.com/company/legal/agreements/)
@@ -124,11 +141,8 @@ Generative AI API powered by OpenAI integration for creating personalized conten
 - [Support](https://help.salesforce.com/)
 - [Blog](https://developer.salesforce.com/blogs)
 - [Community](https://trailhead.salesforce.com/community)
-- [LinkedIn](https://www.linkedin.com/showcase/salesforce-einstein/)
-- [Twitter](https://twitter.com/salesforce)
 
 ## Maintainers
 
-**FN:** Salesforce
-
-**Email:** platform@salesforce.com
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

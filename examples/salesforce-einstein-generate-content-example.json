@@ -1,0 +1,48 @@
+{
+  "operation": "Generate Content from Prompt Template",
+  "method": "POST",
+  "path": "/services/data/v58.0/einstein/llm/prompt/generations",
+  "description": "Generate a personalized sales email using an Einstein prompt template.",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <access_token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "promptTemplateName": "SalesFollowUpEmail",
+      "inputParams": {
+        "Input:Account_Name": "Acme Corporation",
+        "Input:Contact_First_Name": "Jane",
+        "Input:Product_Name": "Salesforce Enterprise",
+        "Input:Last_Meeting_Date": "April 28, 2026"
+      },
+      "additionalConfig": {
+        "numGenerations": 1,
+        "temperature": 0.5
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "generations": [
+        {
+          "id": "gen-001",
+          "generatedText": "Hi Jane,\n\nThank you for your time at our meeting on April 28th. I wanted to follow up on our discussion about Salesforce Enterprise for Acme Corporation...\n\nBest regards,\nYour Account Executive",
+          "finishReason": "stop",
+          "contentQuality": {
+            "scanToxicity": {
+              "isDetected": false,
+              "categories": []
+            }
+          }
+        }
+      ],
+      "promptTextTokenCount": 145,
+      "parameters": {
+        "temperature": 0.5,
+        "maxTokens": 512
+      }
+    }
+  }
+}

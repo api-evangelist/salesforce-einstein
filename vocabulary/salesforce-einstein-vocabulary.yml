@@ -1,0 +1,141 @@
+vocabulary:
+  name: Salesforce Einstein Vocabulary
+  description: >-
+    Operational vocabulary for Salesforce Einstein AI and ML APIs covering
+    computer vision, natural language processing, predictive analytics,
+    generative AI, and conversational AI concepts.
+  version: "1.0"
+  created: "2026-05-02"
+  modified: "2026-05-02"
+  tags:
+    - Artificial Intelligence
+    - Machine Learning
+    - Salesforce Einstein
+
+  domains:
+    - name: Machine Learning
+      description: "Core ML concepts across all Einstein APIs."
+      terms:
+        - term: Dataset
+          definition: >-
+            A labeled collection of examples used to train an Einstein model.
+            Vision datasets contain images; Language datasets contain text documents.
+          aliases: [Training Data, Training Set]
+          related: [Model, Label, Training]
+
+        - term: Model
+          definition: >-
+            A trained machine learning artifact that can make predictions on
+            new data. Created by training on a dataset.
+          aliases: [Classifier, AI Model, Trained Model]
+          related: [Dataset, Prediction, Training]
+
+        - term: Training
+          definition: >-
+            The process of building a model by exposing it to labeled examples
+            in a dataset so it can learn patterns.
+          related: [Dataset, Model, Accuracy]
+
+        - term: Prediction
+          definition: >-
+            The output of a model when analyzing new input data. Includes
+            probabilities/confidence scores for each possible label.
+          aliases: [Inference, Classification Result]
+          related: [Model, Probability, Label]
+
+        - term: Label
+          definition: >-
+            A category or class assigned to training examples. For vision,
+            a label might be "dog" or "cat". For language, "positive" or "negative".
+          aliases: [Class, Category, Tag]
+          related: [Dataset, Training, Prediction]
+
+        - term: Confidence Score
+          definition: >-
+            A probability value (0–1) indicating how confident a model is in
+            its prediction. Higher scores indicate greater certainty.
+          aliases: [Probability, Score, Confidence]
+          related: [Prediction, Model]
+
+    - name: Computer Vision
+      description: "Einstein Vision concepts."
+      terms:
+        - term: Image Classification
+          definition: >-
+            The task of assigning one or more labels to an image based on
+            its visual content.
+          aliases: [Image Recognition, Visual Classification]
+          related: [Object Detection, Dataset, Model]
+
+        - term: Object Detection
+          definition: >-
+            Identifying and localizing specific objects within an image,
+            returning bounding boxes and labels for each detected object.
+          aliases: [Object Recognition]
+          related: [Image Classification, Bounding Box]
+
+    - name: Natural Language Processing
+      description: "Einstein Language concepts."
+      terms:
+        - term: Sentiment Analysis
+          definition: >-
+            Classifying the emotional tone of text as positive, negative, or neutral.
+            Used to understand customer feedback, social media, and service cases.
+          aliases: [Sentiment Classification, Opinion Mining]
+          related: [Intent Detection, Text Classification]
+
+        - term: Intent Detection
+          definition: >-
+            Identifying the purpose or goal behind a piece of text.
+            Used to route customer queries to appropriate service flows.
+          aliases: [Intent Classification, NLU]
+          related: [Sentiment Analysis, Chatbot, Einstein Bots]
+
+    - name: Generative AI
+      description: "Einstein GPT and generative AI concepts."
+      terms:
+        - term: Prompt Template
+          definition: >-
+            A reusable template defining instructions and placeholders for
+            generating AI content. Stored in Salesforce and parameterized
+            with record field values at runtime.
+          aliases: [Prompt, Template]
+          related: [Content Generation, LLM]
+
+        - term: Large Language Model (LLM)
+          definition: >-
+            A neural network trained on large text corpora capable of generating,
+            completing, summarizing, and transforming text. Einstein GPT uses
+            Salesforce's own models and integrated OpenAI models.
+          aliases: [LLM, Foundation Model, Generative Model]
+          related: [Prompt Template, Generation, Completion]
+
+        - term: Grounding
+          definition: >-
+            Connecting an LLM to real Salesforce data (records, knowledge articles)
+            to generate contextually accurate, personalized content.
+          related: [Prompt Template, CRM Data, Retrieval Augmented Generation]
+
+    - name: Conversational AI
+      description: "Einstein Bots concepts."
+      terms:
+        - term: Einstein Bot
+          definition: >-
+            An AI-powered chatbot built on the Salesforce platform for handling
+            customer service queries, with natural language understanding
+            and integration with Salesforce data.
+          aliases: [Bot, Virtual Agent, Chatbot]
+          related: [Session, Intent, Dialog]
+
+        - term: Session
+          definition: >-
+            A single conversation instance between a user and an Einstein Bot.
+            Sessions maintain conversation context and history.
+          aliases: [Conversation, Dialog Session]
+          related: [Einstein Bot, Message]
+
+        - term: Dialog
+          definition: >-
+            A configured conversation path in an Einstein Bot defining how the
+            bot responds to specific intents and user inputs.
+          related: [Intent, Einstein Bot, Session]

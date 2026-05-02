@@ -1,0 +1,28 @@
+{
+  "operation": "Classify Image",
+  "method": "POST",
+  "path": "/v2/vision/predict",
+  "description": "Classify an image using a trained Einstein Vision model.",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <einstein_access_token>",
+      "Content-Type": "multipart/form-data"
+    },
+    "body": {
+      "modelId": "IMAGE_MULTI_LABEL",
+      "sampleBase64Content": "/9j/4AAQSkZJRgAB...<base64-encoded-image>",
+      "numResults": 5
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "probabilities": [
+        { "label": "Damaged Roof", "probability": 0.9873 },
+        { "label": "Storm Damage", "probability": 0.8512 },
+        { "label": "Normal Roof", "probability": 0.0127 }
+      ],
+      "object": "predictresponse"
+    }
+  }
+}

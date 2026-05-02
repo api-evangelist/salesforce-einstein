@@ -1,12 +1,15 @@
+aid: salesforce-einstein
 name: Salesforce Einstein
 description: >-
   Collection of Salesforce Einstein AI and machine learning APIs for predictive analytics,
   natural language processing, computer vision, and intelligent automation.
 image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-logo.png
-url: https://www.salesforce.com/products/einstein/overview/
+url: https://raw.githubusercontent.com/api-evangelist/salesforce-einstein/refs/heads/main/apis.yml
+type: Index
+x-type: company
 created: '2024'
-modified: '2026-03-04'
-specificationVersion: '0.18'
+modified: '2026-05-02'
+specificationVersion: '0.19'
 tags:
   - Artificial Intelligence
   - Computer Vision
@@ -181,6 +184,14 @@ common:
     url: json-schema/salesforce-einstein-bot-session-schema.json
   - type: JSONSchema
     url: json-schema/salesforce-einstein-generation-schema.json
+  - type: SpectralRules
+    url: rules/salesforce-einstein-rules.yml
+  - type: Capabilities
+    url: capabilities/ai-analytics.yaml
+  - type: Capabilities
+    url: capabilities/generative-ai.yaml
+  - type: Vocabulary
+    url: vocabulary/salesforce-einstein-vocabulary.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

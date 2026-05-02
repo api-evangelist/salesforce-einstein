@@ -1,0 +1,172 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein Bots API"
+  description: >-
+    Conversational AI API for managing Einstein Bots, creating sessions,
+    and exchanging messages with intelligent virtual assistants.
+  tags:
+    - Chatbots
+    - Conversational AI
+    - Customer Service
+    - Natural Language Processing
+    - Salesforce Einstein
+    - Virtual Assistants
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SALESFORCE_BOTS_TOKEN: SALESFORCE_BOTS_TOKEN
+      SALESFORCE_INSTANCE_URL: SALESFORCE_INSTANCE_URL
+
+capability:
+  consumes:
+    - type: http
+      namespace: einstein-bots
+      baseUri: "{{env.SALESFORCE_INSTANCE_URL}}/services/data/v58.0/einstein/bots"
+      description: "Salesforce Einstein Bots conversational AI API."
+      authentication:
+        type: bearer
+        token: "{{env.SALESFORCE_BOTS_TOKEN}}"
+      resources:
+        - name: bots
+          path: /bots
+          description: "Einstein Bot definitions."
+          operations:
+            - name: list-bots
+              method: GET
+              description: "List all Einstein Bots in the org."
+              outputRawFormat: json
+              outputParameters:
+                - name: bots
+                  type: object
+                  value: "$."
+            - name: get-bot
+              method: GET
+              description: "Get a bot by ID."
+              inputParameters:
+                - name: botId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Bot ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: bot
+                  type: object
+                  value: "$."
+
+        - name: sessions
+          path: /sessions
+          description: "Bot conversation sessions."
+          operations:
+            - name: create-session
+              method: POST
+              description: "Create a new conversation session with a bot."
+              outputRawFormat: json
+              outputParameters:
+                - name: session
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  botId: "{{tools.botId}}"
+                  externalSessionKey: "{{tools.externalSessionKey}}"
+            - name: send-message
+              method: POST
+              description: "Send a message to an active bot session."
+              inputParameters:
+                - name: sessionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Session ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: response
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  message:
+                    text: "{{tools.text}}"
+                    type: "{{tools.type}}"
+            - name: end-session
+              method: DELETE
+              description: "End an active bot session."
+              inputParameters:
+                - name: sessionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Session ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8104
+      namespace: einstein-bots-api
+      resources:
+        - path: /v1/bots
+          name: bots
+          operations:
+            - method: GET
+              name: list-bots
+              description: "List Einstein Bots."
+              call: "einstein-bots.list-bots"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/sessions
+          name: sessions
+          operations:
+            - method: POST
+              name: create-session
+              description: "Create a bot session."
+              call: "einstein-bots.create-session"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9104
+      namespace: einstein-bots-mcp
+      transport: http
+      tools:
+        - name: list-bots
+          description: "List all Einstein Bots configured in the Salesforce org."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-bots.list-bots"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-bot-session
+          description: "Create a new conversation session with an Einstein Bot."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-bots.create-session"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: send-message-to-bot
+          description: "Send a message to an active Einstein Bot session."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-bots.send-message"
+          with:
+            sessionId: "tools.sessionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
