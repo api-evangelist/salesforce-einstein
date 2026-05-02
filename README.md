@@ -102,6 +102,8 @@ Generative AI API for creating personalized content across Salesforce using LLMs
 | [capabilities/shared/einstein-language.yaml](capabilities/shared/einstein-language.yaml) | Shared definition for Einstein Language API |
 | [capabilities/shared/einstein-gpt.yaml](capabilities/shared/einstein-gpt.yaml) | Shared definition for Einstein GPT API |
 | [capabilities/shared/einstein-bots.yaml](capabilities/shared/einstein-bots.yaml) | Shared definition for Einstein Bots API |
+| [capabilities/shared/einstein-prediction-builder.yaml](capabilities/shared/einstein-prediction-builder.yaml) | Shared definition for Einstein Prediction Builder API |
+| [capabilities/shared/einstein-discovery.yaml](capabilities/shared/einstein-discovery.yaml) | Shared definition for Einstein Discovery API |
 
 ### Workflow Capabilities
 
@@ -109,6 +111,7 @@ Generative AI API for creating personalized content across Salesforce using LLMs
 |------|-------------|------|
 | [capabilities/ai-analytics.yaml](capabilities/ai-analytics.yaml) | AI analytics (vision + language) | Einstein Vision, Einstein Language |
 | [capabilities/generative-ai.yaml](capabilities/generative-ai.yaml) | Generative and conversational AI | Einstein GPT, Einstein Bots |
+| [capabilities/predictive-intelligence.yaml](capabilities/predictive-intelligence.yaml) | Predictive intelligence and analytics | Einstein Prediction Builder, Einstein Discovery |
 
 ## Artifacts
 
@@ -120,6 +123,11 @@ Generative AI API for creating personalized content across Salesforce using LLMs
 | OpenAPI (Bots) | [openapi/salesforce-einstein-bots-openapi.yml](openapi/salesforce-einstein-bots-openapi.yml) |
 | OpenAPI (Prediction Builder) | [openapi/salesforce-einstein-prediction-builder-openapi.yml](openapi/salesforce-einstein-prediction-builder-openapi.yml) |
 | OpenAPI (Discovery) | [openapi/salesforce-einstein-discovery-openapi.yml](openapi/salesforce-einstein-discovery-openapi.yml) |
+| JSON Schema (Prediction) | [json-schema/salesforce-einstein-prediction-schema.json](json-schema/salesforce-einstein-prediction-schema.json) |
+| JSON Schema (Dataset) | [json-schema/salesforce-einstein-dataset-schema.json](json-schema/salesforce-einstein-dataset-schema.json) |
+| JSON Schema (Model) | [json-schema/salesforce-einstein-model-schema.json](json-schema/salesforce-einstein-model-schema.json) |
+| JSON Schema (Bot Session) | [json-schema/salesforce-einstein-bot-session-schema.json](json-schema/salesforce-einstein-bot-session-schema.json) |
+| JSON Schema (Generation) | [json-schema/salesforce-einstein-generation-schema.json](json-schema/salesforce-einstein-generation-schema.json) |
 | JSON-LD Context | [json-ld/salesforce-einstein-context.jsonld](json-ld/salesforce-einstein-context.jsonld) |
 | JSON Structure | [json-structure/salesforce-einstein-structure.json](json-structure/salesforce-einstein-structure.json) |
 | Spectral Rules | [rules/salesforce-einstein-rules.yml](rules/salesforce-einstein-rules.yml) |

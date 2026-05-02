@@ -1,0 +1,215 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein Predictive Intelligence"
+  description: >-
+    Workflow capability combining Einstein Prediction Builder and Einstein Discovery
+    APIs for AI-driven predictive analytics. Manage prediction definitions, retrieve
+    AI record insights, analyze Einstein Discovery stories, and use prediction models
+    for business intelligence. Designed for Salesforce admins, data scientists, and
+    business analysts building intelligent CRM workflows.
+  tags:
+    - Analytics
+    - Artificial Intelligence
+    - Business Intelligence
+    - Machine Learning
+    - Predictive Analytics
+    - Salesforce Einstein
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SALESFORCE_OAUTH2_TOKEN: SALESFORCE_OAUTH2_TOKEN
+      SALESFORCE_INSTANCE_URL: SALESFORCE_INSTANCE_URL
+
+capability:
+  consumes:
+    - import: einstein-prediction-builder
+      location: ./shared/einstein-prediction-builder.yaml
+    - import: einstein-discovery
+      location: ./shared/einstein-discovery.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: einstein-predictive-intelligence-api
+      description: "Unified REST API for Salesforce Einstein predictive intelligence."
+      resources:
+        - path: /v1/prediction-definitions
+          name: prediction-definitions
+          description: "Einstein prediction definitions."
+          operations:
+            - method: GET
+              name: list-prediction-definitions
+              description: "List all Einstein prediction definitions."
+              call: "einstein-prediction-builder.list-prediction-definitions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-prediction-definition
+              description: "Create a new Einstein prediction definition."
+              call: "einstein-prediction-builder.create-prediction-definition"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/prediction-definitions/{id}/predictions
+          name: predictions
+          description: "Prediction results for a definition."
+          operations:
+            - method: GET
+              name: list-predictions
+              description: "List prediction results for a definition."
+              call: "einstein-prediction-builder.list-predictions"
+              with:
+                predictionDefinitionId: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ai-record-insights
+          name: ai-record-insights
+          description: "AI-generated insights for Salesforce records."
+          operations:
+            - method: POST
+              name: get-ai-record-insights
+              description: "Get AI insights for specified Salesforce records."
+              call: "einstein-prediction-builder.get-ai-record-insights"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/stories
+          name: stories
+          description: "Einstein Discovery analytics stories."
+          operations:
+            - method: GET
+              name: list-stories
+              description: "List all Einstein Discovery stories."
+              call: "einstein-discovery.list-stories"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-story
+              description: "Create a new Einstein Discovery story."
+              call: "einstein-discovery.create-story"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/stories/{id}/stats
+          name: story-stats
+          description: "Statistical insights from a Discovery story."
+          operations:
+            - method: GET
+              name: get-story-stats
+              description: "Get statistical insights from an Einstein Discovery story."
+              call: "einstein-discovery.get-story-stats"
+              with:
+                storyId: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models
+          name: models
+          description: "Einstein Discovery prediction models."
+          operations:
+            - method: GET
+              name: list-models
+              description: "List Einstein Discovery prediction models."
+              call: "einstein-discovery.list-models"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/dashboards
+          name: dashboards
+          description: "Einstein Analytics dashboards."
+          operations:
+            - method: GET
+              name: list-dashboards
+              description: "List Einstein Analytics dashboards."
+              call: "einstein-discovery.list-dashboards"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9092
+      namespace: einstein-predictive-intelligence-mcp
+      transport: http
+      description: "MCP server for AI-assisted Salesforce Einstein predictive intelligence."
+      tools:
+        - name: list-prediction-definitions
+          description: "List all Einstein Prediction Builder definitions in the org."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-prediction-builder.list-prediction-definitions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-ai-record-insights
+          description: "Get AI-generated insights and prediction factors for Salesforce records."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-prediction-builder.get-ai-record-insights"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-predictions
+          description: "List prediction results for a given Einstein Prediction Builder definition."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-prediction-builder.list-predictions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-discovery-stories
+          description: "List all Einstein Discovery analytics stories."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-discovery.list-stories"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-story-stats
+          description: "Get statistical insights and key findings from an Einstein Discovery story."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-discovery.get-story-stats"
+          with:
+            storyId: "tools.storyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-discovery-models
+          description: "List Einstein Discovery prediction models for advanced analytics."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-discovery.list-models"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-analytics-dashboards
+          description: "List Einstein Analytics dashboards for business intelligence."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-discovery.list-dashboards"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-discovery-story
+          description: "Create a new Einstein Discovery story from a dataset for automated insights."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "einstein-discovery.create-story"
+          outputParameters:
+            - type: object
+              mapping: "$."

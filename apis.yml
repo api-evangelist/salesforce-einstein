@@ -190,6 +190,10 @@ common:
     url: capabilities/ai-analytics.yaml
   - type: Capabilities
     url: capabilities/generative-ai.yaml
+  - type: Capabilities
+    url: capabilities/predictive-intelligence.yaml
+  - type: JSONStructure
+    url: json-structure/salesforce-einstein-structure.json
   - type: Vocabulary
     url: vocabulary/salesforce-einstein-vocabulary.yml
 maintainers:

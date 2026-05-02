@@ -1,0 +1,224 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Salesforce Einstein Prediction Builder API"
+  description: >-
+    Create and manage custom AI prediction definitions on Salesforce data.
+    Retrieve prediction results, access AI record insights, and configure
+    Einstein Prediction Builder within a Salesforce org.
+  tags:
+    - Artificial Intelligence
+    - Machine Learning
+    - Predictive Analytics
+    - Salesforce Einstein
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SALESFORCE_OAUTH2_TOKEN: SALESFORCE_OAUTH2_TOKEN
+      SALESFORCE_INSTANCE_URL: SALESFORCE_INSTANCE_URL
+
+capability:
+  consumes:
+    - type: http
+      namespace: einstein-prediction-builder
+      baseUri: "{{env.SALESFORCE_INSTANCE_URL}}/services/data/v58.0"
+      description: "Salesforce Einstein Prediction Builder REST API."
+      authentication:
+        type: bearer
+        token: "{{env.SALESFORCE_OAUTH2_TOKEN}}"
+      resources:
+        - name: prediction-definitions
+          path: /einstein/prediction-definitions
+          description: "Einstein prediction definitions for custom AI models."
+          operations:
+            - name: list-prediction-definitions
+              method: GET
+              description: "List all Einstein prediction definitions in the org."
+              outputRawFormat: json
+              outputParameters:
+                - name: predictionDefinitions
+                  type: object
+                  value: "$."
+            - name: create-prediction-definition
+              method: POST
+              description: "Create a new Einstein prediction definition."
+              outputRawFormat: json
+              outputParameters:
+                - name: predictionDefinition
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  predictionField: "{{tools.predictionField}}"
+                  outcomeGoal: "{{tools.outcomeGoal}}"
+            - name: get-prediction-definition
+              method: GET
+              description: "Get details of a specific prediction definition."
+              inputParameters:
+                - name: predictionDefinitionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Prediction definition ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: predictionDefinition
+                  type: object
+                  value: "$."
+            - name: update-prediction-definition
+              method: PATCH
+              description: "Update an existing prediction definition."
+              inputParameters:
+                - name: predictionDefinitionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Prediction definition ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: predictionDefinition
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+            - name: delete-prediction-definition
+              method: DELETE
+              description: "Delete a prediction definition."
+              inputParameters:
+                - name: predictionDefinitionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Prediction definition ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-predictions
+              method: GET
+              description: "List prediction results for a definition."
+              inputParameters:
+                - name: predictionDefinitionId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Prediction definition ID."
+                - name: recordId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter predictions by Salesforce record ID."
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of predictions to return."
+              outputRawFormat: json
+              outputParameters:
+                - name: predictions
+                  type: object
+                  value: "$."
+
+        - name: ai-record-insights
+          path: /einstein/ai-record-insights
+          description: "AI-generated insights for Salesforce records."
+          operations:
+            - name: get-ai-record-insights
+              method: POST
+              description: "Get AI insights for specified Salesforce records."
+              outputRawFormat: json
+              outputParameters:
+                - name: insights
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  predictionDefinition: "{{tools.predictionDefinition}}"
+                  inputRecords: "{{tools.inputRecords}}"
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: einstein-prediction-builder-api
+      resources:
+        - path: /v1/prediction-definitions
+          name: prediction-definitions
+          operations:
+            - method: GET
+              name: list-prediction-definitions
+              description: "List all Einstein prediction definitions."
+              call: "einstein-prediction-builder.list-prediction-definitions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-prediction-definition
+              description: "Create a new prediction definition."
+              call: "einstein-prediction-builder.create-prediction-definition"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/prediction-definitions/{id}/predictions
+          name: predictions
+          operations:
+            - method: GET
+              name: list-predictions
+              description: "List predictions for a definition."
+              call: "einstein-prediction-builder.list-predictions"
+              with:
+                predictionDefinitionId: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ai-record-insights
+          name: ai-record-insights
+          operations:
+            - method: POST
+              name: get-ai-record-insights
+              description: "Get AI-generated insights for Salesforce records."
+              call: "einstein-prediction-builder.get-ai-record-insights"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: einstein-prediction-builder-mcp
+      transport: http
+      tools:
+        - name: list-prediction-definitions
+          description: "List all Einstein Prediction Builder definitions in the org."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-prediction-builder.list-prediction-definitions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-ai-record-insights
+          description: "Get AI-generated insights and predictions for Salesforce records."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-prediction-builder.get-ai-record-insights"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-predictions
+          description: "List prediction results for a given prediction definition."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "einstein-prediction-builder.list-predictions"
+          outputParameters:
+            - type: object
+              mapping: "$."
