@@ -1,135 +1,273 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Salesforce Einstein AI Analytics"
-  description: >-
-    Workflow capability combining Einstein Vision and Language APIs for
-    AI-driven analytics workflows. Covers image classification, object detection,
-    sentiment analysis, and intent detection for customer data analytics teams
-    and Salesforce developers building intelligent applications.
+  label: Salesforce Einstein AI Analytics
+  description: Workflow capability combining Einstein Vision and Language APIs for AI-driven analytics workflows. Covers image
+    classification, object detection, sentiment analysis, and intent detection for customer data analytics teams and Salesforce
+    developers building intelligent applications.
   tags:
-    - Artificial Intelligence
-    - Computer Vision
-    - Image Recognition
-    - Machine Learning
-    - Natural Language Processing
-    - Salesforce Einstein
-    - Sentiment Analysis
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - Artificial Intelligence
+  - Computer Vision
+  - Image Recognition
+  - Machine Learning
+  - Natural Language Processing
+  - Salesforce Einstein
+  - Sentiment Analysis
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      EINSTEIN_VISION_TOKEN: EINSTEIN_VISION_TOKEN
-      EINSTEIN_LANGUAGE_TOKEN: EINSTEIN_LANGUAGE_TOKEN
-
+- namespace: env
+  keys:
+    EINSTEIN_VISION_TOKEN: EINSTEIN_VISION_TOKEN
+    EINSTEIN_LANGUAGE_TOKEN: EINSTEIN_LANGUAGE_TOKEN
 capability:
   consumes:
-    - import: einstein-vision
-      location: ./shared/einstein-vision.yaml
-    - import: einstein-language
-      location: ./shared/einstein-language.yaml
-
+  - type: http
+    namespace: einstein-vision
+    baseUri: https://api.einstein.ai/v2/vision
+    description: Salesforce Einstein Vision REST API.
+    authentication:
+      type: bearer
+      token: '{{env.EINSTEIN_VISION_TOKEN}}'
+    resources:
+    - name: datasets
+      path: /datasets
+      description: Image datasets for training vision models.
+      operations:
+      - name: list-datasets
+        method: GET
+        description: List all datasets for the account.
+        outputRawFormat: json
+        outputParameters:
+        - name: datasets
+          type: object
+          value: $.
+      - name: create-dataset
+        method: POST
+        description: Create a new image dataset.
+        outputRawFormat: json
+        outputParameters:
+        - name: dataset
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: '{{tools.type}}'
+      - name: get-dataset
+        method: GET
+        description: Get a dataset by ID.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Dataset ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: dataset
+          type: object
+          value: $.
+      - name: delete-dataset
+        method: DELETE
+        description: Delete a dataset.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Dataset ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: models
+      path: /train
+      description: Train and manage vision models.
+      operations:
+      - name: train-model
+        method: POST
+        description: Train a new model on a dataset.
+        outputRawFormat: json
+        outputParameters:
+        - name: model
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            datasetId: '{{tools.datasetId}}'
+    - name: predictions
+      path: /predict
+      description: Make image predictions using trained models.
+      operations:
+      - name: predict-image
+        method: POST
+        description: Classify an image using a trained model.
+        outputRawFormat: json
+        outputParameters:
+        - name: prediction
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            modelId: '{{tools.modelId}}'
+            sampleBase64Content: '{{tools.sampleBase64Content}}'
+  - type: http
+    namespace: einstein-language
+    baseUri: https://api.einstein.ai/v2/language
+    description: Salesforce Einstein Language NLP API.
+    authentication:
+      type: bearer
+      token: '{{env.EINSTEIN_LANGUAGE_TOKEN}}'
+    resources:
+    - name: sentiment
+      path: /sentiment
+      description: Sentiment analysis predictions.
+      operations:
+      - name: analyze-sentiment
+        method: POST
+        description: Analyze sentiment of text input.
+        outputRawFormat: json
+        outputParameters:
+        - name: sentiment
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            modelId: '{{tools.modelId}}'
+            document: '{{tools.document}}'
+    - name: intent
+      path: /intent
+      description: Intent detection predictions.
+      operations:
+      - name: detect-intent
+        method: POST
+        description: Detect intent from text input.
+        outputRawFormat: json
+        outputParameters:
+        - name: intent
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            modelId: '{{tools.modelId}}'
+            document: '{{tools.document}}'
+    - name: datasets
+      path: /datasets
+      description: Text datasets for NLP model training.
+      operations:
+      - name: list-datasets
+        method: GET
+        description: List all language datasets.
+        outputRawFormat: json
+        outputParameters:
+        - name: datasets
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: einstein-ai-analytics-api
-      description: "Unified REST API for Salesforce Einstein AI analytics."
-      resources:
-        - path: /v1/vision/datasets
-          name: vision-datasets
-          description: "Vision training datasets."
-          operations:
-            - method: GET
-              name: list-vision-datasets
-              description: "List all vision datasets."
-              call: "einstein-vision.list-datasets"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/vision/predictions
-          name: vision-predictions
-          description: "Image classification predictions."
-          operations:
-            - method: POST
-              name: classify-image
-              description: "Classify an image using a trained model."
-              call: "einstein-vision.predict-image"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/language/sentiment
-          name: sentiment
-          description: "Sentiment analysis."
-          operations:
-            - method: POST
-              name: analyze-sentiment
-              description: "Analyze text sentiment."
-              call: "einstein-language.analyze-sentiment"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/language/intent
-          name: intent
-          description: "Intent detection."
-          operations:
-            - method: POST
-              name: detect-intent
-              description: "Detect intent in text."
-              call: "einstein-language.detect-intent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9080
-      namespace: einstein-ai-analytics-mcp
-      transport: http
-      description: "MCP server for AI-assisted Salesforce Einstein analytics."
-      tools:
-        - name: vision-list-datasets
-          description: "List Einstein Vision image datasets for the account."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "einstein-vision.list-datasets"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: vision-classify-image
-          description: "Classify an image using a trained Einstein Vision model."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "einstein-vision.predict-image"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: vision-train-model
-          description: "Train a new Einstein Vision model on an image dataset."
-          hints:
-            readOnly: false
-            destructive: false
-          call: "einstein-vision.train-model"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: language-analyze-sentiment
-          description: "Analyze the sentiment (positive/negative/neutral) of a text document."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "einstein-language.analyze-sentiment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: language-detect-intent
-          description: "Detect the intent expressed in a text document for customer service routing."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "einstein-language.detect-intent"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: einstein-ai-analytics-api
+    description: Unified REST API for Salesforce Einstein AI analytics.
+    resources:
+    - path: /v1/vision/datasets
+      name: vision-datasets
+      description: Vision training datasets.
+      operations:
+      - method: GET
+        name: list-vision-datasets
+        description: List all vision datasets.
+        call: einstein-vision.list-datasets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vision/predictions
+      name: vision-predictions
+      description: Image classification predictions.
+      operations:
+      - method: POST
+        name: classify-image
+        description: Classify an image using a trained model.
+        call: einstein-vision.predict-image
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/language/sentiment
+      name: sentiment
+      description: Sentiment analysis.
+      operations:
+      - method: POST
+        name: analyze-sentiment
+        description: Analyze text sentiment.
+        call: einstein-language.analyze-sentiment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/language/intent
+      name: intent
+      description: Intent detection.
+      operations:
+      - method: POST
+        name: detect-intent
+        description: Detect intent in text.
+        call: einstein-language.detect-intent
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9080
+    namespace: einstein-ai-analytics-mcp
+    transport: http
+    description: MCP server for AI-assisted Salesforce Einstein analytics.
+    tools:
+    - name: vision-list-datasets
+      description: List Einstein Vision image datasets for the account.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: einstein-vision.list-datasets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vision-classify-image
+      description: Classify an image using a trained Einstein Vision model.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: einstein-vision.predict-image
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vision-train-model
+      description: Train a new Einstein Vision model on an image dataset.
+      hints:
+        readOnly: false
+        destructive: false
+      call: einstein-vision.train-model
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: language-analyze-sentiment
+      description: Analyze the sentiment (positive/negative/neutral) of a text document.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: einstein-language.analyze-sentiment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: language-detect-intent
+      description: Detect the intent expressed in a text document for customer service routing.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: einstein-language.detect-intent
+      outputParameters:
+      - type: object
+        mapping: $.
