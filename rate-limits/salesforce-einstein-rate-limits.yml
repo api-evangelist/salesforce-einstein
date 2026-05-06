@@ -4,113 +4,53 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Salesforce Einstein
 providerId: salesforce-einstein
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Artificial Intelligence
-  - Computer Vision
   - CRM
-  - Machine Learning
-  - Natural Language Processing
-  - Predictive Analytics
+  - AI
   - Salesforce
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Salesforce Einstein API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Salesforce Einstein consumption is limited at two layers. Calls into the core platform APIs
+  inherit the per-org 24-hour API request allowance scaled by edition + license count. Generative Einstein
+  features (Copilot, Prompt Builder, Trust Layer) additionally meter against per-org / per-user generative
+  request budgets defined per add-on SKU. Exact published numbers were not retrievable in this run; this
+  artifact captures the model and points to Salesforce's published limits.
+sources:
+  - https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_api.htm
+notes: Per-edition daily request limits and per-feature generative quotas were not retrievable; consult
+  the Salesforce App Limits Cheatsheet and Einstein release notes from an authenticated browser session
+  for current values.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  apiLimitExceeded: 403
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Einstein Vision API
-      - Einstein Language API
-      - Einstein Prediction Builder API
-      - Einstein Discovery API
-      - Einstein Bots API
-      - Einstein GPT API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Einstein Vision API
-      - Einstein Language API
-      - Einstein Prediction Builder API
-      - Einstein Discovery API
-      - Einstein Bots API
-      - Einstein GPT API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Einstein Vision API
-      - Einstein Language API
-      - Einstein Prediction Builder API
-      - Einstein Discovery API
-      - Einstein Bots API
-      - Einstein GPT API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Einstein Vision API
-      - Einstein Language API
-      - Einstein Prediction Builder API
-      - Einstein Discovery API
-      - Einstein Bots API
-      - Einstein GPT API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Einstein Vision API
-      - Einstein Language API
-      - Einstein Prediction Builder API
-      - Einstein Discovery API
-      - Einstein Bots API
-      - Einstein GPT API
+  - name: Per-org 24-hour API request allowance
+    scope: org
+    metric: requests_per_day
+    limit: see Salesforce App Limits Cheatsheet (varies by edition + license count)
+    notes: Einstein API calls into the core platform consume the same 24-hour bucket as REST / Bulk /
+      Tooling.
+  - name: Einstein generative request quota
+    scope: org
+    metric: requests_per_window
+    limit: see Einstein add-on documentation (per-org / per-user budgets)
+    notes: Copilot, Prompt Builder, and Trust Layer features have additional generative request budgets
+      defined per add-on SKU.
+  - name: Einstein Vision / Language predictions
+    scope: account
+    metric: predictions_per_month
+    limit: see Einstein Platform Services documentation
+    notes: Legacy Einstein Vision / Language APIs document monthly prediction allowances per plan.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Edition + license scaling
+    description: Core API allowance scales with edition and license count.
+  - name: Add-on quotas
+    description: Generative Einstein features add their own quotas on top of the core allowance; exhaustion
+      affects only generative endpoints.
+  - name: Trust Layer governance
+    description: The Einstein Trust Layer enforces masking, audit, and zero-retention policies that affect
+      throughput characteristics of generative calls.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
