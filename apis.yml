@@ -6,7 +6,7 @@ description: >-
 image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-logo.png
 url: https://raw.githubusercontent.com/api-evangelist/salesforce-einstein/refs/heads/main/apis.yml
 type: Index
-x-type: company
+kind: company
 created: '2024'
 modified: '2026-05-02'
 specificationVersion: '0.19'
@@ -81,7 +81,7 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
-      - type: API Reference
+      - type: APIReference
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
       - type: Authentication
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
@@ -102,7 +102,7 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
-      - type: API Reference
+      - type: APIReference
         url: https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
       - type: Authentication
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
@@ -122,7 +122,7 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
-      - type: API Reference
+      - type: APIReference
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
       - type: Setup Guide
         url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
@@ -152,15 +152,15 @@ apis:
 common:
   - type: Portal
     url: https://developer.salesforce.com/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developer.salesforce.com/developer-centers/einstein
   - type: Authentication
     url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.salesforce.com/company/legal/agreements/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.salesforce.com/company/privacy/
-  - type: Status
+  - type: StatusPage
     url: https://status.salesforce.com/
   - type: Support
     url: https://help.salesforce.com/
@@ -172,7 +172,7 @@ common:
     url: https://www.linkedin.com/showcase/salesforce-einstein/
   - type: Twitter
     url: https://twitter.com/salesforce
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/salesforce-einstein-context.jsonld
   - type: JSONSchema
     url: json-schema/salesforce-einstein-prediction-schema.json
