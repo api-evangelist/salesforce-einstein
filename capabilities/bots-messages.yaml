@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein Bots API — Messages
+  description: 'Salesforce Einstein Bots API — Messages. 2 operations. Lead operation: Salesforce Einstein Send a message
+    to a bot. Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - Messages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bots-messages
+    baseUri: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Einstein Bots API — Messages business capability. Self-contained, no shared references.
+    resources:
+    - name: einstein-bots-botId-sessions-sessionId-messages
+      path: /einstein/bots/{botId}/sessions/{sessionId}/messages
+      operations:
+      - name: sendmessage
+        method: POST
+        description: Salesforce Einstein Send a message to a bot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getmessages
+        method: GET
+        description: Salesforce Einstein Get messages in a session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bots-messages-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein Bots API — Messages. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/einstein/bots/{botid}/sessions/{sessionid}/messages
+      name: einstein-bots-botid-sessions-sessionid-messages
+      description: REST surface for einstein-bots-botId-sessions-sessionId-messages.
+      operations:
+      - method: POST
+        name: sendmessage
+        description: Salesforce Einstein Send a message to a bot
+        call: bots-messages.sendmessage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getmessages
+        description: Salesforce Einstein Get messages in a session
+        call: bots-messages.getmessages
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bots-messages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein Bots API — Messages. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-send-message-bot
+      description: Salesforce Einstein Send a message to a bot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: bots-messages.sendmessage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-get-messages-session
+      description: Salesforce Einstein Get messages in a session
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bots-messages.getmessages
+      outputParameters:
+      - type: object
+        mapping: $.

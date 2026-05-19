@@ -1,0 +1,212 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein GPT API — Prompt Templates
+  description: 'Salesforce Einstein GPT API — Prompt Templates. 5 operations. Lead operation: Salesforce Einstein List prompt
+    templates. Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - Prompt Templates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gpt-prompt-templates
+    baseUri: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Einstein GPT API — Prompt Templates business capability. Self-contained, no shared references.
+    resources:
+    - name: einstein-llm-prompt-templates
+      path: /einstein/llm/prompt/templates
+      operations:
+      - name: listprompttemplates
+        method: GET
+        description: Salesforce Einstein List prompt templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageSize
+          in: query
+          type: integer
+          description: Number of templates to return per page.
+        - name: page
+          in: query
+          type: string
+          description: Page token for pagination.
+      - name: createprompttemplate
+        method: POST
+        description: Salesforce Einstein Create a prompt template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: einstein-llm-prompt-templates-templateId
+      path: /einstein/llm/prompt/templates/{templateId}
+      operations:
+      - name: getprompttemplate
+        method: GET
+        description: Salesforce Einstein Get a prompt template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprompttemplate
+        method: PATCH
+        description: Salesforce Einstein Update a prompt template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprompttemplate
+        method: DELETE
+        description: Salesforce Einstein Delete a prompt template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: gpt-prompt-templates-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein GPT API — Prompt Templates. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/einstein/llm/prompt/templates
+      name: einstein-llm-prompt-templates
+      description: REST surface for einstein-llm-prompt-templates.
+      operations:
+      - method: GET
+        name: listprompttemplates
+        description: Salesforce Einstein List prompt templates
+        call: gpt-prompt-templates.listprompttemplates
+        with:
+          pageSize: rest.pageSize
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprompttemplate
+        description: Salesforce Einstein Create a prompt template
+        call: gpt-prompt-templates.createprompttemplate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/einstein/llm/prompt/templates/{templateid}
+      name: einstein-llm-prompt-templates-templateid
+      description: REST surface for einstein-llm-prompt-templates-templateId.
+      operations:
+      - method: GET
+        name: getprompttemplate
+        description: Salesforce Einstein Get a prompt template
+        call: gpt-prompt-templates.getprompttemplate
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateprompttemplate
+        description: Salesforce Einstein Update a prompt template
+        call: gpt-prompt-templates.updateprompttemplate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprompttemplate
+        description: Salesforce Einstein Delete a prompt template
+        call: gpt-prompt-templates.deleteprompttemplate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gpt-prompt-templates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein GPT API — Prompt Templates. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-list-prompt-templates
+      description: Salesforce Einstein List prompt templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gpt-prompt-templates.listprompttemplates
+      with:
+        pageSize: tools.pageSize
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-create-prompt-template
+      description: Salesforce Einstein Create a prompt template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gpt-prompt-templates.createprompttemplate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-get-prompt-template
+      description: Salesforce Einstein Get a prompt template
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gpt-prompt-templates.getprompttemplate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-update-prompt-template
+      description: Salesforce Einstein Update a prompt template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: gpt-prompt-templates.updateprompttemplate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-delete-prompt-template
+      description: Salesforce Einstein Delete a prompt template
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: gpt-prompt-templates.deleteprompttemplate
+      outputParameters:
+      - type: object
+        mapping: $.

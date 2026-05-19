@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein Bots API — Bot Versions
+  description: 'Salesforce Einstein Bots API — Bot Versions. 2 operations. Lead operation: Salesforce Einstein List bot versions.
+    Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - Bot Versions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bots-bot-versions
+    baseUri: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Einstein Bots API — Bot Versions business capability. Self-contained, no shared references.
+    resources:
+    - name: einstein-bots-botId-versions
+      path: /einstein/bots/{botId}/versions
+      operations:
+      - name: listbotversions
+        method: GET
+        description: Salesforce Einstein List bot versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: einstein-bots-botId-versions-versionId
+      path: /einstein/bots/{botId}/versions/{versionId}
+      operations:
+      - name: getbotversion
+        method: GET
+        description: Salesforce Einstein Get a bot version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: bots-bot-versions-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein Bots API — Bot Versions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/einstein/bots/{botid}/versions
+      name: einstein-bots-botid-versions
+      description: REST surface for einstein-bots-botId-versions.
+      operations:
+      - method: GET
+        name: listbotversions
+        description: Salesforce Einstein List bot versions
+        call: bots-bot-versions.listbotversions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/einstein/bots/{botid}/versions/{versionid}
+      name: einstein-bots-botid-versions-versionid
+      description: REST surface for einstein-bots-botId-versions-versionId.
+      operations:
+      - method: GET
+        name: getbotversion
+        description: Salesforce Einstein Get a bot version
+        call: bots-bot-versions.getbotversion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bots-bot-versions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein Bots API — Bot Versions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-list-bot-versions
+      description: Salesforce Einstein List bot versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bots-bot-versions.listbotversions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-get-bot-version
+      description: Salesforce Einstein Get a bot version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bots-bot-versions.getbotversion
+      outputParameters:
+      - type: object
+        mapping: $.

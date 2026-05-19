@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein GPT API — Models
+  description: 'Salesforce Einstein GPT API — Models. 2 operations. Lead operation: Salesforce Einstein List available models.
+    Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - Models
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gpt-models
+    baseUri: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Einstein GPT API — Models business capability. Self-contained, no shared references.
+    resources:
+    - name: einstein-llm-models
+      path: /einstein/llm/models
+      operations:
+      - name: listmodels
+        method: GET
+        description: Salesforce Einstein List available models
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: einstein-llm-models-modelId
+      path: /einstein/llm/models/{modelId}
+      operations:
+      - name: getmodel
+        method: GET
+        description: Salesforce Einstein Get model details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: gpt-models-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein GPT API — Models. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/einstein/llm/models
+      name: einstein-llm-models
+      description: REST surface for einstein-llm-models.
+      operations:
+      - method: GET
+        name: listmodels
+        description: Salesforce Einstein List available models
+        call: gpt-models.listmodels
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/einstein/llm/models/{modelid}
+      name: einstein-llm-models-modelid
+      description: REST surface for einstein-llm-models-modelId.
+      operations:
+      - method: GET
+        name: getmodel
+        description: Salesforce Einstein Get model details
+        call: gpt-models.getmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gpt-models-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein GPT API — Models. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-list-available-models
+      description: Salesforce Einstein List available models
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gpt-models.listmodels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-get-model-details
+      description: Salesforce Einstein Get model details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: gpt-models.getmodel
+      outputParameters:
+      - type: object
+        mapping: $.

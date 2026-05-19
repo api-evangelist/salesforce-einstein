@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein Language API — Predictions
+  description: 'Salesforce Einstein Language API — Predictions. 2 operations. Lead operation: Salesforce Einstein Detect intent.
+    Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - Predictions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: language-predictions
+    baseUri: https://api.einstein.ai/v2/language
+    description: Salesforce Einstein Language API — Predictions business capability. Self-contained, no shared references.
+    resources:
+    - name: intent
+      path: /intent
+      operations:
+      - name: detectintent
+        method: POST
+        description: Salesforce Einstein Detect intent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: sentiment
+      path: /sentiment
+      operations:
+      - name: analyzesentiment
+        method: POST
+        description: Salesforce Einstein Analyze sentiment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: language-predictions-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein Language API — Predictions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/intent
+      name: intent
+      description: REST surface for intent.
+      operations:
+      - method: POST
+        name: detectintent
+        description: Salesforce Einstein Detect intent
+        call: language-predictions.detectintent
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sentiment
+      name: sentiment
+      description: REST surface for sentiment.
+      operations:
+      - method: POST
+        name: analyzesentiment
+        description: Salesforce Einstein Analyze sentiment
+        call: language-predictions.analyzesentiment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: language-predictions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein Language API — Predictions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-detect-intent
+      description: Salesforce Einstein Detect intent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: language-predictions.detectintent
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-analyze-sentiment
+      description: Salesforce Einstein Analyze sentiment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: language-predictions.analyzesentiment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

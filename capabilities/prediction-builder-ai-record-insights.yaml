@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein Prediction Builder API — AI Record Insights
+  description: 'Salesforce Einstein Prediction Builder API — AI Record Insights. 1 operations. Lead operation: Salesforce
+    Einstein Get AI record insights. Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - AI Record Insights
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prediction-builder-ai-record-insights
+    baseUri: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Einstein Prediction Builder API — AI Record Insights business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: einstein-ai-record-insights
+      path: /einstein/ai-record-insights
+      operations:
+      - name: getairecordinsights
+        method: POST
+        description: Salesforce Einstein Get AI record insights
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prediction-builder-ai-record-insights-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein Prediction Builder API — AI Record Insights. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/einstein/ai-record-insights
+      name: einstein-ai-record-insights
+      description: REST surface for einstein-ai-record-insights.
+      operations:
+      - method: POST
+        name: getairecordinsights
+        description: Salesforce Einstein Get AI record insights
+        call: prediction-builder-ai-record-insights.getairecordinsights
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prediction-builder-ai-record-insights-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein Prediction Builder API — AI Record Insights. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-get-ai-record
+      description: Salesforce Einstein Get AI record insights
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: prediction-builder-ai-record-insights.getairecordinsights
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

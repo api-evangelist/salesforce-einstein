@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Salesforce Einstein GPT API — Generations
+  description: 'Salesforce Einstein GPT API — Generations. 3 operations. Lead operation: Salesforce Einstein Generate a chat
+    response. Self-contained Naftiko capability covering one Salesforce Einstein business surface.'
+  tags:
+  - Salesforce Einstein
+  - Generations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SALESFORCE_EINSTEIN_API_KEY: SALESFORCE_EINSTEIN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gpt-generations
+    baseUri: https://{instance}.salesforce.com/services/data/v58.0
+    description: Salesforce Einstein GPT API — Generations business capability. Self-contained, no shared references.
+    resources:
+    - name: einstein-llm-prompt-chat-generations
+      path: /einstein/llm/prompt/chat/generations
+      operations:
+      - name: chatgeneration
+        method: POST
+        description: Salesforce Einstein Generate a chat response
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: einstein-llm-prompt-completions
+      path: /einstein/llm/prompt/completions
+      operations:
+      - name: completeprompt
+        method: POST
+        description: Salesforce Einstein Complete a prompt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: einstein-llm-prompt-generations
+      path: /einstein/llm/prompt/generations
+      operations:
+      - name: generatefromprompt
+        method: POST
+        description: Salesforce Einstein Generate content from a prompt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SALESFORCE_EINSTEIN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: gpt-generations-rest
+    port: 8080
+    description: REST adapter for Salesforce Einstein GPT API — Generations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/einstein/llm/prompt/chat/generations
+      name: einstein-llm-prompt-chat-generations
+      description: REST surface for einstein-llm-prompt-chat-generations.
+      operations:
+      - method: POST
+        name: chatgeneration
+        description: Salesforce Einstein Generate a chat response
+        call: gpt-generations.chatgeneration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/einstein/llm/prompt/completions
+      name: einstein-llm-prompt-completions
+      description: REST surface for einstein-llm-prompt-completions.
+      operations:
+      - method: POST
+        name: completeprompt
+        description: Salesforce Einstein Complete a prompt
+        call: gpt-generations.completeprompt
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/einstein/llm/prompt/generations
+      name: einstein-llm-prompt-generations
+      description: REST surface for einstein-llm-prompt-generations.
+      operations:
+      - method: POST
+        name: generatefromprompt
+        description: Salesforce Einstein Generate content from a prompt
+        call: gpt-generations.generatefromprompt
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: gpt-generations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Salesforce Einstein GPT API — Generations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: salesforce-einstein-generate-chat-response
+      description: Salesforce Einstein Generate a chat response
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gpt-generations.chatgeneration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-complete-prompt
+      description: Salesforce Einstein Complete a prompt
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gpt-generations.completeprompt
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: salesforce-einstein-generate-content-prompt
+      description: Salesforce Einstein Generate content from a prompt
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: gpt-generations.generatefromprompt
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
