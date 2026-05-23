@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DetectionResult",
+  "title": "DetectionResult",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "Detected object label."
+    },
+    "probability": {
+      "type": "number",
+      "description": "Confidence score."
+    },
+    "boundingBox": {
+      "$ref": "#/components/schemas/BoundingBox"
+    }
+  }
+}

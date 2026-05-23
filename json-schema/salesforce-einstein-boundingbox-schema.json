@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BoundingBox",
+  "title": "BoundingBox",
+  "type": "object",
+  "properties": {
+    "minX": {
+      "type": "integer",
+      "description": "Minimum X coordinate."
+    },
+    "minY": {
+      "type": "integer",
+      "description": "Minimum Y coordinate."
+    },
+    "maxX": {
+      "type": "integer",
+      "description": "Maximum X coordinate."
+    },
+    "maxY": {
+      "type": "integer",
+      "description": "Maximum Y coordinate."
+    }
+  }
+}

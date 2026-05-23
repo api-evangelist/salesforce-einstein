@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BotMessage",
+  "title": "BotMessage",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "Text",
+        "Choices",
+        "Transfer",
+        "EscalateToAgent",
+        "SessionEnded"
+      ],
+      "description": "Type of bot message."
+    },
+    "text": {
+      "type": "string",
+      "description": "Text content of the message."
+    },
+    "choices": {
+      "type": "array",
+      "description": "Available choices (for Choices type messages).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "index": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "scheduleItem": {
+      "type": "object",
+      "description": "Schedule information for appointment-related responses.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "sequenceId": {
+      "type": "integer"
+    }
+  }
+}

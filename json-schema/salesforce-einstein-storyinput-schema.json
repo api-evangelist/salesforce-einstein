@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StoryInput",
+  "title": "StoryInput",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the story."
+    },
+    "label": {
+      "type": "string",
+      "description": "Display label."
+    },
+    "sourceDatasetId": {
+      "type": "string",
+      "description": "ID of the dataset to analyze."
+    },
+    "outcomeVariable": {
+      "type": "string",
+      "description": "Variable to predict."
+    },
+    "outcomeGoal": {
+      "type": "string",
+      "enum": [
+        "Maximize",
+        "Minimize"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "sourceDatasetId",
+    "outcomeVariable"
+  ]
+}

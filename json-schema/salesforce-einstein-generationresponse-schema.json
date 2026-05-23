@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GenerationResponse",
+  "title": "GenerationResponse",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique generation identifier."
+    },
+    "generationId": {
+      "type": "string",
+      "description": "ID of this generation for feedback purposes."
+    },
+    "prompt": {
+      "type": "string",
+      "description": "The resolved prompt that was sent to the model."
+    },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "generatedText": {
+          "type": "string",
+          "description": "The generated content."
+        },
+        "contentQuality": {
+          "type": "object",
+          "properties": {
+            "scanToxicity": {
+              "type": "object",
+              "properties": {
+                "isDetected": {
+                  "type": "boolean"
+                },
+                "categories": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "categoryName": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "finish_reason": {
+              "type": "string"
+            },
+            "token_usage": {
+              "type": "object",
+              "properties": {
+                "prompt_tokens": {
+                  "type": "integer"
+                },
+                "completion_tokens": {
+                  "type": "integer"
+                },
+                "total_tokens": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

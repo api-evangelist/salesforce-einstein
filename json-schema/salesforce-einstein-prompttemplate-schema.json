@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PromptTemplate",
+  "title": "PromptTemplate",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "developerName": {
+      "type": "string"
+    },
+    "masterLabel": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "promptText": {
+      "type": "string",
+      "description": "The template text with merge field placeholders."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "salesGeneration",
+        "fieldGeneration",
+        "recordSummary",
+        "chatGeneration",
+        "flexibleGeneration"
+      ],
+      "description": "Type of prompt template."
+    },
+    "relatedEntity": {
+      "type": "string",
+      "description": "Salesforce object the template relates to."
+    },
+    "activeVersionId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Draft",
+        "Inactive"
+      ]
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

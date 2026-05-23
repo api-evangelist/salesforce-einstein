@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatGenerationRequest",
+  "title": "ChatGenerationRequest",
+  "type": "object",
+  "properties": {
+    "promptTemplateDevName": {
+      "type": "string",
+      "description": "Developer name of the chat prompt template."
+    },
+    "inputParams": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "messages": {
+      "type": "array",
+      "description": "Conversation history for context.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ]
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "additionalConfig": {
+      "type": "object",
+      "properties": {
+        "maxTokens": {
+          "type": "integer"
+        },
+        "temperature": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "required": [
+    "messages"
+  ]
+}

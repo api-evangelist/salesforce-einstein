@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Story",
+  "title": "Story",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Running",
+        "Complete",
+        "Failed"
+      ]
+    },
+    "objectType": {
+      "type": "string"
+    },
+    "outcomeVariable": {
+      "type": "string"
+    },
+    "outcomeGoal": {
+      "type": "string",
+      "enum": [
+        "Maximize",
+        "Minimize"
+      ]
+    },
+    "storyType": {
+      "type": "string"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdBy": {
+      "$ref": "#/components/schemas/UserReference"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

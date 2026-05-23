@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GenerationRequest",
+  "title": "GenerationRequest",
+  "type": "object",
+  "properties": {
+    "promptTemplateDevName": {
+      "type": "string",
+      "description": "Developer name of the prompt template to use."
+    },
+    "inputParams": {
+      "type": "object",
+      "description": "Key-value pairs of input parameters for the template.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "isPreview": {
+      "type": "boolean",
+      "description": "If true, returns the resolved prompt without calling the LLM.",
+      "default": false
+    },
+    "additionalConfig": {
+      "type": "object",
+      "properties": {
+        "maxTokens": {
+          "type": "integer",
+          "description": "Maximum number of tokens in the response."
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Sampling temperature (0.0 to 2.0)."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Application context for the generation."
+        }
+      }
+    }
+  },
+  "required": [
+    "promptTemplateDevName",
+    "inputParams"
+  ]
+}

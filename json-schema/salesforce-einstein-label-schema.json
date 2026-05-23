@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Label",
+  "title": "Label",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "datasetId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "numExamples": {
+      "type": "integer"
+    }
+  }
+}

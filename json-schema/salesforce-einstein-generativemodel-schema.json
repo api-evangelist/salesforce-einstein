@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GenerativeModel",
+  "title": "GenerativeModel",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string",
+      "description": "Model provider name."
+    },
+    "modelType": {
+      "type": "string",
+      "enum": [
+        "gpt-4",
+        "gpt-3.5-turbo",
+        "claude",
+        "custom"
+      ],
+      "description": "Type of the model."
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Capabilities supported by the model."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ]
+    }
+  }
+}

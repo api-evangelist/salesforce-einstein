@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PromptTemplateInput",
+  "title": "PromptTemplateInput",
+  "type": "object",
+  "properties": {
+    "developerName": {
+      "type": "string"
+    },
+    "masterLabel": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "promptText": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "salesGeneration",
+        "fieldGeneration",
+        "recordSummary",
+        "chatGeneration",
+        "flexibleGeneration"
+      ]
+    },
+    "relatedEntity": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "developerName",
+    "masterLabel",
+    "promptText",
+    "type"
+  ]
+}

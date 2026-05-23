@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PredictionOutput",
+  "title": "PredictionOutput",
+  "type": "object",
+  "properties": {
+    "predictionResults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prediction": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "number",
+                "description": "Predicted value."
+              },
+              "baseLine": {
+                "type": "number",
+                "description": "Baseline prediction value."
+              }
+            }
+          },
+          "prescriptions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "impact": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "middleValues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "columnName": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "impact": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

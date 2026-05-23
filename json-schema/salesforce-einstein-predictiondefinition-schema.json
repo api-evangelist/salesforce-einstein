@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PredictionDefinition",
+  "title": "PredictionDefinition",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique prediction definition identifier."
+    },
+    "label": {
+      "type": "string",
+      "description": "Display label for the prediction."
+    },
+    "name": {
+      "type": "string",
+      "description": "API name of the prediction definition."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Enabled",
+        "Disabled"
+      ],
+      "description": "Status of the prediction definition."
+    },
+    "outcome": {
+      "$ref": "#/components/schemas/Outcome"
+    },
+    "predictionType": {
+      "type": "string",
+      "enum": [
+        "Boolean",
+        "Categorical",
+        "Numeric"
+      ],
+      "description": "Type of prediction."
+    },
+    "sobjectType": {
+      "type": "string",
+      "description": "Salesforce object the prediction is built on."
+    },
+    "pushbackField": {
+      "type": "string",
+      "description": "Field where prediction scores are written."
+    },
+    "countOfModels": {
+      "type": "integer",
+      "description": "Number of models associated with this definition."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

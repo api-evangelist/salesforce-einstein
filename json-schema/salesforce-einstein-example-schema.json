@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Example",
+  "title": "Example",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "label": {
+      "$ref": "#/components/schemas/Label"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "object": {
+      "type": "string"
+    }
+  }
+}

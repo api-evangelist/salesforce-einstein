@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BotVersion",
+  "title": "BotVersion",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "botId": {
+      "type": "string"
+    },
+    "versionNumber": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Draft"
+      ]
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Bot",
+  "title": "Bot",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique bot identifier."
+    },
+    "developerName": {
+      "type": "string",
+      "description": "Developer name of the bot."
+    },
+    "masterLabel": {
+      "type": "string",
+      "description": "Display label for the bot."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the bot."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "description": "Current status of the bot."
+    },
+    "botType": {
+      "type": "string",
+      "description": "Type of the bot."
+    },
+    "language": {
+      "type": "string",
+      "description": "Primary language of the bot."
+    },
+    "activeVersionId": {
+      "type": "string",
+      "description": "ID of the currently active version."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastModifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

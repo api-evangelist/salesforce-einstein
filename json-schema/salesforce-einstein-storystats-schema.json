@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StoryStats",
+  "title": "StoryStats",
+  "type": "object",
+  "properties": {
+    "insights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "impact": {
+            "type": "number"
+          },
+          "variable": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modelMetrics": {
+      "type": "object",
+      "properties": {
+        "r2": {
+          "type": "number"
+        },
+        "rmse": {
+          "type": "number"
+        },
+        "accuracy": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

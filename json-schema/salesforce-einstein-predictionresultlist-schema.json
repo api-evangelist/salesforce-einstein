@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PredictionResultList",
+  "title": "PredictionResultList",
+  "type": "object",
+  "properties": {
+    "predictions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PredictionResult"
+      }
+    },
+    "totalSize": {
+      "type": "integer"
+    }
+  }
+}

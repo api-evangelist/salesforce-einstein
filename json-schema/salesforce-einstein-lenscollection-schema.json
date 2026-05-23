@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LensCollection",
+  "title": "LensCollection",
+  "type": "object",
+  "properties": {
+    "lenses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Lens"
+      }
+    },
+    "totalSize": {
+      "type": "integer"
+    }
+  }
+}

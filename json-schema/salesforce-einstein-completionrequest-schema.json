@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompletionRequest",
+  "title": "CompletionRequest",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "The prompt text to complete."
+    },
+    "modelId": {
+      "type": "string",
+      "description": "ID of the model to use."
+    },
+    "additionalConfig": {
+      "type": "object",
+      "properties": {
+        "maxTokens": {
+          "type": "integer"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "topP": {
+          "type": "number"
+        },
+        "stopSequences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "prompt"
+  ]
+}

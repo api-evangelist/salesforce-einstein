@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TrainResponse",
+  "title": "TrainResponse",
+  "type": "object",
+  "properties": {
+    "modelId": {
+      "type": "string"
+    },
+    "datasetId": {
+      "type": "integer"
+    },
+    "datasetVersionId": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "progress": {
+      "type": "number"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "epochs": {
+      "type": "integer"
+    },
+    "learningRate": {
+      "type": "number"
+    },
+    "object": {
+      "type": "string"
+    }
+  }
+}

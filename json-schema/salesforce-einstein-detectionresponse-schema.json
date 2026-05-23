@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DetectionResponse",
+  "title": "DetectionResponse",
+  "type": "object",
+  "properties": {
+    "probabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DetectionResult"
+      }
+    },
+    "object": {
+      "type": "string"
+    }
+  }
+}

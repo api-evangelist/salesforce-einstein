@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LearningCurve",
+  "title": "LearningCurve",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "epoch": {
+            "type": "integer"
+          },
+          "metricsData": {
+            "type": "object",
+            "properties": {
+              "f1": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "testAccuracy": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "trainingLoss": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "object": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PredictionFactor",
+  "title": "PredictionFactor",
+  "type": "object",
+  "properties": {
+    "featureName": {
+      "type": "string",
+      "description": "Name of the feature contributing to the prediction."
+    },
+    "featureValue": {
+      "type": "string",
+      "description": "Value of the feature."
+    },
+    "importance": {
+      "type": "number",
+      "description": "Importance weight of the factor."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "Positive",
+        "Negative"
+      ],
+      "description": "Whether the factor positively or negatively affects the prediction."
+    }
+  }
+}

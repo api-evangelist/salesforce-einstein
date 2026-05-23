@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SessionInput",
+  "title": "SessionInput",
+  "type": "object",
+  "properties": {
+    "forceConfig": {
+      "type": "object",
+      "description": "Configuration settings for the session.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Messaging endpoint for the bot."
+        }
+      }
+    },
+    "externalSessionKey": {
+      "type": "string",
+      "description": "External key to associate with the session."
+    }
+  },
+  "required": [
+    "forceConfig"
+  ]
+}

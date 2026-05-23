@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MessageResponse",
+  "title": "MessageResponse",
+  "type": "object",
+  "properties": {
+    "messages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BotMessage"
+      }
+    },
+    "sessionEnded": {
+      "type": "boolean",
+      "description": "Whether the session has ended."
+    },
+    "processedSequenceId": {
+      "type": "integer",
+      "description": "Last processed sequence ID."
+    }
+  }
+}

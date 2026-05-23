@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FeedbackInput",
+  "title": "FeedbackInput",
+  "type": "object",
+  "properties": {
+    "generationId": {
+      "type": "string",
+      "description": "ID of the generation to provide feedback on."
+    },
+    "feedback": {
+      "type": "string",
+      "enum": [
+        "THUMBS_UP",
+        "THUMBS_DOWN"
+      ],
+      "description": "Feedback signal."
+    },
+    "feedbackText": {
+      "type": "string",
+      "description": "Optional text feedback."
+    },
+    "source": {
+      "type": "string",
+      "description": "Source of the feedback."
+    }
+  },
+  "required": [
+    "generationId",
+    "feedback"
+  ]
+}

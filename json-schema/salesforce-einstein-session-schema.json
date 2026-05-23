@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Session",
+  "title": "Session",
+  "type": "object",
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "description": "Unique session identifier."
+    },
+    "botId": {
+      "type": "string",
+      "description": "Bot associated with the session."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Ended",
+        "Transferred"
+      ],
+      "description": "Current status of the session."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastActiveDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

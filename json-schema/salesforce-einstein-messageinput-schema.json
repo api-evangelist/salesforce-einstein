@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MessageInput",
+  "title": "MessageInput",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text message to send to the bot."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Choice",
+            "Transfer"
+          ],
+          "description": "Type of message."
+        },
+        "choiceIndex": {
+          "type": "integer",
+          "description": "Index of selected choice (for Choice type messages)."
+        },
+        "sequenceId": {
+          "type": "integer",
+          "description": "Sequence ID for message ordering."
+        }
+      },
+      "required": [
+        "text",
+        "type"
+      ]
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

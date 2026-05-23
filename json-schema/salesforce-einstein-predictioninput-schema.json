@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PredictionInput",
+  "title": "PredictionInput",
+  "type": "object",
+  "properties": {
+    "predictionDefinition": {
+      "type": "string",
+      "description": "ID of the prediction definition or model."
+    },
+    "columnNames": {
+      "type": "array",
+      "description": "Names of the input columns.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rows": {
+      "type": "array",
+      "description": "Input data rows for prediction.",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "predictionDefinition",
+    "columnNames",
+    "rows"
+  ]
+}

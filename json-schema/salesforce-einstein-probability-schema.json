@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Probability",
+  "title": "Probability",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "Predicted label."
+    },
+    "probability": {
+      "type": "number",
+      "description": "Confidence score (0.0 to 1.0)."
+    }
+  }
+}

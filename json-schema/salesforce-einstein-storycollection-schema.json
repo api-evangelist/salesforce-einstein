@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StoryCollection",
+  "title": "StoryCollection",
+  "type": "object",
+  "properties": {
+    "stories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Story"
+      }
+    },
+    "totalSize": {
+      "type": "integer"
+    },
+    "nextPageUrl": {
+      "type": "string"
+    }
+  }
+}

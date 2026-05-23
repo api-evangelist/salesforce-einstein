@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ModelCollection",
+  "title": "ModelCollection",
+  "type": "object",
+  "properties": {
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DiscoveryModel"
+      }
+    },
+    "totalSize": {
+      "type": "integer"
+    },
+    "nextPageUrl": {
+      "type": "string"
+    }
+  }
+}

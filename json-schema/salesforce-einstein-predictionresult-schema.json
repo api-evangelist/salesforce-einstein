@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PredictionResult",
+  "title": "PredictionResult",
+  "type": "object",
+  "properties": {
+    "recordId": {
+      "type": "string",
+      "description": "Salesforce record ID."
+    },
+    "prediction": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number",
+          "description": "Prediction score."
+        },
+        "label": {
+          "type": "string",
+          "description": "Predicted label (for categorical predictions)."
+        },
+        "factors": {
+          "type": "array",
+          "description": "Top factors influencing the prediction.",
+          "items": {
+            "$ref": "#/components/schemas/PredictionFactor"
+          }
+        }
+      }
+    },
+    "predictionDefinitionId": {
+      "type": "string"
+    }
+  }
+}
