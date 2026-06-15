@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Prediction Builder API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prediction Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List prediction definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/prediction-definitions"
+          },
+          "docs": "Returns a list of all Einstein prediction definitions in the org."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Create a prediction definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/prediction-definitions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Einstein prediction definition."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a prediction definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/prediction-definitions/:predictionDefinitionId",
+            "params": [
+              {
+                "name": "predictionDefinitionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the prediction definition."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific prediction definition."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Update a prediction definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/prediction-definitions/:predictionDefinitionId",
+            "params": [
+              {
+                "name": "predictionDefinitionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the prediction definition."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing prediction definition."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Delete a prediction definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/prediction-definitions/:predictionDefinitionId",
+            "params": [
+              {
+                "name": "predictionDefinitionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the prediction definition."
+              }
+            ]
+          },
+          "docs": "Deletes a prediction definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Predictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List predictions for a definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/prediction-definitions/:predictionDefinitionId/predictions",
+            "params": [
+              {
+                "name": "predictionDefinitionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the prediction definition."
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "query",
+                "description": "Filter predictions by Salesforce record ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of predictions to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination."
+              }
+            ]
+          },
+          "docs": "Returns prediction results for a given prediction definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AI Record Insights",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Get AI record insights",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/ai-record-insights",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns AI-generated insights for specified Salesforce records, including prediction factors and recommendations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

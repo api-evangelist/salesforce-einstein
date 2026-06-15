@@ -1,0 +1,255 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bot Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List bots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots"
+          },
+          "docs": "Returns a list of all Einstein Bots configured in the org."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific Einstein Bot."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bot Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List bot versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/versions",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              }
+            ]
+          },
+          "docs": "Returns a list of versions for a specific bot."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a bot version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/versions/:versionId",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot version."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific bot version."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Create a bot session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new conversation session with an Einstein Bot. Returns a session ID to use for sending and receiving messages."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get session details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ]
+          },
+          "docs": "Returns the current status and details of a bot session."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein End a bot session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ]
+          },
+          "docs": "Ends an active bot conversation session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Get messages in a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId/messages",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ]
+          },
+          "docs": "Returns the message history for a bot session."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Send a message to a bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId/messages",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to an Einstein Bot within an active session and returns the bot's response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

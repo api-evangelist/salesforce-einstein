@@ -1,0 +1,423 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Language API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.einstein.ai/v2/language/datasets",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all language datasets associated with the account."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Create a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.einstein.ai/v2/language/datasets",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "path",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new text classification dataset."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.einstein.ai/v2/language/datasets/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific language dataset."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Delete a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.einstein.ai/v2/language/datasets/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset."
+              }
+            ]
+          },
+          "docs": "Deletes a dataset and all associated examples and models."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Examples",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List examples in a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.einstein.ai/v2/language/datasets/:datasetId/examples",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of text examples in the specified dataset."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Add an example to a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.einstein.ai/v2/language/datasets/:datasetId/examples",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "labelId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "document",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Adds a labeled text example to an existing dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List models for a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.einstein.ai/v2/language/datasets/:datasetId/models",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset."
+              }
+            ]
+          },
+          "docs": "Returns all models trained on the specified dataset."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Train a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.einstein.ai/v2/language/train",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "datasetId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "trainParams",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "epochs",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "learningRate",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Trains a text classification model on a dataset. Training is asynchronous."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Retrain a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.einstein.ai/v2/language/retrain",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "modelId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "epochs",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "learningRate",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Retrains an existing model with additional data."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get model details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.einstein.ai/v2/language/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Returns the details and metrics of a trained model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Delete a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.einstein.ai/v2/language/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Deletes a trained model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Predictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Analyze sentiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.einstein.ai/v2/language/sentiment",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "modelId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "document",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "numResults",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Analyzes the sentiment of the given text. Use the pre-built CommunitySentiment model or a custom-trained sentiment model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Detect intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.einstein.ai/v2/language/intent",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "modelId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "document",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "numResults",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Detects the intent of the given text. Requires a custom-trained intent model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Get API usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.einstein.ai/v2/language/apiusage"
+          },
+          "docs": "Returns API usage data for the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
