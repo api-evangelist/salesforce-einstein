@@ -37,7 +37,7 @@ apis:
         url: https://metamind.readme.io/docs/generate-oauth-token
       - type: Pricing
         url: https://www.salesforce.com/products/einstein/pricing/
-      - type: SignUp
+      - type: Signup
         url: https://api.einstein.ai/signup
       - type: OpenAPI
         url: openapi/salesforce-einstein-vision-openapi.yml
