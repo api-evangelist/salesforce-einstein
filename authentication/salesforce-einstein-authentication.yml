@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/salesforce-einstein-bots-openapi.yml, openapi/salesforce-einstein-discovery-openapi.yml,
+  openapi/salesforce-einstein-gpt-openapi.yml, openapi/salesforce-einstein-language-openapi.yml,
+  openapi/salesforce-einstein-prediction-builder-openapi.yml, openapi/salesforce-einstein-vision-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+    tokenUrl: https://login.salesforce.com/services/oauth2/token
+    scopes: 2
+  description: Salesforce OAuth 2.0 authentication.
+  sources:
+  - openapi/salesforce-einstein-bots-openapi.yml
+  - openapi/salesforce-einstein-discovery-openapi.yml
+  - openapi/salesforce-einstein-gpt-openapi.yml
+  - openapi/salesforce-einstein-prediction-builder-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 Bearer token. Generate a token using your Einstein Platform Services
+    private key.
+  sources:
+  - openapi/salesforce-einstein-language-openapi.yml
+  - openapi/salesforce-einstein-vision-openapi.yml

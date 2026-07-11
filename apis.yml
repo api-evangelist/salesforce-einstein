@@ -140,6 +140,8 @@ apis:
       - type: OpenAPI
         url: openapi/salesforce-einstein-gpt-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/salesforce-einstein-domain-security.yml
   - type: Authentication
     url: authentication/salesforce-einstein-authentication.yml
   - type: OAuthScopes
