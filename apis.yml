@@ -140,6 +140,10 @@ apis:
       - type: OpenAPI
         url: openapi/salesforce-einstein-gpt-openapi.yml
 common:
+  - type: Authentication
+    url: authentication/salesforce-einstein-authentication.yml
+  - type: OAuthScopes
+    url: scopes/salesforce-einstein-scopes.yml
   - type: Portal
     url: https://developer.salesforce.com/
   - type: GettingStarted

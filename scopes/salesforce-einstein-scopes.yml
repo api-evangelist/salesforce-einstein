@@ -1,0 +1,57 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/salesforce-einstein-bots-openapi.yml, openapi/salesforce-einstein-discovery-openapi.yml,
+  openapi/salesforce-einstein-gpt-openapi.yml, openapi/salesforce-einstein-prediction-builder-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/salesforce-einstein-bots-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+    tokenUrl: https://login.salesforce.com/services/oauth2/token
+  description: Salesforce OAuth 2.0 authentication.
+- name: oauth2
+  source: openapi/salesforce-einstein-discovery-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+    tokenUrl: https://login.salesforce.com/services/oauth2/token
+  description: Salesforce OAuth 2.0 authentication.
+- name: oauth2
+  source: openapi/salesforce-einstein-gpt-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+    tokenUrl: https://login.salesforce.com/services/oauth2/token
+  description: Salesforce OAuth 2.0 authentication.
+- name: oauth2
+  source: openapi/salesforce-einstein-prediction-builder-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+    tokenUrl: https://login.salesforce.com/services/oauth2/token
+  description: Salesforce OAuth 2.0 authentication.
+scopes:
+- scope: api
+  description: Full access to Salesforce APIs
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/salesforce-einstein-bots-openapi.yml
+  - openapi/salesforce-einstein-discovery-openapi.yml
+  - openapi/salesforce-einstein-gpt-openapi.yml
+  - openapi/salesforce-einstein-prediction-builder-openapi.yml
+- scope: einstein_gpt
+  description: Access to Einstein AI features
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/salesforce-einstein-bots-openapi.yml
+  - openapi/salesforce-einstein-gpt-openapi.yml
+  - openapi/salesforce-einstein-prediction-builder-openapi.yml
+- scope: wave_api
+  description: Access to Analytics APIs
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/salesforce-einstein-discovery-openapi.yml
