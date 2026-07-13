@@ -2,13 +2,14 @@
   "repo": "salesforce-einstein",
   "feeds": [
     {
-      "source": "https://developer.salesforce.com/blogs",
-      "feed_url": "",
-      "saved": 2,
-      "method": "agent-scrape"
+      "source": "https://help.salesforce.com/",
+      "feed_url": "https://help.salesforce.com/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T13:07:50Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 16,
   "agent_pulled": "2026-06-27"
 }
