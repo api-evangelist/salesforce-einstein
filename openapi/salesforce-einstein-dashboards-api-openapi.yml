@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Dashboards API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Dashboards
+  description: Manage analytics dashboards
+paths:
+  /wave/dashboards:
+    get:
+      operationId: listDashboards
+      summary: Salesforce Einstein List dashboards
+      description: Returns a list of analytics dashboards.
+      tags:
+      - Dashboards
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: Successful response with dashboards list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/dashboards/{dashboardId}:
+    get:
+      operationId: getDashboard
+      summary: Salesforce Einstein Get a dashboard
+      description: Returns details of a specific analytics dashboard.
+      tags:
+      - Dashboards
+      parameters:
+      - name: dashboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with dashboard details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Dashboard:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        folderId:
+          type: string
+        folderName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    DashboardCollection:
+      type: object
+      properties:
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+        totalSize:
+          type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

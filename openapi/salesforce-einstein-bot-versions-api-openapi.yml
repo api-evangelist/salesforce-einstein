@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Bot Versions API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Bot Versions
+  description: Manage bot versions
+paths:
+  /einstein/bots/{botId}/versions:
+    get:
+      operationId: listBotVersions
+      summary: Salesforce Einstein List bot versions
+      description: Returns a list of versions for a specific bot.
+      tags:
+      - Bot Versions
+      parameters:
+      - $ref: '#/components/parameters/BotId'
+      responses:
+        '200':
+          description: Successful response with bot versions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotVersionCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/bots/{botId}/versions/{versionId}:
+    get:
+      operationId: getBotVersion
+      summary: Salesforce Einstein Get a bot version
+      description: Returns details of a specific bot version.
+      tags:
+      - Bot Versions
+      parameters:
+      - $ref: '#/components/parameters/BotId'
+      - $ref: '#/components/parameters/VersionId'
+      responses:
+        '200':
+          description: Successful response with bot version details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotVersion'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    BotVersion:
+      type: object
+      properties:
+        id:
+          type: string
+        botId:
+          type: string
+        versionNumber:
+          type: integer
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Draft
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+    BotVersionCollection:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotVersion'
+        totalSize:
+          type: integer
+  parameters:
+    VersionId:
+      name: versionId
+      in: path
+      required: true
+      description: Unique identifier for the bot version.
+      schema:
+        type: string
+    BotId:
+      name: botId
+      in: path
+      required: true
+      description: Unique identifier for the Einstein Bot.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

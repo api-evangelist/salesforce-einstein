@@ -1,0 +1,321 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Stories API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Stories
+  description: Manage Einstein Discovery stories
+paths:
+  /wave/stories:
+    get:
+      operationId: listStories
+      summary: Salesforce Einstein List stories
+      description: Returns a list of all Einstein Discovery stories.
+      tags:
+      - Stories
+      parameters:
+      - name: q
+        in: query
+        description: Search query to filter stories by name.
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: Number of stories to return per page.
+        schema:
+          type: integer
+          default: 25
+      - name: page
+        in: query
+        description: Page number.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with stories list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createStory
+      summary: Salesforce Einstein Create a story
+      description: Creates a new Einstein Discovery story from a dataset.
+      tags:
+      - Stories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoryInput'
+      responses:
+        '201':
+          description: Story created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/stories/{storyId}:
+    get:
+      operationId: getStory
+      summary: Salesforce Einstein Get a story
+      description: Returns details of a specific Einstein Discovery story.
+      tags:
+      - Stories
+      parameters:
+      - $ref: '#/components/parameters/StoryId'
+      responses:
+        '200':
+          description: Successful response with story details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateStory
+      summary: Salesforce Einstein Update a story
+      description: Updates an existing Einstein Discovery story.
+      tags:
+      - Stories
+      parameters:
+      - $ref: '#/components/parameters/StoryId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoryInput'
+      responses:
+        '200':
+          description: Story updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteStory
+      summary: Salesforce Einstein Delete a story
+      description: Deletes an Einstein Discovery story.
+      tags:
+      - Stories
+      parameters:
+      - $ref: '#/components/parameters/StoryId'
+      responses:
+        '204':
+          description: Story deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wave/stories/{storyId}/stats:
+    get:
+      operationId: getStoryStats
+      summary: Salesforce Einstein Get story statistics
+      description: Returns insights and statistical analysis from a story.
+      tags:
+      - Stories
+      parameters:
+      - $ref: '#/components/parameters/StoryId'
+      responses:
+        '200':
+          description: Successful response with story statistics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryStats'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Story:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+          enum:
+          - New
+          - Running
+          - Complete
+          - Failed
+        objectType:
+          type: string
+        outcomeVariable:
+          type: string
+        outcomeGoal:
+          type: string
+          enum:
+          - Maximize
+          - Minimize
+        storyType:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/UserReference'
+        url:
+          type: string
+          format: uri
+    StoryInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the story.
+        label:
+          type: string
+          description: Display label.
+        sourceDatasetId:
+          type: string
+          description: ID of the dataset to analyze.
+        outcomeVariable:
+          type: string
+          description: Variable to predict.
+        outcomeGoal:
+          type: string
+          enum:
+          - Maximize
+          - Minimize
+      required:
+      - name
+      - sourceDatasetId
+      - outcomeVariable
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    StoryCollection:
+      type: object
+      properties:
+        stories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    UserReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    StoryStats:
+      type: object
+      properties:
+        insights:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              description:
+                type: string
+              impact:
+                type: number
+              variable:
+                type: string
+        modelMetrics:
+          type: object
+          properties:
+            r2:
+              type: number
+            rmse:
+              type: number
+            accuracy:
+              type: number
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    StoryId:
+      name: storyId
+      in: path
+      required: true
+      description: Unique identifier for the story.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

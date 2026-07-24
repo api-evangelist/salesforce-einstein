@@ -1,0 +1,272 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Generations API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Generations
+  description: Generate AI-powered content
+paths:
+  /einstein/llm/prompt/generations:
+    post:
+      operationId: generateFromPrompt
+      summary: Salesforce Einstein Generate content from a prompt
+      description: Generates AI content using a prompt template. Provide a prompt template ID and field values to generate personalized content.
+      tags:
+      - Generations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerationRequest'
+      responses:
+        '200':
+          description: Successful generation response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/completions:
+    post:
+      operationId: completePrompt
+      summary: Salesforce Einstein Complete a prompt
+      description: Sends a raw prompt to the configured LLM and returns the completion. This provides direct access to the language model without using a template.
+      tags:
+      - Generations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+      responses:
+        '200':
+          description: Successful completion response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/chat/generations:
+    post:
+      operationId: chatGeneration
+      summary: Salesforce Einstein Generate a chat response
+      description: Generates a conversational AI response using a chat-based prompt with message history context.
+      tags:
+      - Generations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatGenerationRequest'
+      responses:
+        '200':
+          description: Successful chat generation response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    GenerationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique generation identifier.
+        generationId:
+          type: string
+          description: ID of this generation for feedback purposes.
+        prompt:
+          type: string
+          description: The resolved prompt that was sent to the model.
+        generation:
+          type: object
+          properties:
+            id:
+              type: string
+            generatedText:
+              type: string
+              description: The generated content.
+            contentQuality:
+              type: object
+              properties:
+                scanToxicity:
+                  type: object
+                  properties:
+                    isDetected:
+                      type: boolean
+                    categories:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          categoryName:
+                            type: string
+                          score:
+                            type: number
+            parameters:
+              type: object
+              properties:
+                finish_reason:
+                  type: string
+                token_usage:
+                  type: object
+                  properties:
+                    prompt_tokens:
+                      type: integer
+                    completion_tokens:
+                      type: integer
+                    total_tokens:
+                      type: integer
+    ChatGenerationRequest:
+      type: object
+      properties:
+        promptTemplateDevName:
+          type: string
+          description: Developer name of the chat prompt template.
+        inputParams:
+          type: object
+          additionalProperties:
+            type: string
+        messages:
+          type: array
+          description: Conversation history for context.
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                - user
+                - assistant
+                - system
+              content:
+                type: string
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+            temperature:
+              type: number
+      required:
+      - messages
+    GenerationRequest:
+      type: object
+      properties:
+        promptTemplateDevName:
+          type: string
+          description: Developer name of the prompt template to use.
+        inputParams:
+          type: object
+          description: Key-value pairs of input parameters for the template.
+          additionalProperties:
+            type: string
+        isPreview:
+          type: boolean
+          description: If true, returns the resolved prompt without calling the LLM.
+          default: false
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+              description: Maximum number of tokens in the response.
+            temperature:
+              type: number
+              description: Sampling temperature (0.0 to 2.0).
+            applicationName:
+              type: string
+              description: Application context for the generation.
+      required:
+      - promptTemplateDevName
+      - inputParams
+    CompletionRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The prompt text to complete.
+        modelId:
+          type: string
+          description: ID of the model to use.
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+            temperature:
+              type: number
+            topP:
+              type: number
+            stopSequences:
+              type: array
+              items:
+                type: string
+      required:
+      - prompt
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

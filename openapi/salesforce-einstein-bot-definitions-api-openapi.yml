@@ -1,0 +1,154 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Bot Definitions API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Bot Definitions
+  description: Manage Einstein Bot definitions
+paths:
+  /einstein/bots:
+    get:
+      operationId: listBots
+      summary: Salesforce Einstein List bots
+      description: Returns a list of all Einstein Bots configured in the org.
+      tags:
+      - Bot Definitions
+      responses:
+        '200':
+          description: Successful response with bots list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/bots/{botId}:
+    get:
+      operationId: getBot
+      summary: Salesforce Einstein Get a bot
+      description: Returns details of a specific Einstein Bot.
+      tags:
+      - Bot Definitions
+      parameters:
+      - $ref: '#/components/parameters/BotId'
+      responses:
+        '200':
+          description: Successful response with bot details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bot'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    Bot:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique bot identifier.
+        developerName:
+          type: string
+          description: Developer name of the bot.
+        masterLabel:
+          type: string
+          description: Display label for the bot.
+        description:
+          type: string
+          description: Description of the bot.
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          description: Current status of the bot.
+        botType:
+          type: string
+          description: Type of the bot.
+        language:
+          type: string
+          description: Primary language of the bot.
+        activeVersionId:
+          type: string
+          description: ID of the currently active version.
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    BotCollection:
+      type: object
+      properties:
+        bots:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bot'
+        totalSize:
+          type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    BotId:
+      name: botId
+      in: path
+      required: true
+      description: Unique identifier for the Einstein Bot.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

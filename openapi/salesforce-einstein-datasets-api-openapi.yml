@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Datasets API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Datasets
+  description: Manage text datasets for training models
+paths:
+  /datasets:
+    get:
+      operationId: listDatasets
+      summary: Salesforce Einstein List datasets
+      description: Returns a list of all language datasets associated with the account.
+      tags:
+      - Datasets
+      parameters:
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: count
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      responses:
+        '200':
+          description: Successful response with list of datasets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDataset
+      summary: Salesforce Einstein Create a dataset
+      description: Creates a new text classification dataset.
+      tags:
+      - Datasets
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the dataset.
+                type:
+                  type: string
+                  enum:
+                  - text-sentiment
+                  - text-intent
+                  description: Type of the dataset.
+                path:
+                  type: string
+                  description: URL of the .csv file containing training data.
+              required:
+              - name
+              - type
+      responses:
+        '200':
+          description: Dataset created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /datasets/{datasetId}:
+    get:
+      operationId: getDataset
+      summary: Salesforce Einstein Get a dataset
+      description: Returns details of a specific language dataset.
+      tags:
+      - Datasets
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Successful response with dataset details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteDataset
+      summary: Salesforce Einstein Delete a dataset
+      description: Deletes a dataset and all associated examples and models.
+      tags:
+      - Datasets
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Dataset deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    LabelSummary:
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Label'
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+        datasetId:
+          type: integer
+        name:
+          type: string
+        numExamples:
+          type: integer
+    DatasetList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    Dataset:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique dataset identifier.
+        name:
+          type: string
+          description: Name of the dataset.
+        type:
+          type: string
+          enum:
+          - text-sentiment
+          - text-intent
+          description: Type of the dataset.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        labelSummary:
+          $ref: '#/components/schemas/LabelSummary'
+        totalExamples:
+          type: integer
+        totalLabels:
+          type: integer
+        available:
+          type: boolean
+        statusMsg:
+          type: string
+        object:
+          type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

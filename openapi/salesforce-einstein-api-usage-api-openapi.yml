@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights API Usage API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: API Usage
+  description: Monitor API usage and limits
+paths:
+  /apiusage:
+    get:
+      operationId: getApiUsage
+      summary: Salesforce Einstein Get API usage
+      description: Returns API usage data for the account.
+      tags:
+      - API Usage
+      responses:
+        '200':
+          description: Successful response with usage data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiUsageList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ApiUsageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUsage'
+        object:
+          type: string
+    ApiUsage:
+      type: object
+      properties:
+        id:
+          type: string
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+        plan:
+          type: object
+          properties:
+            planId:
+              type: string
+            source:
+              type: string
+        predictionsUsed:
+          type: integer
+        predictionsMax:
+          type: integer
+        object:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+  responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

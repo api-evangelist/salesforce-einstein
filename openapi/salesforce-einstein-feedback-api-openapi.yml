@@ -1,0 +1,119 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Feedback API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Feedback
+  description: Provide feedback on generated content
+paths:
+  /einstein/llm/feedback:
+    post:
+      operationId: submitFeedback
+      summary: Salesforce Einstein Submit feedback on generated content
+      description: Submits feedback on AI-generated content to improve future generation quality.
+      tags:
+      - Feedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackInput'
+      responses:
+        '201':
+          description: Feedback submitted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    FeedbackInput:
+      type: object
+      properties:
+        generationId:
+          type: string
+          description: ID of the generation to provide feedback on.
+        feedback:
+          type: string
+          enum:
+          - THUMBS_UP
+          - THUMBS_DOWN
+          description: Feedback signal.
+        feedbackText:
+          type: string
+          description: Optional text feedback.
+        source:
+          type: string
+          description: Source of the feedback.
+      required:
+      - generationId
+      - feedback
+    FeedbackResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        generationId:
+          type: string
+        feedback:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

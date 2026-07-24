@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Messages API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Messages
+  description: Send and receive bot messages
+paths:
+  /einstein/bots/{botId}/sessions/{sessionId}/messages:
+    post:
+      operationId: sendMessage
+      summary: Salesforce Einstein Send a message to a bot
+      description: Sends a message to an Einstein Bot within an active session and returns the bot's response.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/BotId'
+      - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInput'
+      responses:
+        '200':
+          description: Successful response with bot messages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      operationId: getMessages
+      summary: Salesforce Einstein Get messages in a session
+      description: Returns the message history for a bot session.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/BotId'
+      - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Successful response with message history.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    MessageInput:
+      type: object
+      properties:
+        message:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Text message to send to the bot.
+            type:
+              type: string
+              enum:
+              - Text
+              - Choice
+              - Transfer
+              description: Type of message.
+            choiceIndex:
+              type: integer
+              description: Index of selected choice (for Choice type messages).
+            sequenceId:
+              type: integer
+              description: Sequence ID for message ordering.
+          required:
+          - text
+          - type
+      required:
+      - message
+    BotMessage:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Text
+          - Choices
+          - Transfer
+          - EscalateToAgent
+          - SessionEnded
+          description: Type of bot message.
+        text:
+          type: string
+          description: Text content of the message.
+        choices:
+          type: array
+          description: Available choices (for Choices type messages).
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              value:
+                type: string
+              index:
+                type: integer
+        scheduleItem:
+          type: object
+          description: Schedule information for appointment-related responses.
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+        sequenceId:
+          type: integer
+    MessageResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotMessage'
+        sessionEnded:
+          type: boolean
+          description: Whether the session has ended.
+        processedSequenceId:
+          type: integer
+          description: Last processed sequence ID.
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier for the bot session.
+      schema:
+        type: string
+    BotId:
+      name: botId
+      in: path
+      required: true
+      description: Unique identifier for the Einstein Bot.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

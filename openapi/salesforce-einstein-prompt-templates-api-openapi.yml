@@ -1,0 +1,266 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Prompt Templates API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Prompt Templates
+  description: Manage prompt templates for content generation
+paths:
+  /einstein/llm/prompt/templates:
+    get:
+      operationId: listPromptTemplates
+      summary: Salesforce Einstein List prompt templates
+      description: Returns a list of all prompt templates in the org.
+      tags:
+      - Prompt Templates
+      parameters:
+      - name: pageSize
+        in: query
+        description: Number of templates to return per page.
+        schema:
+          type: integer
+          default: 25
+      - name: page
+        in: query
+        description: Page token for pagination.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with prompt templates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplateCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPromptTemplate
+      summary: Salesforce Einstein Create a prompt template
+      description: Creates a new prompt template for content generation.
+      tags:
+      - Prompt Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptTemplateInput'
+      responses:
+        '201':
+          description: Prompt template created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/prompt/templates/{templateId}:
+    get:
+      operationId: getPromptTemplate
+      summary: Salesforce Einstein Get a prompt template
+      description: Returns details of a specific prompt template.
+      tags:
+      - Prompt Templates
+      parameters:
+      - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: Successful response with template details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePromptTemplate
+      summary: Salesforce Einstein Update a prompt template
+      description: Updates an existing prompt template.
+      tags:
+      - Prompt Templates
+      parameters:
+      - $ref: '#/components/parameters/TemplateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptTemplateInput'
+      responses:
+        '200':
+          description: Template updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePromptTemplate
+      summary: Salesforce Einstein Delete a prompt template
+      description: Deletes a prompt template.
+      tags:
+      - Prompt Templates
+      parameters:
+      - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '204':
+          description: Template deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    PromptTemplateInput:
+      type: object
+      properties:
+        developerName:
+          type: string
+        masterLabel:
+          type: string
+        description:
+          type: string
+        promptText:
+          type: string
+        type:
+          type: string
+          enum:
+          - salesGeneration
+          - fieldGeneration
+          - recordSummary
+          - chatGeneration
+          - flexibleGeneration
+        relatedEntity:
+          type: string
+      required:
+      - developerName
+      - masterLabel
+      - promptText
+      - type
+    PromptTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+        developerName:
+          type: string
+        masterLabel:
+          type: string
+        description:
+          type: string
+        promptText:
+          type: string
+          description: The template text with merge field placeholders.
+        type:
+          type: string
+          enum:
+          - salesGeneration
+          - fieldGeneration
+          - recordSummary
+          - chatGeneration
+          - flexibleGeneration
+          description: Type of prompt template.
+        relatedEntity:
+          type: string
+          description: Salesforce object the template relates to.
+        activeVersionId:
+          type: string
+        status:
+          type: string
+          enum:
+          - Active
+          - Draft
+          - Inactive
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+    PromptTemplateCollection:
+      type: object
+      properties:
+        promptTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    TemplateId:
+      name: templateId
+      in: path
+      required: true
+      description: Unique identifier for the prompt template.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Lenses API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Lenses
+  description: Manage analytics lenses (datasets)
+paths:
+  /wave/lenses:
+    get:
+      operationId: listLenses
+      summary: Salesforce Einstein List lenses
+      description: Returns a list of analytics lenses (datasets).
+      tags:
+      - Lenses
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: Successful response with lenses list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LensCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/lenses/{lensId}:
+    get:
+      operationId: getLens
+      summary: Salesforce Einstein Get a lens
+      description: Returns details of a specific analytics lens.
+      tags:
+      - Lenses
+      parameters:
+      - name: lensId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with lens details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lens'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Lens:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        datasetId:
+          type: string
+        datasetName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    LensCollection:
+      type: object
+      properties:
+        lenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lens'
+        totalSize:
+          type: integer
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

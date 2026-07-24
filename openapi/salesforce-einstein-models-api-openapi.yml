@@ -1,0 +1,541 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Models API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Models
+  description: Manage Einstein Discovery prediction models
+paths:
+  /wave/models:
+    get:
+      operationId: listModels
+      summary: Salesforce Einstein List prediction models
+      description: Returns a list of Einstein Discovery prediction models.
+      tags:
+      - Models
+      parameters:
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+      - name: page
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with models list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /wave/models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Salesforce Einstein Get a prediction model
+      description: Returns details of a specific prediction model.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with model details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteModel
+      summary: Salesforce Einstein Delete a prediction model
+      description: Deletes an Einstein Discovery prediction model.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      responses:
+        '204':
+          description: Model deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /einstein/llm/models:
+    get:
+      operationId: listModels
+      summary: Salesforce Einstein List available models
+      description: Returns a list of available generative AI models that can be used for content generation.
+      tags:
+      - Models
+      responses:
+        '200':
+          description: Successful response with available models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCollection_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /einstein/llm/models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Salesforce Einstein Get model details
+      description: Returns details of a specific generative AI model.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/ModelId_2'
+      responses:
+        '200':
+          description: Successful response with model details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerativeModel'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /datasets/{datasetId}/models:
+    get:
+      operationId: listModelsForDataset
+      summary: Salesforce Einstein List models for a dataset
+      description: Returns all models trained on the specified dataset.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Successful response with models list.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /train:
+    post:
+      operationId: trainModel
+      summary: Salesforce Einstein Train a model
+      description: Trains a text classification model on a dataset. Training is asynchronous.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name for the trained model.
+                datasetId:
+                  type: integer
+                  description: ID of the dataset to train on.
+                trainParams:
+                  type: string
+                  description: JSON string of optional training parameters.
+                epochs:
+                  type: integer
+                  description: Number of training epochs.
+                learningRate:
+                  type: number
+                  description: Learning rate for training.
+              required:
+              - name
+              - datasetId
+      responses:
+        '200':
+          description: Training job started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /retrain:
+    post:
+      operationId: retrainModel
+      summary: Salesforce Einstein Retrain a model
+      description: Retrains an existing model with additional data.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                modelId:
+                  type: string
+                  description: ID of the model to retrain.
+                epochs:
+                  type: integer
+                learningRate:
+                  type: number
+              required:
+              - modelId
+      responses:
+        '200':
+          description: Retraining job started successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Salesforce Einstein Get model details
+      description: Returns the details and metrics of a trained model.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with model details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteModel
+      summary: Salesforce Einstein Delete a model
+      description: Deletes a trained model.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Model deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /models/{modelId}/lc:
+    get:
+      operationId: getModelLearningCurve
+      summary: Salesforce Einstein Get model learning curve
+      description: Returns the learning curve data for a trained model.
+      tags:
+      - Models
+      parameters:
+      - $ref: '#/components/parameters/ModelId'
+      responses:
+        '200':
+          description: Successful response with learning curve.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningCurve'
+        '401':
+          $ref: '#/components/responses/Unauthorized_3'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    DiscoveryModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Training
+          - Failed
+        storyId:
+          type: string
+        algorithmType:
+          type: string
+        predictionType:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedDate:
+          type: string
+          format: date-time
+        url:
+          type: string
+          format: uri
+    Error_2:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    LearningCurve:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              epoch:
+                type: integer
+              metricsData:
+                type: object
+                properties:
+                  f1:
+                    type: array
+                    items:
+                      type: number
+                  testAccuracy:
+                    type: array
+                    items:
+                      type: number
+                  trainingLoss:
+                    type: array
+                    items:
+                      type: number
+        object:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    Error_3:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    Model:
+      type: object
+      properties:
+        modelId:
+          type: string
+        name:
+          type: string
+        datasetId:
+          type: integer
+        datasetVersionId:
+          type: integer
+        status:
+          type: string
+          enum:
+          - QUEUED
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - DELETED
+        progress:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        learningRate:
+          type: number
+        epochs:
+          type: integer
+        object:
+          type: string
+        modelType:
+          type: string
+        failureMsg:
+          type: string
+    TrainResponse:
+      type: object
+      properties:
+        modelId:
+          type: string
+        datasetId:
+          type: integer
+        datasetVersionId:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+        progress:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        epochs:
+          type: integer
+        learningRate:
+          type: number
+        object:
+          type: string
+    ModelCollection:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoveryModel'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    ModelCollection_2:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerativeModel'
+        totalSize:
+          type: integer
+    GenerativeModel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        provider:
+          type: string
+          description: Model provider name.
+        modelType:
+          type: string
+          enum:
+          - gpt-4
+          - gpt-3.5-turbo
+          - claude
+          - custom
+          description: Type of the model.
+        capabilities:
+          type: array
+          items:
+            type: string
+          description: Capabilities supported by the model.
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+  parameters:
+    ModelId:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the model.
+      schema:
+        type: string
+    ModelId_2:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the generative AI model.
+      schema:
+        type: string
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
+  responses:
+    Unauthorized_2:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_3:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features

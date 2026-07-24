@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Salesforce Einstein Bots AI Record Insights Examples API
+  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  version: 58.0.0
+  contact:
+    name: Salesforce Developer Support
+    url: https://developer.salesforce.com/
+  license:
+    name: Salesforce Master Subscription Agreement
+    url: https://www.salesforce.com/company/legal/agreements/
+  termsOfService: https://www.salesforce.com/company/legal/agreements/
+servers:
+- url: https://{instance}.salesforce.com/services/data/v58.0
+  description: Salesforce Instance
+  variables:
+    instance:
+      default: login
+      description: Your Salesforce instance domain.
+security:
+- oauth2: []
+tags:
+- name: Examples
+  description: Manage training examples within datasets
+paths:
+  /datasets/{datasetId}/examples:
+    get:
+      operationId: listExamples
+      summary: Salesforce Einstein List examples in a dataset
+      description: Returns a list of text examples in the specified dataset.
+      tags:
+      - Examples
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: count
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: source
+        in: query
+        schema:
+          type: string
+          enum:
+          - all
+          - upload
+          - feedback
+      responses:
+        '200':
+          description: Successful response with examples list.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExampleList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addExample
+      summary: Salesforce Einstein Add an example to a dataset
+      description: Adds a labeled text example to an existing dataset.
+      tags:
+      - Examples
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the example.
+                labelId:
+                  type: integer
+                  description: ID of the label to assign.
+                document:
+                  type: string
+                  description: Text content of the example.
+              required:
+              - name
+              - labelId
+              - document
+      responses:
+        '200':
+          description: Example added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Example'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+        datasetId:
+          type: integer
+        name:
+          type: string
+        numExamples:
+          type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    Example:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        label:
+          $ref: '#/components/schemas/Label'
+        createdAt:
+          type: string
+          format: date-time
+        object:
+          type: string
+    ExampleList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Example'
+  responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Salesforce OAuth 2.0 authentication.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
+          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          scopes:
+            api: Full access to Salesforce APIs
+            einstein_gpt: Access to Einstein AI features
