@@ -3,6 +3,19 @@ name: Salesforce Einstein
 description: >-
   Collection of Salesforce Einstein AI and machine learning APIs for predictive analytics, natural language processing,
   computer vision, and intelligent automation.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-logo.png
 url: https://raw.githubusercontent.com/api-evangelist/salesforce-einstein/refs/heads/main/apis.yml
 type: Index
@@ -19,126 +32,771 @@ tags:
   - Predictive Analytics
   - Salesforce
 apis:
-  - name: Einstein Vision API
-    description: Image recognition and classification API for building custom AI-powered image recognition models.
-    image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-vision.png
-    humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
-    baseURL: https://api.einstein.ai/v2/vision
-    tags:
-      - Computer Vision
-      - Image Recognition
-      - Machine Learning
-    properties:
-      - type: Documentation
-        url: https://metamind.readme.io/docs/intro-to-einstein-vision
-      - type: OpenAPI
-        url: https://api.einstein.ai/v2/vision/openapi.json
-      - type: Authentication
-        url: https://metamind.readme.io/docs/generate-oauth-token
-      - type: Pricing
-        url: https://www.salesforce.com/products/einstein/pricing/
-      - type: Signup
-        url: https://api.einstein.ai/signup
-      - type: OpenAPI
-        url: openapi/salesforce-einstein-vision-openapi.yml
-  - name: Einstein Language API
-    description: Natural language processing API for sentiment analysis, intent detection, and text classification.
-    image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-language.png
-    humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/natural-language-processing/
-    baseURL: https://api.einstein.ai/v2/language
-    tags:
-      - Machine Learning
-      - Natural Language Processing
-      - Sentiment Analysis
-      - Text Classification
-    properties:
-      - type: Documentation
-        url: https://metamind.readme.io/docs/intro-to-einstein-language
-      - type: OpenAPI
-        url: https://api.einstein.ai/v2/language/openapi.json
-      - type: Authentication
-        url: https://metamind.readme.io/docs/generate-oauth-token
-      - type: Pricing
-        url: https://www.salesforce.com/products/einstein/pricing/
-      - type: OpenAPI
-        url: openapi/salesforce-einstein-language-openapi.yml
-  - name: Einstein Prediction Builder API
-    description: Create custom AI predictions on Salesforce data without code using Einstein AI.
-    image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/prediction-builder.png
-    humanURL: https://help.salesforce.com/s/articleView?id=sf.einstein_prediction_builder.htm
-    baseURL: https://[instance].salesforce.com/services/data/v58.0/einstein/
-    tags:
-      - CRM
-      - Machine Learning
-      - No-Code
-      - Predictive Analytics
-    properties:
-      - type: Documentation
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
-      - type: APIReference
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
-      - type: Authentication
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
-      - type: OpenAPI
-        url: openapi/salesforce-einstein-prediction-builder-openapi.yml
-  - name: Einstein Discovery API
-    description: Advanced analytics and automated insights API for predicting outcomes and recommending actions.
-    image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-discovery.png
-    humanURL: https://www.salesforce.com/products/einstein/features/
-    baseURL: https://[instance].salesforce.com/services/data/v58.0/analytics/
-    tags:
-      - Automated Insights
-      - Business Intelligence
-      - Machine Learning
-      - Predictive Analytics
-    properties:
-      - type: Documentation
-        url: https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
-      - type: APIReference
-        url: >-
-          https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
-      - type: Authentication
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
-      - type: OpenAPI
-        url: openapi/salesforce-einstein-discovery-openapi.yml
-  - name: Einstein Bots API
-    description: Conversational AI API for building intelligent chatbots and virtual assistants.
-    image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-bots.png
-    humanURL: https://www.salesforce.com/products/service-cloud/features/chatbots/
-    baseURL: https://[instance].salesforce.com/services/data/v58.0/einstein/
-    tags:
-      - Chatbots
-      - Conversational AI
-      - Customer Service
-      - Natural Language Processing
-    properties:
-      - type: Documentation
-        url: https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
-      - type: APIReference
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
-      - type: Setup Guide
-        url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
-      - type: OpenAPI
-        url: openapi/salesforce-einstein-bots-openapi.yml
-  - name: Einstein GPT API
-    description: Generative AI API powered by OpenAI integration for creating personalized content across Salesforce.
-    image: https://www.salesforce.com/content/dam/web/en_us/www/images/einstein/einstein-gpt.png
-    humanURL: https://www.salesforce.com/einstein-gpt/
-    baseURL: https://[instance].salesforce.com/services/data/v58.0/einstein/
-    tags:
-      - Content Generation
-      - Generative AI
-      - GPT
-      - Large Language Models
-    properties:
-      - type: Documentation
-        url: https://developer.salesforce.com/docs/einstein/genai/overview
-      - type: Announcement
-        url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
-      - type: Trust & Safety
-        url: https://www.salesforce.com/company/ethical-and-humane-use/
-      - type: OpenAPI
-        url: openapi/salesforce-einstein-gpt-openapi.yml
+- aid: salesforce-einstein:salesforce-einstein-ai-record-insights-api
+  name: Salesforce Einstein AI Record Insights API
+  description: Access AI-generated insights on records
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - AI Record Insights
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-ai-record-insights-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-api-usage-api
+  name: Salesforce Einstein API Usage API
+  description: Monitor API usage and limits
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - API Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-api-usage-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-bot-definitions-api
+  name: Salesforce Einstein Bot Definitions API
+  description: Manage Einstein Bot definitions
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Bot Definitions
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-bot-definitions-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-bot-versions-api
+  name: Salesforce Einstein Bot Versions API
+  description: Manage bot versions
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Bot Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-bot-versions-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-dashboards-api
+  name: Salesforce Einstein Dashboards API
+  description: Manage analytics dashboards
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-dashboards-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-datasets-api
+  name: Salesforce Einstein Datasets API
+  description: Manage text datasets for training models
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-examples-api
+  name: Salesforce Einstein Examples API
+  description: Manage training examples within datasets
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Examples
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-examples-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-feedback-api
+  name: Salesforce Einstein Feedback API
+  description: Provide feedback on generated content
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-generations-api
+  name: Salesforce Einstein Generations API
+  description: Generate AI-powered content
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Generations
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-generations-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-lenses-api
+  name: Salesforce Einstein Lenses API
+  description: Manage analytics lenses (datasets)
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Lenses
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-lenses-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-messages-api
+  name: Salesforce Einstein Messages API
+  description: Send and receive bot messages
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-messages-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-models-api
+  name: Salesforce Einstein Models API
+  description: Manage Einstein Discovery prediction models
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-models-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-prediction-definitions-api
+  name: Salesforce Einstein Prediction Definitions API
+  description: Manage Einstein prediction definitions
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Prediction Definitions
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-prediction-definitions-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-predictions-api
+  name: Salesforce Einstein Predictions API
+  description: Make predictions using Discovery models
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Predictions
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-predictions-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-prompt-templates-api
+  name: Salesforce Einstein Prompt Templates API
+  description: Manage prompt templates for content generation
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Prompt Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-prompt-templates-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-sessions-api
+  name: Salesforce Einstein Sessions API
+  description: Manage bot conversation sessions
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
+- aid: salesforce-einstein:salesforce-einstein-stories-api
+  name: Salesforce Einstein Stories API
+  description: Manage Einstein Discovery stories
+  humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
+  baseURL: https://api.einstein.ai/v2/vision
+  tags:
+  - Stories
+  properties:
+  - type: OpenAPI
+    url: openapi/salesforce-einstein-stories-api-openapi.yml
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-vision
+  - type: Authentication
+    url: https://metamind.readme.io/docs/generate-oauth-token
+  - type: Pricing
+    url: https://www.salesforce.com/products/einstein/pricing/
+  - type: Signup
+    url: https://api.einstein.ai/signup
+  - type: Documentation
+    url: https://metamind.readme.io/docs/intro-to-einstein-language
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/einstein_prediction_builder.htm
+  - type: APIReference
+    url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/
+  - type: Authentication
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_oauth_and_connected_apps.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/
+  - type: APIReference
+    url: >-
+      https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_overview.htm
+  - type: Documentation
+    url: >-
+      https://developer.salesforce.com/docs/service/einstein-bots/guide/einstein-bots-developer-overview.html
+  - type: Setup Guide
+    url: https://help.salesforce.com/s/articleView?id=sf.bots_service_intro.htm
+  - type: Documentation
+    url: https://developer.salesforce.com/docs/einstein/genai/overview
+  - type: Announcement
+    url: https://www.salesforce.com/news/press-releases/2023/03/07/einstein-gpt/
+  - type: Trust & Safety
+    url: https://www.salesforce.com/company/ethical-and-humane-use/
 common:
   - type: AgenticAccess
     url: agentic-access/salesforce-einstein-agentic-access.yml
