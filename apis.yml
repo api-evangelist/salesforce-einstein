@@ -842,12 +842,6 @@ common:
     url: json-schema/salesforce-einstein-generation-schema.json
   - type: SpectralRules
     url: rules/salesforce-einstein-rules.yml
-  - type: Capabilities
-    url: capabilities/ai-analytics.yaml
-  - type: Capabilities
-    url: capabilities/generative-ai.yaml
-  - type: Capabilities
-    url: capabilities/predictive-intelligence.yaml
   - type: JSONStructure
     url: json-structure/salesforce-einstein-structure.json
   - type: Vocabulary
