@@ -22,7 +22,7 @@ type: Index
 kind: company
 created: '2024'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
   - Artificial Intelligence
   - Computer Vision
