@@ -1,0 +1,923 @@
+{
+  "item": [
+    {
+      "id": "574281fb-818f-4c38-aa69-df736defa306",
+      "name": "Sessions",
+      "description": {
+        "content": "Manage bot conversation sessions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb133ca8-9c03-41d0-a2b7-d88eaeedb87b",
+          "name": "Salesforce Einstein Create a bot session",
+          "request": {
+            "name": "Salesforce Einstein Create a bot session",
+            "description": {
+              "content": "Creates a new conversation session with an Einstein Bot. Returns a session ID to use for sending and receiving messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "bots",
+                ":botId",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "botId",
+                  "description": "(Required) Unique identifier for the Einstein Bot."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"forceConfig\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"externalSessionKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "082c0773-60d5-4901-bbaf-567af85b177c",
+              "name": "Bot session created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"forceConfig\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"externalSessionKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionId\": \"string\",\n  \"botId\": \"string\",\n  \"status\": \"Transferred\",\n  \"createdDate\": \"2015-06-20T16:19:51.415Z\",\n  \"lastActiveDate\": \"1990-03-08T19:03:02.243Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d1ad785-f59c-41ee-a7da-d0490f51e647",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"forceConfig\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"externalSessionKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6f9a3e4-b7b9-463e-a373-0ca2b06c2fed",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"forceConfig\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"externalSessionKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "087cb56b-17d7-49e8-b2ad-2acd28a27f24",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"forceConfig\": {\n    \"endpoint\": \"<string>\"\n  },\n  \"externalSessionKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a841e6b3-5a54-4b2a-918b-8f8494b9bd01",
+          "name": "Salesforce Einstein Get session details",
+          "request": {
+            "name": "Salesforce Einstein Get session details",
+            "description": {
+              "content": "Returns the current status and details of a bot session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "bots",
+                ":botId",
+                "sessions",
+                ":sessionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "botId",
+                  "description": "(Required) Unique identifier for the Einstein Bot."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier for the bot session."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5736cdb9-4237-49ca-bf1c-f9c7db214aa1",
+              "name": "Successful response with session details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the bot session."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionId\": \"string\",\n  \"botId\": \"string\",\n  \"status\": \"Transferred\",\n  \"createdDate\": \"2015-06-20T16:19:51.415Z\",\n  \"lastActiveDate\": \"1990-03-08T19:03:02.243Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e81596c-60fa-42ae-8b8c-ba9e2f3f5e5e",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the bot session."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "640f5f98-bf72-48d5-8005-744fbc44f12d",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the bot session."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7536d123-8750-4b9a-8414-06185e7c3b1b",
+          "name": "Salesforce Einstein End a bot session",
+          "request": {
+            "name": "Salesforce Einstein End a bot session",
+            "description": {
+              "content": "Ends an active bot conversation session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "bots",
+                ":botId",
+                "sessions",
+                ":sessionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "botId",
+                  "description": "(Required) Unique identifier for the Einstein Bot."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sessionId",
+                  "description": "(Required) Unique identifier for the bot session."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "905a3630-74eb-47a3-a241-257cf8ab2b8b",
+              "name": "Session ended successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the bot session."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76c3822e-63f3-46ed-a4a1-64d5a1bf8f25",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the bot session."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a59bca7-0065-4507-8cf8-f73346c715a3",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "bots",
+                    ":botId",
+                    "sessions",
+                    ":sessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "botId",
+                      "description": "(Required) Unique identifier for the Einstein Bot."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sessionId",
+                      "description": "(Required) Unique identifier for the bot session."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21dc1c08-8b03-456d-be75-38bba181dea1",
+    "name": "Salesforce Einstein Bots AI Record Insights Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

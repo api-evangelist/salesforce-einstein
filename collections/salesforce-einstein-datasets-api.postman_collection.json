@@ -1,0 +1,989 @@
+{
+  "item": [
+    {
+      "id": "de1fe5ed-841b-4520-b89e-f0ff75b10d7f",
+      "name": "Datasets",
+      "description": {
+        "content": "Manage text datasets for training models",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0853136e-36af-41a7-abb8-cc8bdf7e4c82",
+          "name": "Salesforce Einstein List datasets",
+          "request": {
+            "name": "Salesforce Einstein List datasets",
+            "description": {
+              "content": "Returns a list of all language datasets associated with the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e770bc97-95d9-4b3b-a021-38b7cc74dc36",
+              "name": "Successful response with list of datasets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"id\": 7863,\n      \"name\": \"string\",\n      \"type\": \"text-sentiment\",\n      \"createdAt\": \"1971-06-05T13:24:29.300Z\",\n      \"updatedAt\": \"2024-07-14T10:36:43.302Z\",\n      \"labelSummary\": {\n        \"labels\": [\n          {\n            \"id\": 2694,\n            \"datasetId\": 1714,\n            \"name\": \"string\",\n            \"numExamples\": 5756\n          },\n          {\n            \"id\": 203,\n            \"datasetId\": 3902,\n            \"name\": \"string\",\n            \"numExamples\": 8804\n          }\n        ]\n      },\n      \"totalExamples\": 1157,\n      \"totalLabels\": 62,\n      \"available\": false,\n      \"statusMsg\": \"string\",\n      \"object\": \"string\"\n    },\n    {\n      \"id\": 2376,\n      \"name\": \"string\",\n      \"type\": \"text-sentiment\",\n      \"createdAt\": \"1987-12-17T21:57:09.800Z\",\n      \"updatedAt\": \"1948-08-17T06:43:57.399Z\",\n      \"labelSummary\": {\n        \"labels\": [\n          {\n            \"id\": 2425,\n            \"datasetId\": 5758,\n            \"name\": \"string\",\n            \"numExamples\": 742\n          },\n          {\n            \"id\": 1455,\n            \"datasetId\": 3601,\n            \"name\": \"string\",\n            \"numExamples\": 2150\n          }\n        ]\n      },\n      \"totalExamples\": 9351,\n      \"totalLabels\": 7354,\n      \"available\": true,\n      \"statusMsg\": \"string\",\n      \"object\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f7f57dd-e6e0-41f0-b6e5-e86c587de9a8",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "count",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ac127ab-f2ee-42be-8f94-bca0ee590de4",
+          "name": "Salesforce Einstein Create a dataset",
+          "request": {
+            "name": "Salesforce Einstein Create a dataset",
+            "description": {
+              "content": "Creates a new text classification dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Name of the dataset."
+                },
+                {
+                  "key": "type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Type of the dataset. (This can only be one of text-sentiment,text-intent)"
+                },
+                {
+                  "key": "path",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URL of the .csv file containing training data."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7e3a1e1f-dc6d-4b6e-acee-1829e3053a35",
+              "name": "Dataset created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the dataset.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Type of the dataset. (This can only be one of text-sentiment,text-intent)",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the .csv file containing training data.",
+                        "type": "text/plain"
+                      },
+                      "key": "path",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5999,\n  \"name\": \"string\",\n  \"type\": \"text-sentiment\",\n  \"createdAt\": \"1950-12-08T14:04:18.611Z\",\n  \"updatedAt\": \"1975-08-21T06:01:49.565Z\",\n  \"labelSummary\": {\n    \"labels\": [\n      {\n        \"id\": 6153,\n        \"datasetId\": 5366,\n        \"name\": \"string\",\n        \"numExamples\": 8114\n      },\n      {\n        \"id\": 9021,\n        \"datasetId\": 2737,\n        \"name\": \"string\",\n        \"numExamples\": 2704\n      }\n    ]\n  },\n  \"totalExamples\": 9723,\n  \"totalLabels\": 5050,\n  \"available\": true,\n  \"statusMsg\": \"string\",\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3abf50d5-f66b-410d-8418-24278fe7bf4c",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the dataset.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Type of the dataset. (This can only be one of text-sentiment,text-intent)",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the .csv file containing training data.",
+                        "type": "text/plain"
+                      },
+                      "key": "path",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd12ddd2-e269-4767-a521-56a2f0ddfb59",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name of the dataset.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Type of the dataset. (This can only be one of text-sentiment,text-intent)",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the .csv file containing training data.",
+                        "type": "text/plain"
+                      },
+                      "key": "path",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98a9e9c0-c605-4c0b-9cbe-c1e24bc662fd",
+          "name": "Salesforce Einstein Get a dataset",
+          "request": {
+            "name": "Salesforce Einstein Get a dataset",
+            "description": {
+              "content": "Returns details of a specific language dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "datasetId",
+                  "description": "(Required) Unique identifier for the dataset."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf6b5345-ad8f-44ae-8f65-fd971bdedadc",
+              "name": "Successful response with dataset details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5999,\n  \"name\": \"string\",\n  \"type\": \"text-sentiment\",\n  \"createdAt\": \"1950-12-08T14:04:18.611Z\",\n  \"updatedAt\": \"1975-08-21T06:01:49.565Z\",\n  \"labelSummary\": {\n    \"labels\": [\n      {\n        \"id\": 6153,\n        \"datasetId\": 5366,\n        \"name\": \"string\",\n        \"numExamples\": 8114\n      },\n      {\n        \"id\": 9021,\n        \"datasetId\": 2737,\n        \"name\": \"string\",\n        \"numExamples\": 2704\n      }\n    ]\n  },\n  \"totalExamples\": 9723,\n  \"totalLabels\": 5050,\n  \"available\": true,\n  \"statusMsg\": \"string\",\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cb9f45e-ef22-46d2-8d8f-ce594d314a19",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21116fbc-b28d-4721-9c35-823f68550a33",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37e634aa-3c50-451a-90e8-49907be6b0a0",
+          "name": "Salesforce Einstein Delete a dataset",
+          "request": {
+            "name": "Salesforce Einstein Delete a dataset",
+            "description": {
+              "content": "Deletes a dataset and all associated examples and models.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "datasetId",
+                  "description": "(Required) Unique identifier for the dataset."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5bf83e3e-0fbd-49d3-88c2-cc83e7cc8d63",
+              "name": "Dataset deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "948dc72c-a8e0-4872-9cce-a937ebaec2a4",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f2ab71f-b773-4b5d-9719-8bddae922c46",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ffeceab0-df48-4199-b735-413c16a1fcfd",
+    "name": "Salesforce Einstein Bots AI Record Insights Datasets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

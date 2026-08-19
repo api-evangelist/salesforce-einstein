@@ -1,0 +1,789 @@
+{
+  "item": [
+    {
+      "id": "ee2a6fa4-74cb-4ec7-b9c1-0d3425cf91b7",
+      "name": "Generations",
+      "description": {
+        "content": "Generate AI-powered content",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7396fc3f-a648-4cfb-be0f-64d635c11db2",
+          "name": "Salesforce Einstein Generate content from a prompt",
+          "request": {
+            "name": "Salesforce Einstein Generate content from a prompt",
+            "description": {
+              "content": "Generates AI content using a prompt template. Provide a prompt template ID and field values to generate personalized content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "llm",
+                "prompt",
+                "generations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"isPreview\": false,\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"applicationName\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "894a681d-1d7d-42cb-83fb-e38ee5b24f4e",
+              "name": "Successful generation response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"isPreview\": false,\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"applicationName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"generationId\": \"string\",\n  \"prompt\": \"string\",\n  \"generation\": {\n    \"id\": \"string\",\n    \"generatedText\": \"string\",\n    \"contentQuality\": {\n      \"scanToxicity\": {\n        \"isDetected\": true,\n        \"categories\": [\n          {\n            \"categoryName\": \"string\",\n            \"score\": 3883.3203886177093\n          },\n          {\n            \"categoryName\": \"string\",\n            \"score\": 6339.382148745628\n          }\n        ]\n      }\n    },\n    \"parameters\": {\n      \"finish_reason\": \"string\",\n      \"token_usage\": {\n        \"prompt_tokens\": 295,\n        \"completion_tokens\": 6012,\n        \"total_tokens\": 8669\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c16f9074-4142-4b1a-a788-be08b26099a7",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"isPreview\": false,\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"applicationName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f41f3b0-a39f-479d-aa19-9af8d3f5c161",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"isPreview\": false,\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"applicationName\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b95c37f1-85b8-428d-9bf8-edaae5652813",
+          "name": "Salesforce Einstein Complete a prompt",
+          "request": {
+            "name": "Salesforce Einstein Complete a prompt",
+            "description": {
+              "content": "Sends a raw prompt to the configured LLM and returns the completion. This provides direct access to the language model without using a template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "llm",
+                "prompt",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"modelId\": \"<string>\",\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"topP\": \"<number>\",\n    \"stopSequences\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a28ffa1-7d30-4463-ada1-fc1cb3f4cb19",
+              "name": "Successful completion response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"modelId\": \"<string>\",\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"topP\": \"<number>\",\n    \"stopSequences\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"generationId\": \"string\",\n  \"prompt\": \"string\",\n  \"generation\": {\n    \"id\": \"string\",\n    \"generatedText\": \"string\",\n    \"contentQuality\": {\n      \"scanToxicity\": {\n        \"isDetected\": true,\n        \"categories\": [\n          {\n            \"categoryName\": \"string\",\n            \"score\": 3883.3203886177093\n          },\n          {\n            \"categoryName\": \"string\",\n            \"score\": 6339.382148745628\n          }\n        ]\n      }\n    },\n    \"parameters\": {\n      \"finish_reason\": \"string\",\n      \"token_usage\": {\n        \"prompt_tokens\": 295,\n        \"completion_tokens\": 6012,\n        \"total_tokens\": 8669\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9890e5fc-1843-46dc-911d-f4f7f058e956",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"modelId\": \"<string>\",\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"topP\": \"<number>\",\n    \"stopSequences\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e75a304c-080d-446c-ae34-01dbda89c0fa",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"modelId\": \"<string>\",\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"topP\": \"<number>\",\n    \"stopSequences\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3e15f70-6099-4de9-92cb-29264275675b",
+          "name": "Salesforce Einstein Generate a chat response",
+          "request": {
+            "name": "Salesforce Einstein Generate a chat response",
+            "description": {
+              "content": "Generates a conversational AI response using a chat-based prompt with message history context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "llm",
+                "prompt",
+                "chat",
+                "generations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\"\n  },\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fdfb0b8-74a7-498f-a272-0e3cef49e4cd",
+              "name": "Successful chat generation response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "chat",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\"\n  },\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"generationId\": \"string\",\n  \"prompt\": \"string\",\n  \"generation\": {\n    \"id\": \"string\",\n    \"generatedText\": \"string\",\n    \"contentQuality\": {\n      \"scanToxicity\": {\n        \"isDetected\": true,\n        \"categories\": [\n          {\n            \"categoryName\": \"string\",\n            \"score\": 3883.3203886177093\n          },\n          {\n            \"categoryName\": \"string\",\n            \"score\": 6339.382148745628\n          }\n        ]\n      }\n    },\n    \"parameters\": {\n      \"finish_reason\": \"string\",\n      \"token_usage\": {\n        \"prompt_tokens\": 295,\n        \"completion_tokens\": 6012,\n        \"total_tokens\": 8669\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6add4641-427d-4851-8ce9-b983f415eb29",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "chat",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\"\n  },\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7fa8f65-2cd9-442a-9287-c0b7f980f2a0",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "prompt",
+                    "chat",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"promptTemplateDevName\": \"<string>\",\n  \"inputParams\": {\n    \"key_0\": \"<string>\"\n  },\n  \"additionalConfig\": {\n    \"maxTokens\": \"<integer>\",\n    \"temperature\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a5075efc-a147-4cb4-88e4-473321eaa60e",
+    "name": "Salesforce Einstein Bots AI Record Insights Generations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights Generations API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Generate content from a prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/llm/prompt/generations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates AI content using a prompt template. Provide a prompt template ID and field values to generate personalized content."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Complete a prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/llm/prompt/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a raw prompt to the configured LLM and returns the completion. This provides direct access to the language model without using a template."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Generate a chat response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/llm/prompt/chat/generations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a conversational AI response using a chat-based prompt with message history context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

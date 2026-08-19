@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights Dashboards API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List dashboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/dashboards",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of analytics dashboards."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific analytics dashboard."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

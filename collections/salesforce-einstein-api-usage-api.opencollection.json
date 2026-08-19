@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights API Usage API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Get API usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/apiusage"
+          },
+          "docs": "Returns API usage data for the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

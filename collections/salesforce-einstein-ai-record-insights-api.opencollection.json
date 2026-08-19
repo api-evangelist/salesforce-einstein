@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AI Record Insights",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Get AI record insights",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/ai-record-insights",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns AI-generated insights for specified Salesforce records, including prediction factors and recommendations."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2599 @@
+{
+  "item": [
+    {
+      "id": "daffc22e-74df-499e-9ecd-8aa727dee16e",
+      "name": "Models",
+      "description": {
+        "content": "Manage Einstein Discovery prediction models",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83c4bbbf-9368-4d43-9c15-9b8d46062149",
+          "name": "Salesforce Einstein List prediction models",
+          "request": {
+            "name": "Salesforce Einstein List prediction models",
+            "description": {
+              "content": "Returns a list of Einstein Discovery prediction models.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wave",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08ec8789-fe33-47df-a8dd-df73d1cfffd3",
+              "name": "Successful response with models list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"status\": \"Failed\",\n      \"storyId\": \"string\",\n      \"algorithmType\": \"string\",\n      \"predictionType\": \"string\",\n      \"createdDate\": \"2025-05-23T21:39:01.138Z\",\n      \"lastModifiedDate\": \"1987-10-17T08:32:39.319Z\",\n      \"url\": \"https://dfRBTPKBPNyEMIpFxvNQ.uahbHShsT77Q5WLQE49F,V4i-gx9GLDXHXnAKFbuH0wSwJdFZeIg\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"status\": \"Inactive\",\n      \"storyId\": \"string\",\n      \"algorithmType\": \"string\",\n      \"predictionType\": \"string\",\n      \"createdDate\": \"1995-11-10T15:17:23.046Z\",\n      \"lastModifiedDate\": \"2011-11-14T07:04:02.452Z\",\n      \"url\": \"https://xfaCWRLNsIYSAYUfCMRsOOcbEBvbEqae.aidkvcpryQ.Z-NB.BUjOOVrPUJ+18SetiaEas7juK7AdHuW\"\n    }\n  ],\n  \"totalSize\": 907,\n  \"nextPageUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e763176b-30a7-455c-a702-5fb62f7e5628",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8b3f9d8-090a-4700-9acd-b8e8988077ca",
+          "name": "Salesforce Einstein Get a prediction model",
+          "request": {
+            "name": "Salesforce Einstein Get a prediction model",
+            "description": {
+              "content": "Returns details of a specific prediction model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wave",
+                "models",
+                ":modelId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelId",
+                  "description": "(Required) Unique identifier for the model."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09a5005a-ecb1-4f5c-85a9-63288cde0872",
+              "name": "Successful response with model details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"label\": \"string\",\n  \"status\": \"Failed\",\n  \"storyId\": \"string\",\n  \"algorithmType\": \"string\",\n  \"predictionType\": \"string\",\n  \"createdDate\": \"2025-04-18T15:11:40.269Z\",\n  \"lastModifiedDate\": \"2001-03-25T15:46:56.622Z\",\n  \"url\": \"http://rn.iwimuv3NiRqnGZRXcrlbZ6sIHr+NogBM0m93X1oI7\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaacf0da-7434-47fb-9f58-83f88747884d",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b6c3d89-278a-41d9-b161-1140938be1ea",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d13f4c7-0d8e-4837-b141-450e7c45a59e",
+          "name": "Salesforce Einstein Delete a prediction model",
+          "request": {
+            "name": "Salesforce Einstein Delete a prediction model",
+            "description": {
+              "content": "Deletes an Einstein Discovery prediction model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wave",
+                "models",
+                ":modelId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelId",
+                  "description": "(Required) Unique identifier for the model."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8bcfa1d-debc-4e3f-8f89-f6f334351a14",
+              "name": "Model deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96652765-277d-4b15-af5b-734b250cf16f",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcf0cf0c-d419-4fc9-a8f5-f66ec627a3a9",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "245aaf01-e83c-4582-a19a-ed5606cf1b6b",
+          "name": "Salesforce Einstein List available models",
+          "request": {
+            "name": "Salesforce Einstein List available models",
+            "description": {
+              "content": "Returns a list of available generative AI models that can be used for content generation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "llm",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87cf4521-9227-45a6-b738-307705215387",
+              "name": "Successful response with available models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"provider\": \"string\",\n      \"modelType\": \"gpt-3.5-turbo\",\n      \"capabilities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"status\": \"Active\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"label\": \"string\",\n      \"provider\": \"string\",\n      \"modelType\": \"gpt-4\",\n      \"capabilities\": [\n        \"string\",\n        \"string\"\n      ],\n      \"status\": \"Inactive\"\n    }\n  ],\n  \"totalSize\": 357\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7af931a2-3f6b-48bb-aa14-0b79840f9cde",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13fdd5e2-9c74-4311-8ed1-05215be38c4e",
+          "name": "Salesforce Einstein Get model details",
+          "request": {
+            "name": "Salesforce Einstein Get model details",
+            "description": {
+              "content": "Returns details of a specific generative AI model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "llm",
+                "models",
+                ":modelId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelId",
+                  "description": "(Required) Unique identifier for the generative AI model."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c79b202-b2dc-4af8-9d25-19b9df27eddb",
+              "name": "Successful response with model details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the generative AI model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"label\": \"string\",\n  \"provider\": \"string\",\n  \"modelType\": \"gpt-3.5-turbo\",\n  \"capabilities\": [\n    \"string\",\n    \"string\"\n  ],\n  \"status\": \"Inactive\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaa38bcc-9844-4eb2-acd6-cad5e3f76d25",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the generative AI model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54109571-0e38-49eb-8e45-56ed39c48db4",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "llm",
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the generative AI model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "652e5e4e-3f24-4cc7-acf5-618b8331731e",
+          "name": "Salesforce Einstein List models for a dataset",
+          "request": {
+            "name": "Salesforce Einstein List models for a dataset",
+            "description": {
+              "content": "Returns all models trained on the specified dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "datasets",
+                ":datasetId",
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "datasetId",
+                  "description": "(Required) Unique identifier for the dataset."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe430deb-9be8-4f2d-9d8e-ab46970067ad",
+              "name": "Successful response with models list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"modelId\": \"string\",\n    \"name\": \"string\",\n    \"datasetId\": 3364,\n    \"datasetVersionId\": 5415,\n    \"status\": \"QUEUED\",\n    \"progress\": 2208.329116308221,\n    \"createdAt\": \"2005-11-16T01:54:48.596Z\",\n    \"updatedAt\": \"1983-04-21T18:20:31.821Z\",\n    \"learningRate\": 3850.9348638004535,\n    \"epochs\": 9587,\n    \"object\": \"string\",\n    \"modelType\": \"string\",\n    \"failureMsg\": \"string\"\n  },\n  {\n    \"modelId\": \"string\",\n    \"name\": \"string\",\n    \"datasetId\": 9166,\n    \"datasetVersionId\": 6252,\n    \"status\": \"SUCCEEDED\",\n    \"progress\": 4832.357125165897,\n    \"createdAt\": \"1978-01-08T11:12:20.994Z\",\n    \"updatedAt\": \"2008-11-07T14:24:26.269Z\",\n    \"learningRate\": 891.63805771587,\n    \"epochs\": 2826,\n    \"object\": \"string\",\n    \"modelType\": \"string\",\n    \"failureMsg\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4672d21-01a3-47bb-965e-e66d56943465",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "datasets",
+                    ":datasetId",
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "datasetId",
+                      "description": "(Required) Unique identifier for the dataset."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e211d09f-f7d3-4b1f-894d-0c16080ebf00",
+          "name": "Salesforce Einstein Train a model",
+          "request": {
+            "name": "Salesforce Einstein Train a model",
+            "description": {
+              "content": "Trains a text classification model on a dataset. Training is asynchronous.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "train"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Name for the trained model."
+                },
+                {
+                  "key": "datasetId",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) ID of the dataset to train on."
+                },
+                {
+                  "key": "trainParams",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "JSON string of optional training parameters."
+                },
+                {
+                  "key": "epochs",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Number of training epochs."
+                },
+                {
+                  "key": "learningRate",
+                  "value": "<number>",
+                  "type": "text",
+                  "description": "Learning rate for training."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b59e9c95-c8c1-4f50-9d86-05f5a7aba46e",
+              "name": "Training job started successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name for the trained model.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ID of the dataset to train on.",
+                        "type": "text/plain"
+                      },
+                      "key": "datasetId",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON string of optional training parameters.",
+                        "type": "text/plain"
+                      },
+                      "key": "trainParams",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Number of training epochs.",
+                        "type": "text/plain"
+                      },
+                      "key": "epochs",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Learning rate for training.",
+                        "type": "text/plain"
+                      },
+                      "key": "learningRate",
+                      "value": "<number>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"modelId\": \"string\",\n  \"datasetId\": 6117,\n  \"datasetVersionId\": 3957,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"progress\": 2952.231293313724,\n  \"createdAt\": \"2022-11-29T07:06:46.456Z\",\n  \"updatedAt\": \"1990-12-03T16:38:41.118Z\",\n  \"epochs\": 9322,\n  \"learningRate\": 5186.042180974885,\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dd9ff02-d28f-4703-95b5-e79084b21077",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name for the trained model.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ID of the dataset to train on.",
+                        "type": "text/plain"
+                      },
+                      "key": "datasetId",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON string of optional training parameters.",
+                        "type": "text/plain"
+                      },
+                      "key": "trainParams",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Number of training epochs.",
+                        "type": "text/plain"
+                      },
+                      "key": "epochs",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Learning rate for training.",
+                        "type": "text/plain"
+                      },
+                      "key": "learningRate",
+                      "value": "<number>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "767a6747-9e1e-4852-92bf-2064f35d1892",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "train"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Name for the trained model.",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ID of the dataset to train on.",
+                        "type": "text/plain"
+                      },
+                      "key": "datasetId",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "JSON string of optional training parameters.",
+                        "type": "text/plain"
+                      },
+                      "key": "trainParams",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Number of training epochs.",
+                        "type": "text/plain"
+                      },
+                      "key": "epochs",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Learning rate for training.",
+                        "type": "text/plain"
+                      },
+                      "key": "learningRate",
+                      "value": "<number>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92e83555-6300-41f4-b871-a2c82f1689d2",
+          "name": "Salesforce Einstein Retrain a model",
+          "request": {
+            "name": "Salesforce Einstein Retrain a model",
+            "description": {
+              "content": "Retrains an existing model with additional data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "retrain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "modelId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) ID of the model to retrain."
+                },
+                {
+                  "key": "epochs",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "learningRate",
+                  "value": "<number>",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d90b4d4e-cefd-46e1-8477-fb44708d19b2",
+              "name": "Retraining job started successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "retrain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to retrain.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "epochs",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "learningRate",
+                      "value": "<number>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"modelId\": \"string\",\n  \"datasetId\": 6117,\n  \"datasetVersionId\": 3957,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"progress\": 2952.231293313724,\n  \"createdAt\": \"2022-11-29T07:06:46.456Z\",\n  \"updatedAt\": \"1990-12-03T16:38:41.118Z\",\n  \"epochs\": 9322,\n  \"learningRate\": 5186.042180974885,\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4128de7-1a1b-4007-8708-38f813f44b14",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "retrain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to retrain.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "epochs",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "learningRate",
+                      "value": "<number>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b49378-939b-439d-bf61-e51008cbfc56",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "retrain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to retrain.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "epochs",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "learningRate",
+                      "value": "<number>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5fad752-a3b8-4e4e-8cd8-b07d47fc56da",
+          "name": "Salesforce Einstein Get model details",
+          "request": {
+            "name": "Salesforce Einstein Get model details",
+            "description": {
+              "content": "Returns the details and metrics of a trained model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":modelId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelId",
+                  "description": "(Required) Unique identifier for the model."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80cb7359-aa6e-4eef-bae6-7f5df0be20db",
+              "name": "Successful response with model details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"modelId\": \"string\",\n  \"name\": \"string\",\n  \"datasetId\": 1427,\n  \"datasetVersionId\": 381,\n  \"status\": \"RUNNING\",\n  \"progress\": 3113.55617920556,\n  \"createdAt\": \"2010-05-21T16:41:45.081Z\",\n  \"updatedAt\": \"1948-01-01T08:28:58.614Z\",\n  \"learningRate\": 6005.055883920646,\n  \"epochs\": 3764,\n  \"object\": \"string\",\n  \"modelType\": \"string\",\n  \"failureMsg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "191f59da-7225-433b-bef5-bf67c973e7a8",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fa6ae57-9ccd-452f-8a35-539bd267a848",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba97d1ca-6e04-4728-8dca-5d3db1efdf4d",
+          "name": "Salesforce Einstein Delete a model",
+          "request": {
+            "name": "Salesforce Einstein Delete a model",
+            "description": {
+              "content": "Deletes a trained model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":modelId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelId",
+                  "description": "(Required) Unique identifier for the model."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c659e55b-35b0-4019-b3ec-8314dcaa99f2",
+              "name": "Model deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc7c340b-e63e-4302-970f-0e0cac3977de",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "134cde6a-a089-4b20-9d96-a813b421da86",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95fcb8d3-eea4-494f-81ad-810c0eaa15a6",
+          "name": "Salesforce Einstein Get model learning curve",
+          "request": {
+            "name": "Salesforce Einstein Get model learning curve",
+            "description": {
+              "content": "Returns the learning curve data for a trained model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":modelId",
+                "lc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "modelId",
+                  "description": "(Required) Unique identifier for the model."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47e9ab65-3453-403e-a7fb-d61117ea24f8",
+              "name": "Successful response with learning curve.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId",
+                    "lc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"epoch\": 2031,\n      \"metricsData\": {\n        \"f1\": [\n          9551.218213588154,\n          7267.663423038075\n        ],\n        \"testAccuracy\": [\n          1875.816020719242,\n          8914.685181647194\n        ],\n        \"trainingLoss\": [\n          8688.835986583801,\n          2307.8994359688363\n        ]\n      }\n    },\n    {\n      \"epoch\": 9038,\n      \"metricsData\": {\n        \"f1\": [\n          6116.392473043725,\n          570.8189558927379\n        ],\n        \"testAccuracy\": [\n          846.0087461481569,\n          6455.500838759015\n        ],\n        \"trainingLoss\": [\n          2430.770154854145,\n          4885.620543507927\n        ]\n      }\n    }\n  ],\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93e4b02e-6abb-4e83-821c-f5900953ff7d",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId",
+                    "lc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5974699-148b-428e-b556-c87e2ebf0a1b",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":modelId",
+                    "lc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "modelId",
+                      "description": "(Required) Unique identifier for the model."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4c6aeec7-7ef5-4f0b-9c09-a81e512ed160",
+    "name": "Salesforce Einstein Bots AI Record Insights Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

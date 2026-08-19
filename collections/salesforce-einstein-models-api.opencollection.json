@@ -1,0 +1,269 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights Models API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List prediction models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/models",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of Einstein Discovery prediction models."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a prediction model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific prediction model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Delete a prediction model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Deletes an Einstein Discovery prediction model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein List available models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/llm/models"
+          },
+          "docs": "Returns a list of available generative AI models that can be used for content generation."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get model details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/llm/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the generative AI model."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific generative AI model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein List models for a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/datasets/:datasetId/models",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the dataset."
+              }
+            ]
+          },
+          "docs": "Returns all models trained on the specified dataset."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Train a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/train",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "datasetId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "trainParams",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "epochs",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "learningRate",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Trains a text classification model on a dataset. Training is asynchronous."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Retrain a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/retrain",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "modelId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "epochs",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "learningRate",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Retrains an existing model with additional data."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get model details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Returns the details and metrics of a trained model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Delete a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/models/:modelId",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Deletes a trained model."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get model learning curve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/models/:modelId/lc",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the model."
+              }
+            ]
+          },
+          "docs": "Returns the learning curve data for a trained model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

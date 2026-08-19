@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights Sessions API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Create a bot session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new conversation session with an Einstein Bot. Returns a session ID to use for sending and receiving messages."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get session details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ]
+          },
+          "docs": "Returns the current status and details of a bot session."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein End a bot session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ]
+          },
+          "docs": "Ends an active bot conversation session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

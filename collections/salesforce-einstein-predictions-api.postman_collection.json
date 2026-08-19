@@ -1,0 +1,1930 @@
+{
+  "item": [
+    {
+      "id": "790aef90-ac03-46ef-aa4a-be48a476f28f",
+      "name": "Predictions",
+      "description": {
+        "content": "Make predictions using Discovery models",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6ef84ad-854a-4270-8b10-3b87a246b6b2",
+          "name": "Salesforce Einstein Make a prediction",
+          "request": {
+            "name": "Salesforce Einstein Make a prediction",
+            "description": {
+              "content": "Makes a prediction using an Einstein Discovery model. Provide the model ID and input field values to receive a prediction with explanatory factors.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wave",
+                "prediction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"columnNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rows\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de73f53d-4acd-431a-aeaa-ee4b12316cd2",
+              "name": "Successful prediction response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "prediction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"columnNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rows\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"predictionResults\": [\n    {\n      \"prediction\": {\n        \"total\": 8774.495725709683,\n        \"baseLine\": 9387.97506185393\n      },\n      \"prescriptions\": [\n        {\n          \"action\": \"string\",\n          \"description\": \"string\",\n          \"impact\": 7747.982834950287\n        },\n        {\n          \"action\": \"string\",\n          \"description\": \"string\",\n          \"impact\": 9757.231389050143\n        }\n      ],\n      \"middleValues\": [\n        {\n          \"columnName\": \"string\",\n          \"value\": \"string\",\n          \"impact\": 6991.660261655524\n        },\n        {\n          \"columnName\": \"string\",\n          \"value\": \"string\",\n          \"impact\": 4623.01592374944\n        }\n      ]\n    },\n    {\n      \"prediction\": {\n        \"total\": 6398.955327791257,\n        \"baseLine\": 4312.278355725596\n      },\n      \"prescriptions\": [\n        {\n          \"action\": \"string\",\n          \"description\": \"string\",\n          \"impact\": 3735.1147761585457\n        },\n        {\n          \"action\": \"string\",\n          \"description\": \"string\",\n          \"impact\": 6501.925100430838\n        }\n      ],\n      \"middleValues\": [\n        {\n          \"columnName\": \"string\",\n          \"value\": \"string\",\n          \"impact\": 3158.359886187926\n        },\n        {\n          \"columnName\": \"string\",\n          \"value\": \"string\",\n          \"impact\": 6337.958961549221\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "855bb773-22a2-449c-8d03-d601b38266c4",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "prediction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"columnNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rows\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cd28763-26d4-4399-8469-bf586ab8d444",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wave",
+                    "prediction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"columnNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rows\": [\n    [\n      \"<string>\",\n      \"<string>\"\n    ],\n    [\n      \"<string>\",\n      \"<string>\"\n    ]\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bfb3f89-52a1-470a-9aa4-50727134fd0d",
+          "name": "Salesforce Einstein Analyze sentiment",
+          "request": {
+            "name": "Salesforce Einstein Analyze sentiment",
+            "description": {
+              "content": "Analyzes the sentiment of the given text. Use the pre-built CommunitySentiment model or a custom-trained sentiment model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sentiment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "modelId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) ID of the model to use. Use 'CommunitySentiment' for the pre-built model."
+                },
+                {
+                  "key": "document",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Text to analyze."
+                },
+                {
+                  "key": "numResults",
+                  "value": "3",
+                  "type": "text",
+                  "description": "Maximum number of results to return."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "177c5630-cdc7-4129-a074-c7a0bc4bcd8d",
+              "name": "Successful sentiment analysis response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sentiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to use. Use 'CommunitySentiment' for the pre-built model.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text to analyze.",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"probabilities\": [\n    {\n      \"label\": \"string\",\n      \"probability\": 3742.899509891282\n    },\n    {\n      \"label\": \"string\",\n      \"probability\": 2997.9033190901596\n    }\n  ],\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c78b263a-2827-4352-89a9-7145fde3bb78",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sentiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to use. Use 'CommunitySentiment' for the pre-built model.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text to analyze.",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93255ac4-774c-40b2-a8b6-ace725af30b2",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sentiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to use. Use 'CommunitySentiment' for the pre-built model.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text to analyze.",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "408ef20b-4c7b-4347-b60c-da5032a5f784",
+          "name": "Salesforce Einstein Detect intent",
+          "request": {
+            "name": "Salesforce Einstein Detect intent",
+            "description": {
+              "content": "Detects the intent of the given text. Requires a custom-trained intent model.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "intent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "modelId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) ID of the custom intent model to use."
+                },
+                {
+                  "key": "document",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Text to classify."
+                },
+                {
+                  "key": "numResults",
+                  "value": "3",
+                  "type": "text",
+                  "description": "Maximum number of results to return."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "13b0efda-1c30-4f3c-94a6-e928c4a4f75f",
+              "name": "Successful intent detection response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the custom intent model to use.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"probabilities\": [\n    {\n      \"label\": \"string\",\n      \"probability\": 3742.899509891282\n    },\n    {\n      \"label\": \"string\",\n      \"probability\": 2997.9033190901596\n    }\n  ],\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d907da65-caa3-4942-a0dc-884e02e0db42",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the custom intent model to use.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7fcf090-46a5-4806-b6bb-908dae577cdd",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "intent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the custom intent model to use.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Text to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "document",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85c9556b-6ebd-499d-83ca-e316b21bc7f1",
+          "name": "Salesforce Einstein List predictions for a definition",
+          "request": {
+            "name": "Salesforce Einstein List predictions for a definition",
+            "description": {
+              "content": "Returns prediction results for a given prediction definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "prediction-definitions",
+                ":predictionDefinitionId",
+                "predictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "recordId",
+                  "value": "<string>",
+                  "description": "Filter predictions by Salesforce record ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of predictions to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "predictionDefinitionId",
+                  "description": "(Required) Unique identifier for the prediction definition."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eeeabb66-fdd4-49dd-a392-5b78eb3cce54",
+              "name": "Successful response with predictions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId",
+                    "predictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "recordId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"predictions\": [\n    {\n      \"recordId\": \"string\",\n      \"prediction\": {\n        \"score\": 5266.789898495718,\n        \"label\": \"string\",\n        \"factors\": [\n          {\n            \"featureName\": \"string\",\n            \"featureValue\": \"string\",\n            \"importance\": 5084.50280090229,\n            \"direction\": \"Negative\"\n          },\n          {\n            \"featureName\": \"string\",\n            \"featureValue\": \"string\",\n            \"importance\": 4473.1109660362645,\n            \"direction\": \"Positive\"\n          }\n        ]\n      },\n      \"predictionDefinitionId\": \"string\"\n    },\n    {\n      \"recordId\": \"string\",\n      \"prediction\": {\n        \"score\": 817.3345992502612,\n        \"label\": \"string\",\n        \"factors\": [\n          {\n            \"featureName\": \"string\",\n            \"featureValue\": \"string\",\n            \"importance\": 4197.990800317688,\n            \"direction\": \"Positive\"\n          },\n          {\n            \"featureName\": \"string\",\n            \"featureValue\": \"string\",\n            \"importance\": 6380.431259427422,\n            \"direction\": \"Negative\"\n          }\n        ]\n      },\n      \"predictionDefinitionId\": \"string\"\n    }\n  ],\n  \"totalSize\": 4260\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c742537b-b094-4e16-96c7-1f5e92bda02c",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId",
+                    "predictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "recordId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d01effa0-9ac5-4e8d-b001-def499847140",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId",
+                    "predictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "recordId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac893f04-f169-424a-85c9-24de3e889a02",
+          "name": "Salesforce Einstein Make a prediction",
+          "request": {
+            "name": "Salesforce Einstein Make a prediction",
+            "description": {
+              "content": "Classifies an image using a trained model. Submit either an image file or a URL to an image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "predict"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "modelId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) ID of the model to use for prediction."
+                },
+                {
+                  "key": "sampleLocation",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URL of the image to classify."
+                },
+                {
+                  "key": "sampleContent",
+                  "type": "file",
+                  "description": "Binary content of the image to classify."
+                },
+                {
+                  "key": "sampleBase64Content",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Base64-encoded image content."
+                },
+                {
+                  "key": "numResults",
+                  "value": "3",
+                  "type": "text",
+                  "description": "Maximum number of prediction results to return."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "03b181e8-facc-43f6-900a-12ac0c9a22d1",
+              "name": "Successful prediction response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to use for prediction.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the image to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleLocation",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Binary content of the image to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleContent",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Base64-encoded image content.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleBase64Content",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of prediction results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"probabilities\": [\n    {\n      \"label\": \"string\",\n      \"probability\": 3742.899509891282\n    },\n    {\n      \"label\": \"string\",\n      \"probability\": 2997.9033190901596\n    }\n  ],\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52efad05-43a2-46a8-837b-22346587d476",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to use for prediction.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the image to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleLocation",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Binary content of the image to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleContent",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Base64-encoded image content.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleBase64Content",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of prediction results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bd74ea5-ac54-4309-b344-a413bc6efa93",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "predict"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the model to use for prediction.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the image to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleLocation",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Binary content of the image to classify.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleContent",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Base64-encoded image content.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleBase64Content",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Maximum number of prediction results to return.",
+                        "type": "text/plain"
+                      },
+                      "key": "numResults",
+                      "value": "3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91da6c1d-c99d-4906-970d-d6e4b3a05d2e",
+          "name": "Salesforce Einstein Detect objects in an image",
+          "request": {
+            "name": "Salesforce Einstein Detect objects in an image",
+            "description": {
+              "content": "Detects objects and their bounding boxes in an image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "detect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "modelId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) ID of the object detection model to use."
+                },
+                {
+                  "key": "sampleLocation",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URL of the image."
+                },
+                {
+                  "key": "sampleContent",
+                  "type": "file",
+                  "description": "Binary content of the image."
+                },
+                {
+                  "key": "sampleBase64Content",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Base64-encoded image content."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "41424487-4fae-46a7-844c-a61dde37f45f",
+              "name": "Successful detection response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the object detection model to use.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the image.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleLocation",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Binary content of the image.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleContent",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Base64-encoded image content.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleBase64Content",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"probabilities\": [\n    {\n      \"label\": \"string\",\n      \"probability\": 9852.499852542504,\n      \"boundingBox\": {\n        \"minX\": 3890,\n        \"minY\": 7753,\n        \"maxX\": 6668,\n        \"maxY\": 3820\n      }\n    },\n    {\n      \"label\": \"string\",\n      \"probability\": 5754.581274524831,\n      \"boundingBox\": {\n        \"minX\": 6274,\n        \"minY\": 1062,\n        \"maxX\": 381,\n        \"maxY\": 453\n      }\n    }\n  ],\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "180be488-6fe5-4b0d-ae73-07dc4d1a0566",
+              "name": "Bad request. Invalid parameters or missing required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the object detection model to use.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the image.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleLocation",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Binary content of the image.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleContent",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Base64-encoded image content.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleBase64Content",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51a055ce-b898-4ad3-8337-3b48cedaf30f",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "detect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ID of the object detection model to use.",
+                        "type": "text/plain"
+                      },
+                      "key": "modelId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URL of the image.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleLocation",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Binary content of the image.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleContent",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Base64-encoded image content.",
+                        "type": "text/plain"
+                      },
+                      "key": "sampleBase64Content",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "04ed4b92-73a1-4d02-baed-8ab181b3808c",
+    "name": "Salesforce Einstein Bots AI Record Insights Predictions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

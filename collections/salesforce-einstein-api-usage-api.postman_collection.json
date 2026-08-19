@@ -1,0 +1,204 @@
+{
+  "item": [
+    {
+      "id": "dec84d2e-acef-4219-817e-c49d0591e776",
+      "name": "API Usage",
+      "description": {
+        "content": "Monitor API usage and limits",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe7a2c56-c539-4c0d-86b6-db0a13f7e0dd",
+          "name": "Salesforce Einstein Get API usage",
+          "request": {
+            "name": "Salesforce Einstein Get API usage",
+            "description": {
+              "content": "Returns API usage data for the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apiusage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d025ba7-db3d-42b3-94f6-1043a4edf2cf",
+              "name": "Successful response with usage data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiusage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"startsAt\": \"2019-01-20T20:08:12.783Z\",\n      \"endsAt\": \"2007-09-18T06:26:05.283Z\",\n      \"plan\": {\n        \"planId\": \"string\",\n        \"source\": \"string\"\n      },\n      \"predictionsUsed\": 9921,\n      \"predictionsMax\": 3925,\n      \"object\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"startsAt\": \"2021-03-11T09:13:49.049Z\",\n      \"endsAt\": \"1951-10-02T09:50:19.797Z\",\n      \"plan\": {\n        \"planId\": \"string\",\n        \"source\": \"string\"\n      },\n      \"predictionsUsed\": 7000,\n      \"predictionsMax\": 2507,\n      \"object\": \"string\"\n    }\n  ],\n  \"object\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bcbfaf8-ddb2-488e-ae6f-405f5882ba47",
+              "name": "Unauthorized. Invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apiusage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bca386bb-0d0f-47ca-88bc-4066726faadd",
+    "name": "Salesforce Einstein Bots AI Record Insights API Usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

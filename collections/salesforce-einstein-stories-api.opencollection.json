@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights Stories API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein List stories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/stories",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter stories by name."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of stories to return per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number."
+              }
+            ]
+          },
+          "docs": "Returns a list of all Einstein Discovery stories."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Create a story",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/stories",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Einstein Discovery story from a dataset."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get a story",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/stories/:storyId",
+            "params": [
+              {
+                "name": "storyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the story."
+              }
+            ]
+          },
+          "docs": "Returns details of a specific Einstein Discovery story."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Update a story",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/stories/:storyId",
+            "params": [
+              {
+                "name": "storyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the story."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Einstein Discovery story."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Delete a story",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/stories/:storyId",
+            "params": [
+              {
+                "name": "storyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the story."
+              }
+            ]
+          },
+          "docs": "Deletes an Einstein Discovery story."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Get story statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/wave/stories/:storyId/stats",
+            "params": [
+              {
+                "name": "storyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the story."
+              }
+            ]
+          },
+          "docs": "Returns insights and statistical analysis from a story."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

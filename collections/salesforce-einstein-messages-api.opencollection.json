@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Salesforce Einstein Bots AI Record Insights Messages API",
+    "version": "58.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.salesforce.com/services/oauth2/authorize",
+      "accessTokenUrl": "https://login.salesforce.com/services/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Salesforce Einstein Get messages in a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId/messages",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ]
+          },
+          "docs": "Returns the message history for a bot session."
+        },
+        {
+          "info": {
+            "name": "Salesforce Einstein Send a message to a bot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.salesforce.com/services/data/v58.0/einstein/bots/:botId/sessions/:sessionId/messages",
+            "params": [
+              {
+                "name": "botId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the Einstein Bot."
+              },
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the bot session."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to an Einstein Bot within an active session and returns the bot's response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

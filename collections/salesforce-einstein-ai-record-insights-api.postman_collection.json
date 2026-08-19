@@ -1,0 +1,295 @@
+{
+  "item": [
+    {
+      "id": "61fbf1cd-626c-4a53-ac80-b39e1b080a23",
+      "name": "AI Record Insights",
+      "description": {
+        "content": "Access AI-generated insights on records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4bdf3db3-e61e-4cfc-96d7-cecbf6f84d9f",
+          "name": "Salesforce Einstein Get AI record insights",
+          "request": {
+            "name": "Salesforce Einstein Get AI record insights",
+            "description": {
+              "content": "Returns AI-generated insights for specified Salesforce records, including prediction factors and recommendations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "ai-record-insights"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"inputRecords\": [\n    {\n      \"recordId\": \"<string>\"\n    },\n    {\n      \"recordId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0439a01-bb90-4f21-8f14-609c55842260",
+              "name": "Successful response with record insights.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "ai-record-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"inputRecords\": [\n    {\n      \"recordId\": \"<string>\"\n    },\n    {\n      \"recordId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"recordInsights\": [\n    {\n      \"recordId\": \"string\",\n      \"insights\": [\n        {\n          \"type\": \"string\",\n          \"label\": \"string\",\n          \"value\": 1294.8467252084706,\n          \"factors\": [\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 1166.3025737609178,\n              \"direction\": \"Positive\"\n            },\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 9342.167273274039,\n              \"direction\": \"Negative\"\n            }\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"label\": \"string\",\n          \"value\": 3429.016629305844,\n          \"factors\": [\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 6531.691870390324,\n              \"direction\": \"Negative\"\n            },\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 2534.235651408018,\n              \"direction\": \"Negative\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"recordId\": \"string\",\n      \"insights\": [\n        {\n          \"type\": \"string\",\n          \"label\": \"string\",\n          \"value\": 4554.499207715523,\n          \"factors\": [\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 6775.105677972855,\n              \"direction\": \"Positive\"\n            },\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 8296.156628675993,\n              \"direction\": \"Negative\"\n            }\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"label\": \"string\",\n          \"value\": 7755.678165747635,\n          \"factors\": [\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 6923.253229681637,\n              \"direction\": \"Positive\"\n            },\n            {\n              \"featureName\": \"string\",\n              \"featureValue\": \"string\",\n              \"importance\": 2459.4120940102193,\n              \"direction\": \"Positive\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b988755-04da-4c0e-9b11-c0fc2d56e08a",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "ai-record-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"inputRecords\": [\n    {\n      \"recordId\": \"<string>\"\n    },\n    {\n      \"recordId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95cc1726-58e9-4e45-887d-b97fa1b65d57",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "ai-record-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"predictionDefinition\": \"<string>\",\n  \"inputRecords\": [\n    {\n      \"recordId\": \"<string>\"\n    },\n    {\n      \"recordId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fc6934fe-0467-4e5c-b404-c78144586b58",
+    "name": "Salesforce Einstein Bots AI Record Insights API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

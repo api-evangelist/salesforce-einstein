@@ -1,0 +1,1224 @@
+{
+  "item": [
+    {
+      "id": "cd1f8e43-e1cc-414a-8898-7b6d63e9f658",
+      "name": "Prediction Definitions",
+      "description": {
+        "content": "Manage Einstein prediction definitions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9397ca3-7d80-41dd-b304-6cdb9cd467f9",
+          "name": "Salesforce Einstein List prediction definitions",
+          "request": {
+            "name": "Salesforce Einstein List prediction definitions",
+            "description": {
+              "content": "Returns a list of all Einstein prediction definitions in the org.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "prediction-definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "518c2ede-e86d-4fc6-b26f-6c7066426a54",
+              "name": "Successful response with prediction definitions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"predictionDefinitions\": [\n    {\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"Disabled\",\n      \"outcome\": {\n        \"field\": \"string\",\n        \"goal\": \"Maximize\",\n        \"label\": \"string\"\n      },\n      \"predictionType\": \"Categorical\",\n      \"sobjectType\": \"string\",\n      \"pushbackField\": \"string\",\n      \"countOfModels\": 2015,\n      \"createdDate\": \"2012-06-25T11:07:36.325Z\",\n      \"lastModifiedDate\": \"1962-06-19T22:46:25.113Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"label\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"Disabled\",\n      \"outcome\": {\n        \"field\": \"string\",\n        \"goal\": \"Minimize\",\n        \"label\": \"string\"\n      },\n      \"predictionType\": \"Numeric\",\n      \"sobjectType\": \"string\",\n      \"pushbackField\": \"string\",\n      \"countOfModels\": 2288,\n      \"createdDate\": \"1950-04-04T19:53:55.127Z\",\n      \"lastModifiedDate\": \"1956-06-06T00:34:25.111Z\"\n    }\n  ],\n  \"totalSize\": 1591\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37770404-d6f0-4ff6-b3e8-98ec18c3c8f2",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4009b61f-f6e3-48b9-bb32-874c84ae4e99",
+          "name": "Salesforce Einstein Create a prediction definition",
+          "request": {
+            "name": "Salesforce Einstein Create a prediction definition",
+            "description": {
+              "content": "Creates a new Einstein prediction definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "prediction-definitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"<string>\",\n    \"goal\": \"<string>\",\n    \"label\": \"<string>\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bd28c4f3-4d23-4cf5-8874-989e1a8fbb45",
+              "name": "Prediction definition created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"label\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"Enabled\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Maximize\",\n    \"label\": \"string\"\n  },\n  \"predictionType\": \"Boolean\",\n  \"sobjectType\": \"string\",\n  \"pushbackField\": \"string\",\n  \"countOfModels\": 9606,\n  \"createdDate\": \"1955-06-12T13:29:26.472Z\",\n  \"lastModifiedDate\": \"2009-12-29T09:32:40.042Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b66fa3a0-6b03-40c8-a239-fef6e34cf69f",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1563c34a-d71e-4051-b91e-a105a674bdef",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ff59517-c2c0-4137-84da-353e4df1b997",
+          "name": "Salesforce Einstein Get a prediction definition",
+          "request": {
+            "name": "Salesforce Einstein Get a prediction definition",
+            "description": {
+              "content": "Returns details of a specific prediction definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "prediction-definitions",
+                ":predictionDefinitionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "predictionDefinitionId",
+                  "description": "(Required) Unique identifier for the prediction definition."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67103eda-6d1e-4e62-b159-bb29275373ff",
+              "name": "Successful response with prediction definition details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"label\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"Enabled\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Maximize\",\n    \"label\": \"string\"\n  },\n  \"predictionType\": \"Boolean\",\n  \"sobjectType\": \"string\",\n  \"pushbackField\": \"string\",\n  \"countOfModels\": 9606,\n  \"createdDate\": \"1955-06-12T13:29:26.472Z\",\n  \"lastModifiedDate\": \"2009-12-29T09:32:40.042Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac4bd2b1-9cbb-40a1-874e-34bb8cb7c44d",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74c7a68a-8146-4b9d-bdf9-4ea1f60d2113",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4aff46d-f3c2-4b4b-8ba7-dc90b521f1eb",
+          "name": "Salesforce Einstein Update a prediction definition",
+          "request": {
+            "name": "Salesforce Einstein Update a prediction definition",
+            "description": {
+              "content": "Updates an existing prediction definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "prediction-definitions",
+                ":predictionDefinitionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "predictionDefinitionId",
+                  "description": "(Required) Unique identifier for the prediction definition."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"<string>\",\n    \"goal\": \"<string>\",\n    \"label\": \"<string>\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e53f05f1-6824-4899-ada6-eb5b42aeb22f",
+              "name": "Prediction definition updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"label\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"Enabled\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Maximize\",\n    \"label\": \"string\"\n  },\n  \"predictionType\": \"Boolean\",\n  \"sobjectType\": \"string\",\n  \"pushbackField\": \"string\",\n  \"countOfModels\": 9606,\n  \"createdDate\": \"1955-06-12T13:29:26.472Z\",\n  \"lastModifiedDate\": \"2009-12-29T09:32:40.042Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84748a3f-30fa-4dbf-81ac-7aaa326c376d",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05178ad6-160c-49a0-b921-7958178037d2",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "029b0810-51bf-4040-8dc5-e30f52f17c30",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": \"<string>\",\n  \"sobjectType\": \"<string>\",\n  \"predictionType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"outcome\": {\n    \"field\": \"string\",\n    \"goal\": \"Minimize\",\n    \"label\": \"string\"\n  },\n  \"pushbackField\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0f7b716-8406-4754-a76d-3fabd8803294",
+          "name": "Salesforce Einstein Delete a prediction definition",
+          "request": {
+            "name": "Salesforce Einstein Delete a prediction definition",
+            "description": {
+              "content": "Deletes a prediction definition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "einstein",
+                "prediction-definitions",
+                ":predictionDefinitionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "predictionDefinitionId",
+                  "description": "(Required) Unique identifier for the prediction definition."
+                },
+                {
+                  "description": "Your Salesforce instance domain.",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f2f755f-5d14-4644-aa03-a09d3bbc53ea",
+              "name": "Prediction definition deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a55eaba-0aeb-4d04-9a53-45d8231eca32",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95385d80-3b9c-435d-9b5e-32584fe381da",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "einstein",
+                    "prediction-definitions",
+                    ":predictionDefinitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "predictionDefinitionId",
+                      "description": "(Required) Unique identifier for the prediction definition."
+                    },
+                    {
+                      "description": "Your Salesforce instance domain.",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errorCode\": \"string\",\n  \"fields\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Salesforce instance domain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "login",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.salesforce.com/services/data/v58.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "api einstein_gpt"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.salesforce.com/services/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.salesforce.com/services/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "66e461a8-b9e6-493b-9985-94cf150c0434",
+    "name": "Salesforce Einstein Bots AI Record Insights Prediction Definitions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.\n\nContact Support:\n Name: Salesforce Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
