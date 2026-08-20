@@ -25,6 +25,14 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 tags:
   - Artificial Intelligence
+  - Computer-Vision
+  - CRM
+  - Machine-Learning
+  - Natural Language Processing
+  - Predictive Analytics
+  - Salesforce
+tags_raw:
+  - Artificial Intelligence
   - Computer Vision
   - CRM
   - Machine Learning
@@ -488,6 +496,8 @@ apis:
   humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
   baseURL: https://api.einstein.ai/v2/vision
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
