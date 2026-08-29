@@ -3,6 +3,18 @@ name: Salesforce Einstein
 description: >-
   Collection of Salesforce Einstein AI and machine learning APIs for predictive analytics, natural language processing,
   computer vision, and intelligent automation.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
