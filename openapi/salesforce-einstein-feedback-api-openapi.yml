@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Feedback API
-  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  title: Salesforce Einstein GPT Feedback API
+  description: Generative AI API powered by large language model integration for creating personalized content across Salesforce. Einstein GPT (now part of Einstein Copilot and Einstein Generative AI) provides endpoints for text generation, prompt management, and AI-powered content creation.
   version: 58.0.0
   contact:
     name: Salesforce Developer Support
@@ -48,6 +48,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -60,6 +73,18 @@ components:
           type: array
           items:
             type: string
+    FeedbackResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        generationId:
+          type: string
+        feedback:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
     FeedbackInput:
       type: object
       properties:
@@ -81,31 +106,6 @@ components:
       required:
       - generationId
       - feedback
-    FeedbackResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        generationId:
-          type: string
-        feedback:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
@@ -116,4 +116,4 @@ components:
           tokenUrl: https://login.salesforce.com/services/oauth2/token
           scopes:
             api: Full access to Salesforce APIs
-            einstein_gpt: Access to Einstein AI features
+            einstein_gpt: Access to Einstein Generative AI features

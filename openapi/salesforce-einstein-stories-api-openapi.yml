@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Stories API
-  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  title: Salesforce Einstein Discovery Stories API
+  description: Advanced analytics and automated insights API for predicting outcomes and recommending actions. Einstein Discovery leverages the Salesforce Analytics (Wave) REST API to provide AI-powered stories, predictions, and data insights.
   version: 58.0.0
   contact:
     name: Salesforce Developer Support
@@ -162,7 +162,97 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    StoryInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the story.
+        label:
+          type: string
+          description: Display label.
+        sourceDatasetId:
+          type: string
+          description: ID of the dataset to analyze.
+        outcomeVariable:
+          type: string
+          description: Variable to predict.
+        outcomeGoal:
+          type: string
+          enum:
+          - Maximize
+          - Minimize
+      required:
+      - name
+      - sourceDatasetId
+      - outcomeVariable
+    StoryCollection:
+      type: object
+      properties:
+        stories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    StoryStats:
+      type: object
+      properties:
+        insights:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              description:
+                type: string
+              impact:
+                type: number
+              variable:
+                type: string
+        modelMetrics:
+          type: object
+          properties:
+            r2:
+              type: number
+            rmse:
+              type: number
+            accuracy:
+              type: number
     Story:
       type: object
       properties:
@@ -203,52 +293,6 @@ components:
         url:
           type: string
           format: uri
-    StoryInput:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the story.
-        label:
-          type: string
-          description: Display label.
-        sourceDatasetId:
-          type: string
-          description: ID of the dataset to analyze.
-        outcomeVariable:
-          type: string
-          description: Variable to predict.
-        outcomeGoal:
-          type: string
-          enum:
-          - Maximize
-          - Minimize
-      required:
-      - name
-      - sourceDatasetId
-      - outcomeVariable
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    StoryCollection:
-      type: object
-      properties:
-        stories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Story'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
     UserReference:
       type: object
       properties:
@@ -256,50 +300,6 @@ components:
           type: string
         name:
           type: string
-    StoryStats:
-      type: object
-      properties:
-        insights:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              description:
-                type: string
-              impact:
-                type: number
-              variable:
-                type: string
-        modelMetrics:
-          type: object
-          properties:
-            r2:
-              type: number
-            rmse:
-              type: number
-            accuracy:
-              type: number
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     StoryId:
       name: storyId
@@ -318,4 +318,4 @@ components:
           tokenUrl: https://login.salesforce.com/services/oauth2/token
           scopes:
             api: Full access to Salesforce APIs
-            einstein_gpt: Access to Einstein AI features
+            wave_api: Access to Analytics APIs

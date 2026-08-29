@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Bot Definitions API
+  title: Salesforce Einstein Bots Bot Definitions API
   description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
   version: 58.0.0
   contact:
@@ -121,14 +121,14 @@ components:
         totalSize:
           type: integer
   responses:
-    Unauthorized:
-      description: Unauthorized.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Unauthorized.
       content:
         application/json:
           schema:

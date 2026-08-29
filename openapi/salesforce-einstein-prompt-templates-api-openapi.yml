@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Prompt Templates API
-  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  title: Salesforce Einstein GPT Prompt Templates API
+  description: Generative AI API powered by large language model integration for creating personalized content across Salesforce. Einstein GPT (now part of Einstein Copilot and Einstein Generative AI) provides endpoints for text generation, prompt management, and AI-powered content creation.
   version: 58.0.0
   contact:
     name: Salesforce Developer Support
@@ -137,33 +137,48 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    PromptTemplateInput:
+    Error:
       type: object
       properties:
-        developerName:
+        message:
           type: string
-        masterLabel:
+        errorCode:
           type: string
-        description:
+        fields:
+          type: array
+          items:
+            type: string
+    PromptTemplateCollection:
+      type: object
+      properties:
+        promptTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
           type: string
-        promptText:
-          type: string
-        type:
-          type: string
-          enum:
-          - salesGeneration
-          - fieldGeneration
-          - recordSummary
-          - chatGeneration
-          - flexibleGeneration
-        relatedEntity:
-          type: string
-      required:
-      - developerName
-      - masterLabel
-      - promptText
-      - type
     PromptTemplate:
       type: object
       properties:
@@ -204,47 +219,32 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    PromptTemplateCollection:
+    PromptTemplateInput:
       type: object
       properties:
-        promptTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromptTemplate'
-        totalSize:
-          type: integer
-        nextPageUrl:
+        developerName:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
+        masterLabel:
           type: string
-        errorCode:
+        description:
           type: string
-        fields:
-          type: array
-          items:
-            type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        promptText:
+          type: string
+        type:
+          type: string
+          enum:
+          - salesGeneration
+          - fieldGeneration
+          - recordSummary
+          - chatGeneration
+          - flexibleGeneration
+        relatedEntity:
+          type: string
+      required:
+      - developerName
+      - masterLabel
+      - promptText
+      - type
   parameters:
     TemplateId:
       name: templateId
@@ -263,4 +263,4 @@ components:
           tokenUrl: https://login.salesforce.com/services/oauth2/token
           scopes:
             api: Full access to Salesforce APIs
-            einstein_gpt: Access to Einstein AI features
+            einstein_gpt: Access to Einstein Generative AI features

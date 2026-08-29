@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Generations API
-  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
+  title: Salesforce Einstein GPT Generations API
+  description: Generative AI API powered by large language model integration for creating personalized content across Salesforce. Einstein GPT (now part of Einstein Copilot and Einstein Generative AI) provides endpoints for text generation, prompt management, and AI-powered content creation.
   version: 58.0.0
   contact:
     name: Salesforce Developer Support
@@ -96,6 +96,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -108,6 +121,60 @@ components:
           type: array
           items:
             type: string
+    CompletionRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The prompt text to complete.
+        modelId:
+          type: string
+          description: ID of the model to use.
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+            temperature:
+              type: number
+            topP:
+              type: number
+            stopSequences:
+              type: array
+              items:
+                type: string
+      required:
+      - prompt
+    GenerationRequest:
+      type: object
+      properties:
+        promptTemplateDevName:
+          type: string
+          description: Developer name of the prompt template to use.
+        inputParams:
+          type: object
+          description: Key-value pairs of input parameters for the template.
+          additionalProperties:
+            type: string
+        isPreview:
+          type: boolean
+          description: If true, returns the resolved prompt without calling the LLM.
+          default: false
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+              description: Maximum number of tokens in the response.
+            temperature:
+              type: number
+              description: Sampling temperature (0.0 to 2.0).
+            applicationName:
+              type: string
+              description: Application context for the generation.
+      required:
+      - promptTemplateDevName
+      - inputParams
     GenerationResponse:
       type: object
       properties:
@@ -192,73 +259,6 @@ components:
               type: number
       required:
       - messages
-    GenerationRequest:
-      type: object
-      properties:
-        promptTemplateDevName:
-          type: string
-          description: Developer name of the prompt template to use.
-        inputParams:
-          type: object
-          description: Key-value pairs of input parameters for the template.
-          additionalProperties:
-            type: string
-        isPreview:
-          type: boolean
-          description: If true, returns the resolved prompt without calling the LLM.
-          default: false
-        additionalConfig:
-          type: object
-          properties:
-            maxTokens:
-              type: integer
-              description: Maximum number of tokens in the response.
-            temperature:
-              type: number
-              description: Sampling temperature (0.0 to 2.0).
-            applicationName:
-              type: string
-              description: Application context for the generation.
-      required:
-      - promptTemplateDevName
-      - inputParams
-    CompletionRequest:
-      type: object
-      properties:
-        prompt:
-          type: string
-          description: The prompt text to complete.
-        modelId:
-          type: string
-          description: ID of the model to use.
-        additionalConfig:
-          type: object
-          properties:
-            maxTokens:
-              type: integer
-            temperature:
-              type: number
-            topP:
-              type: number
-            stopSequences:
-              type: array
-              items:
-                type: string
-      required:
-      - prompt
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
@@ -269,4 +269,4 @@ components:
           tokenUrl: https://login.salesforce.com/services/oauth2/token
           scopes:
             api: Full access to Salesforce APIs
-            einstein_gpt: Access to Einstein AI features
+            einstein_gpt: Access to Einstein Generative AI features

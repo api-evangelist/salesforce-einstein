@@ -1,8 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Examples API
-  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
-  version: 58.0.0
+  title: Salesforce Einstein Examples API
+  version: 2.0.0
   contact:
     name: Salesforce Developer Support
     url: https://developer.salesforce.com/
@@ -10,15 +9,14 @@ info:
     name: Salesforce Master Subscription Agreement
     url: https://www.salesforce.com/company/legal/agreements/
   termsOfService: https://www.salesforce.com/company/legal/agreements/
+  description: 'Operations tagged Examples across 2 of this provider''s published API definitions: salesforce-einstein-language-openapi.yml, salesforce-einstein-vision-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{instance}.salesforce.com/services/data/v58.0
-  description: Salesforce Instance
-  variables:
-    instance:
-      default: login
-      description: Your Salesforce instance domain.
+- url: https://api.einstein.ai/v2/language
+  description: Einstein Language Production Server
+- url: https://api.einstein.ai/v2/vision
+  description: Einstein Vision Production Server
 security:
-- oauth2: []
+- bearerAuth: []
 tags:
 - name: Examples
   description: Manage training examples within datasets
@@ -101,28 +99,30 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://api.einstein.ai/v2/language
+      description: Einstein Language Production Server
 components:
+  responses:
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Label:
-      type: object
-      properties:
-        id:
-          type: integer
-        datasetId:
-          type: integer
-        name:
-          type: string
-        numExamples:
-          type: integer
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
     Example:
       type: object
       properties:
@@ -137,6 +137,15 @@ components:
           format: date-time
         object:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     ExampleList:
       type: object
       properties:
@@ -146,25 +155,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Example'
-  responses:
-    Unauthorized:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Label:
+      type: object
+      properties:
+        id:
+          type: integer
+        datasetId:
+          type: integer
+        name:
+          type: string
+        numExamples:
+          type: integer
+    Example_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique example identifier.
+        name:
+          type: string
+          description: Example name.
+        location:
+          type: string
+          description: URL to the image.
+        label:
+          $ref: '#/components/schemas/Label_2'
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the example was created.
+        object:
+          type: string
+    Label_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique label identifier.
+        datasetId:
+          type: integer
+          description: Dataset the label belongs to.
+        name:
+          type: string
+          description: Label name.
+        numExamples:
+          type: integer
+          description: Number of examples with this label.
   parameters:
     DatasetId:
       name: datasetId
@@ -174,13 +210,11 @@ components:
       schema:
         type: integer
   securitySchemes:
-    oauth2:
-      type: oauth2
-      description: Salesforce OAuth 2.0 authentication.
-      flows:
-        authorizationCode:
-          authorizationUrl: https://login.salesforce.com/services/oauth2/authorize
-          tokenUrl: https://login.salesforce.com/services/oauth2/token
-          scopes:
-            api: Full access to Salesforce APIs
-            einstein_gpt: Access to Einstein AI features
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 Bearer token. Generate a token using your Einstein Platform Services private key.
+x-refined-from:
+- salesforce-einstein-language-openapi.yml
+- salesforce-einstein-vision-openapi.yml

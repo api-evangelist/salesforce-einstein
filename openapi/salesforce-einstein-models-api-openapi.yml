@@ -1,8 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Salesforce Einstein Bots AI Record Insights Models API
-  description: Conversational AI API for building intelligent chatbots and virtual assistants. Einstein Bots provides REST endpoints to create, manage, and interact with AI-powered bots that can handle customer service conversations across channels.
-  version: 58.0.0
+  title: Salesforce Einstein Models API
   contact:
     name: Salesforce Developer Support
     url: https://developer.salesforce.com/
@@ -10,6 +8,8 @@ info:
     name: Salesforce Master Subscription Agreement
     url: https://www.salesforce.com/company/legal/agreements/
   termsOfService: https://www.salesforce.com/company/legal/agreements/
+  version: '1.0'
+  description: 'Operations tagged Models across 4 of this provider''s published API definitions: salesforce-einstein-discovery-openapi.yml, salesforce-einstein-gpt-openapi.yml, salesforce-einstein-language-openapi.yml, salesforce-einstein-vision-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{instance}.salesforce.com/services/data/v58.0
   description: Salesforce Instance
@@ -17,8 +17,10 @@ servers:
     instance:
       default: login
       description: Your Salesforce instance domain.
-security:
-- oauth2: []
+- url: https://api.einstein.ai/v2/language
+  description: Einstein Language Production Server
+- url: https://api.einstein.ai/v2/vision
+  description: Einstein Vision Production Server
 tags:
 - name: Models
   description: Manage Einstein Discovery prediction models
@@ -49,6 +51,15 @@ paths:
                 $ref: '#/components/schemas/ModelCollection'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - oauth2: []
+    servers:
+    - url: https://{instance}.salesforce.com/services/data/v58.0
+      description: Salesforce Instance
+      variables:
+        instance:
+          default: login
+          description: Your Salesforce instance domain.
   /wave/models/{modelId}:
     get:
       operationId: getModel
@@ -69,6 +80,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2: []
     delete:
       operationId: deleteModel
       summary: Salesforce Einstein Delete a prediction model
@@ -84,6 +97,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2: []
+    servers:
+    - url: https://{instance}.salesforce.com/services/data/v58.0
+      description: Salesforce Instance
+      variables:
+        instance:
+          default: login
+          description: Your Salesforce instance domain.
   /einstein/llm/models:
     get:
       operationId: listModels
@@ -100,6 +122,15 @@ paths:
                 $ref: '#/components/schemas/ModelCollection_2'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - oauth2: []
+    servers:
+    - url: https://{instance}.salesforce.com/services/data/v58.0
+      description: Salesforce Instance
+      variables:
+        instance:
+          default: login
+          description: Your Salesforce instance domain.
   /einstein/llm/models/{modelId}:
     get:
       operationId: getModel
@@ -120,6 +151,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2: []
+    servers:
+    - url: https://{instance}.salesforce.com/services/data/v58.0
+      description: Salesforce Instance
+      variables:
+        instance:
+          default: login
+          description: Your Salesforce instance domain.
   /datasets/{datasetId}/models:
     get:
       operationId: listModelsForDataset
@@ -140,6 +180,11 @@ paths:
                   $ref: '#/components/schemas/Model'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.einstein.ai/v2/language
+      description: Einstein Language Production Server
   /train:
     post:
       operationId: trainModel
@@ -183,6 +228,11 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.einstein.ai/v2/language
+      description: Einstein Language Production Server
   /retrain:
     post:
       operationId: retrainModel
@@ -217,6 +267,11 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.einstein.ai/v2/language
+      description: Einstein Language Production Server
   /models/{modelId}:
     get:
       operationId: getModel
@@ -237,6 +292,8 @@ paths:
           $ref: '#/components/responses/Unauthorized_2'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteModel
       summary: Salesforce Einstein Delete a model
@@ -252,6 +309,11 @@ paths:
           $ref: '#/components/responses/Unauthorized_2'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.einstein.ai/v2/language
+      description: Einstein Language Production Server
   /models/{modelId}/lc:
     get:
       operationId: getModelLearningCurve
@@ -272,8 +334,35 @@ paths:
           $ref: '#/components/responses/Unauthorized_3'
         '404':
           $ref: '#/components/responses/NotFound'
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.einstein.ai/v2/vision
+      description: Einstein Vision Production Server
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    ModelCollection:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoveryModel'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
     DiscoveryModel:
       type: object
       properties:
@@ -305,54 +394,46 @@ components:
         url:
           type: string
           format: uri
-    Error_2:
+    GenerativeModel:
       type: object
       properties:
-        message:
+        id:
           type: string
-          description: Human-readable error message.
-        errorCode:
+        name:
           type: string
-          description: Machine-readable error code.
-    LearningCurve:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              epoch:
-                type: integer
-              metricsData:
-                type: object
-                properties:
-                  f1:
-                    type: array
-                    items:
-                      type: number
-                  testAccuracy:
-                    type: array
-                    items:
-                      type: number
-                  trainingLoss:
-                    type: array
-                    items:
-                      type: number
-        object:
+        label:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
+        provider:
           type: string
-        errorCode:
+          description: Model provider name.
+        modelType:
           type: string
-        fields:
+          enum:
+          - gpt-4
+          - gpt-3.5-turbo
+          - claude
+          - custom
+          description: Type of the model.
+        capabilities:
           type: array
           items:
             type: string
-    Error_3:
+          description: Capabilities supported by the model.
+        status:
+          type: string
+          enum:
+          - Active
+          - Inactive
+    ModelCollection_2:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerativeModel'
+        totalSize:
+          type: integer
+    Error_2:
       type: object
       properties:
         message:
@@ -425,56 +506,119 @@ components:
           type: number
         object:
           type: string
-    ModelCollection:
+    Error_3:
       type: object
       properties:
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/DiscoveryModel'
-        totalSize:
-          type: integer
-        nextPageUrl:
+        message:
           type: string
-    ModelCollection_2:
-      type: object
-      properties:
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenerativeModel'
-        totalSize:
-          type: integer
-    GenerativeModel:
-      type: object
-      properties:
-        id:
+          description: Human-readable error message.
+        errorCode:
           type: string
+          description: Machine-readable error code.
+    Model_2:
+      type: object
+      properties:
+        modelId:
+          type: string
+          description: Unique model identifier.
         name:
           type: string
-        label:
-          type: string
-        provider:
-          type: string
-          description: Model provider name.
-        modelType:
-          type: string
-          enum:
-          - gpt-4
-          - gpt-3.5-turbo
-          - claude
-          - custom
-          description: Type of the model.
-        capabilities:
-          type: array
-          items:
-            type: string
-          description: Capabilities supported by the model.
+          description: Model name.
+        datasetId:
+          type: integer
+          description: Dataset the model was trained on.
+        datasetVersionId:
+          type: integer
+          description: Version of the dataset used.
         status:
           type: string
           enum:
-          - Active
-          - Inactive
+          - QUEUED
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - DELETED
+          description: Current status of the model.
+        progress:
+          type: number
+          description: Training progress (0.0 to 1.0).
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the model was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the model was last updated.
+        learningRate:
+          type: number
+          description: Learning rate used for training.
+        epochs:
+          type: integer
+          description: Number of training epochs.
+        object:
+          type: string
+        modelType:
+          type: string
+          description: Type of model.
+        failureMsg:
+          type: string
+          description: Failure message if training failed.
+    TrainResponse_2:
+      type: object
+      properties:
+        modelId:
+          type: string
+          description: ID of the model being trained.
+        datasetId:
+          type: integer
+        datasetVersionId:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+        progress:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        epochs:
+          type: integer
+        learningRate:
+          type: number
+        object:
+          type: string
+    LearningCurve:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              epoch:
+                type: integer
+              metricsData:
+                type: object
+                properties:
+                  f1:
+                    type: array
+                    items:
+                      type: number
+                  testAccuracy:
+                    type: array
+                    items:
+                      type: number
+                  trainingLoss:
+                    type: array
+                    items:
+                      type: number
+        object:
+          type: string
   parameters:
     ModelId:
       name: modelId
@@ -498,36 +642,42 @@ components:
       schema:
         type: integer
   responses:
-    Unauthorized_2:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_3:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
     NotFound:
       description: Resource not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    Unauthorized_2:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    BadRequest_2:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+    Unauthorized_3:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
   securitySchemes:
     oauth2:
       type: oauth2
@@ -538,4 +688,14 @@ components:
           tokenUrl: https://login.salesforce.com/services/oauth2/token
           scopes:
             api: Full access to Salesforce APIs
-            einstein_gpt: Access to Einstein AI features
+            wave_api: Access to Analytics APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 Bearer token. Generate a token using your Einstein Platform Services private key.
+x-refined-from:
+- salesforce-einstein-discovery-openapi.yml
+- salesforce-einstein-gpt-openapi.yml
+- salesforce-einstein-language-openapi.yml
+- salesforce-einstein-vision-openapi.yml
