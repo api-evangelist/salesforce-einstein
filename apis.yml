@@ -820,6 +820,8 @@ apis:
   - type: Trust & Safety
     url: https://www.salesforce.com/company/ethical-and-humane-use/
 common:
+  - type: Website
+    url: https://www.salesforce.com/
   - type: AgenticAccess
     url: agentic-access/salesforce-einstein-agentic-access.yml
   - type: DomainSecurity
