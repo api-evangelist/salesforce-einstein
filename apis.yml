@@ -328,6 +328,8 @@ apis:
   humanURL: https://www.salesforce.com/products/einstein/ai-deep-dive/image-recognition/
   baseURL: https://api.einstein.ai/v2/vision
   tags:
+  - Example
+  tags_raw:
   - Examples
   properties:
   - type: OpenAPI
