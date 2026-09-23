@@ -137,37 +137,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     PromptTemplateCollection:
       type: object
       properties:
@@ -179,6 +149,32 @@ components:
           type: integer
         nextPageUrl:
           type: string
+    PromptTemplateInput:
+      type: object
+      properties:
+        developerName:
+          type: string
+        masterLabel:
+          type: string
+        description:
+          type: string
+        promptText:
+          type: string
+        type:
+          type: string
+          enum:
+          - salesGeneration
+          - fieldGeneration
+          - recordSummary
+          - chatGeneration
+          - flexibleGeneration
+        relatedEntity:
+          type: string
+      required:
+      - developerName
+      - masterLabel
+      - promptText
+      - type
     PromptTemplate:
       type: object
       properties:
@@ -219,32 +215,36 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    PromptTemplateInput:
+    Error:
       type: object
       properties:
-        developerName:
+        message:
           type: string
-        masterLabel:
+        errorCode:
           type: string
-        description:
-          type: string
-        promptText:
-          type: string
-        type:
-          type: string
-          enum:
-          - salesGeneration
-          - fieldGeneration
-          - recordSummary
-          - chatGeneration
-          - flexibleGeneration
-        relatedEntity:
-          type: string
-      required:
-      - developerName
-      - masterLabel
-      - promptText
-      - type
+        fields:
+          type: array
+          items:
+            type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     TemplateId:
       name: templateId

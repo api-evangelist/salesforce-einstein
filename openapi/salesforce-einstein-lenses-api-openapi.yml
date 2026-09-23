@@ -75,30 +75,28 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    LensCollection:
       type: object
       properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
+        lenses:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Lens'
+        totalSize:
+          type: integer
     Lens:
       type: object
       properties:
@@ -121,15 +119,17 @@ components:
         url:
           type: string
           format: uri
-    LensCollection:
+    Error:
       type: object
       properties:
-        lenses:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Lens'
-        totalSize:
-          type: integer
+            type: string
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,0 +1,47 @@
+# Front Door AI Index — salesforce-einstein — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: salesforce-einstein
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.salesforce.com
+  final_host: www.salesforce.com
+  ownership: shared
+  owner: salesforce
+  shares_host_with:
+  - cquotient
+  - demandware
+  - pardot
+  - salesforce
+  - salesforce-automation
+  - salesforce-automation-system
+  - salesforce-commerce-cloud
+  - salesforce-experience-cloud
+  - salesforce-flow
+  - salesforce-knowledge-management
+  - salesforce-marketing-cloud
+  - salesforce-net-zero-cloud
+  - salesforce-sales-cloud
+  - salesforce-service-cloud
+  - service-cloud
+  - visualforce
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 50
+  density: null
+  words: 1529
+  tiers:
+    agentic: 23
+    core: 26
+    model: 1
+  ambiguous: 21
+  top_terms:
+    AI: 25
+    agentic: 19
+    agent: 18
+    AI agent: 4
+    intelligence: 3
+    Claude: 1
+    artificial intelligence: 1

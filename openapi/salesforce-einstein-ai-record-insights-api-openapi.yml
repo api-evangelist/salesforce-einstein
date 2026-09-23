@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Salesforce Einstein Prediction Builder AI Record Insights API
+  title: Salesforce Einstein Prediction Builder AI Record Insights…
   description: Create custom AI predictions on Salesforce data without code using Einstein Prediction Builder. This API provides endpoints to manage prediction definitions, view prediction results, and configure prediction settings within Salesforce.
   version: 58.0.0
   contact:
@@ -65,48 +65,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    PredictionFactor:
-      type: object
-      properties:
-        featureName:
-          type: string
-          description: Name of the feature contributing to the prediction.
-        featureValue:
-          type: string
-          description: Value of the feature.
-        importance:
-          type: number
-          description: Importance weight of the factor.
-        direction:
-          type: string
-          enum:
-          - Positive
-          - Negative
-          description: Whether the factor positively or negatively affects the prediction.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     AIRecordInsightsResponse:
       type: object
       properties:
@@ -132,6 +103,35 @@ components:
                       type: array
                       items:
                         $ref: '#/components/schemas/PredictionFactor'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    PredictionFactor:
+      type: object
+      properties:
+        featureName:
+          type: string
+          description: Name of the feature contributing to the prediction.
+        featureValue:
+          type: string
+          description: Value of the feature.
+        importance:
+          type: number
+          description: Importance weight of the factor.
+        direction:
+          type: string
+          enum:
+          - Positive
+          - Negative
+          description: Whether the factor positively or negatively affects the prediction.
   securitySchemes:
     oauth2:
       type: oauth2

@@ -286,26 +286,26 @@ paths:
       description: Einstein Vision Production Server
 components:
   responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest_2:
-      description: Bad request. Invalid parameters or missing required fields.
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_2:
+      description: Unauthorized. Invalid or missing bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error_2'
-    Unauthorized_2:
-      description: Unauthorized. Invalid or missing bearer token.
+    BadRequest_2:
+      description: Bad request. Invalid parameters or missing required fields.
       content:
         application/json:
           schema:
@@ -316,30 +316,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest_3:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
     Unauthorized_3:
       description: Unauthorized. Invalid or missing bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error_3'
+    BadRequest_3:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     PredictionInput:
       type: object
       properties:
@@ -401,24 +390,17 @@ components:
                       type: string
                     impact:
                       type: number
-    Error_2:
+    Error:
       type: object
       properties:
         message:
           type: string
-          description: Human-readable error message.
         errorCode:
           type: string
-          description: Machine-readable error code.
-    PredictionResponse:
-      type: object
-      properties:
-        probabilities:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Probability'
-        object:
-          type: string
+            type: string
     Probability:
       type: object
       properties:
@@ -428,24 +410,24 @@ components:
         probability:
           type: number
           description: Confidence score (0.0 to 1.0).
-    PredictionFactor:
+    PredictionResponse:
       type: object
       properties:
-        featureName:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Probability'
+        object:
           type: string
-          description: Name of the feature contributing to the prediction.
-        featureValue:
+    Error_2:
+      type: object
+      properties:
+        message:
           type: string
-          description: Value of the feature.
-        importance:
-          type: number
-          description: Importance weight of the factor.
-        direction:
+          description: Human-readable error message.
+        errorCode:
           type: string
-          enum:
-          - Positive
-          - Negative
-          description: Whether the factor positively or negatively affects the prediction.
+          description: Machine-readable error code.
     PredictionResultList:
       type: object
       properties:
@@ -477,6 +459,24 @@ components:
                 $ref: '#/components/schemas/PredictionFactor'
         predictionDefinitionId:
           type: string
+    PredictionFactor:
+      type: object
+      properties:
+        featureName:
+          type: string
+          description: Name of the feature contributing to the prediction.
+        featureValue:
+          type: string
+          description: Value of the feature.
+        importance:
+          type: number
+          description: Importance weight of the factor.
+        direction:
+          type: string
+          enum:
+          - Positive
+          - Negative
+          description: Whether the factor positively or negatively affects the prediction.
     Error_3:
       type: object
       properties:
@@ -495,17 +495,6 @@ components:
             $ref: '#/components/schemas/DetectionResult'
         object:
           type: string
-    DetectionResult:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Detected object label.
-        probability:
-          type: number
-          description: Confidence score.
-        boundingBox:
-          $ref: '#/components/schemas/BoundingBox'
     BoundingBox:
       type: object
       properties:
@@ -521,6 +510,17 @@ components:
         maxY:
           type: integer
           description: Maximum Y coordinate.
+    DetectionResult:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Detected object label.
+        probability:
+          type: number
+          description: Confidence score.
+        boundingBox:
+          $ref: '#/components/schemas/BoundingBox'
   parameters:
     PredictionDefinitionId:
       name: predictionDefinitionId

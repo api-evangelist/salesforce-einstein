@@ -42,7 +42,8 @@
     "tag 'Predictions' spans 4 source specs (salesforce-einstein-discovery-openapi.yml, salesforce-einstein-language-openapi.yml, salesforce-einstein-prediction-builder-openapi.yml, salesforce-einstein-vision-openapi.yml): per-path servers applied",
     "tag 'API Usage' spans 2 source specs (salesforce-einstein-language-openapi.yml, salesforce-einstein-vision-openapi.yml): per-path servers applied",
     "tag 'Datasets' spans 2 source specs (salesforce-einstein-language-openapi.yml, salesforce-einstein-vision-openapi.yml): per-path servers applied",
-    "tag 'Examples' spans 2 source specs (salesforce-einstein-language-openapi.yml, salesforce-einstein-vision-openapi.yml): per-path servers applied"
+    "tag 'Examples' spans 2 source specs (salesforce-einstein-language-openapi.yml, salesforce-einstein-vision-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "salesforce-einstein-ai-record-insights-api-openapi.yml: previously refined output, superseded by openapi/_original/",

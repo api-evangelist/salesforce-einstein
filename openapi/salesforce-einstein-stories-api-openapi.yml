@@ -163,6 +163,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad request.
       content:
@@ -175,24 +181,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     StoryInput:
       type: object
       properties:
@@ -228,6 +217,13 @@ components:
           type: integer
         nextPageUrl:
           type: string
+    UserReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
     StoryStats:
       type: object
       properties:
@@ -253,6 +249,17 @@ components:
               type: number
             accuracy:
               type: number
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     Story:
       type: object
       properties:
@@ -293,13 +300,6 @@ components:
         url:
           type: string
           format: uri
-    UserReference:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
   parameters:
     StoryId:
       name: storyId

@@ -42,6 +42,15 @@ paths:
       description: Einstein Language Production Server
 components:
   schemas:
+    ApiUsageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUsage'
+        object:
+          type: string
     Error:
       type: object
       properties:
@@ -73,15 +82,6 @@ components:
           type: integer
         predictionsMax:
           type: integer
-        object:
-          type: string
-    ApiUsageList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiUsage'
         object:
           type: string
   responses:

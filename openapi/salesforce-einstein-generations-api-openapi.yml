@@ -96,85 +96,40 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    CompletionRequest:
-      type: object
-      properties:
-        prompt:
-          type: string
-          description: The prompt text to complete.
-        modelId:
-          type: string
-          description: ID of the model to use.
-        additionalConfig:
-          type: object
-          properties:
-            maxTokens:
-              type: integer
-            temperature:
-              type: number
-            topP:
-              type: number
-            stopSequences:
-              type: array
-              items:
-                type: string
-      required:
-      - prompt
-    GenerationRequest:
+    ChatGenerationRequest:
       type: object
       properties:
         promptTemplateDevName:
           type: string
-          description: Developer name of the prompt template to use.
+          description: Developer name of the chat prompt template.
         inputParams:
           type: object
-          description: Key-value pairs of input parameters for the template.
           additionalProperties:
             type: string
-        isPreview:
-          type: boolean
-          description: If true, returns the resolved prompt without calling the LLM.
-          default: false
+        messages:
+          type: array
+          description: Conversation history for context.
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                - user
+                - assistant
+                - system
+              content:
+                type: string
         additionalConfig:
           type: object
           properties:
             maxTokens:
               type: integer
-              description: Maximum number of tokens in the response.
             temperature:
               type: number
-              description: Sampling temperature (0.0 to 2.0).
-            applicationName:
-              type: string
-              description: Application context for the generation.
       required:
-      - promptTemplateDevName
-      - inputParams
+      - messages
     GenerationResponse:
       type: object
       properties:
@@ -226,30 +181,45 @@ components:
                       type: integer
                     total_tokens:
                       type: integer
-    ChatGenerationRequest:
+    GenerationRequest:
       type: object
       properties:
         promptTemplateDevName:
           type: string
-          description: Developer name of the chat prompt template.
+          description: Developer name of the prompt template to use.
         inputParams:
           type: object
+          description: Key-value pairs of input parameters for the template.
           additionalProperties:
             type: string
-        messages:
-          type: array
-          description: Conversation history for context.
-          items:
-            type: object
-            properties:
-              role:
-                type: string
-                enum:
-                - user
-                - assistant
-                - system
-              content:
-                type: string
+        isPreview:
+          type: boolean
+          description: If true, returns the resolved prompt without calling the LLM.
+          default: false
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+              description: Maximum number of tokens in the response.
+            temperature:
+              type: number
+              description: Sampling temperature (0.0 to 2.0).
+            applicationName:
+              type: string
+              description: Application context for the generation.
+      required:
+      - promptTemplateDevName
+      - inputParams
+    CompletionRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The prompt text to complete.
+        modelId:
+          type: string
+          description: ID of the model to use.
         additionalConfig:
           type: object
           properties:
@@ -257,8 +227,38 @@ components:
               type: integer
             temperature:
               type: number
+            topP:
+              type: number
+            stopSequences:
+              type: array
+              items:
+                type: string
       required:
-      - messages
+      - prompt
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
