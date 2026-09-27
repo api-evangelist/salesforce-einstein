@@ -37,9 +37,9 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 tags:
   - Artificial Intelligence
-  - Computer-Vision
+  - Computer Vision
   - CRM
-  - Machine-Learning
+  - Machine Learning
   - Natural Language Processing
   - Predictive Analytics
   - Salesforce
@@ -51,6 +51,8 @@ tags_raw:
   - Natural Language Processing
   - Predictive Analytics
   - Salesforce
+  - Computer-Vision
+  - Machine-Learning
 apis:
 - aid: salesforce-einstein:salesforce-einstein-ai-record-insights-api
   name: Salesforce Einstein AI Record Insights API

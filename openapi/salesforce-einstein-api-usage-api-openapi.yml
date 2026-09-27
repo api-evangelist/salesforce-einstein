@@ -42,15 +42,6 @@ paths:
       description: Einstein Language Production Server
 components:
   schemas:
-    ApiUsageList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiUsage'
-        object:
-          type: string
     Error:
       type: object
       properties:
@@ -60,6 +51,15 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code.
+    ApiUsageList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiUsage'
+        object:
+          type: string
     ApiUsage:
       type: object
       properties:

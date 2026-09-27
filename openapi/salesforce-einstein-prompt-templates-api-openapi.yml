@@ -138,43 +138,17 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    PromptTemplateCollection:
+    Error:
       type: object
       properties:
-        promptTemplates:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/PromptTemplate'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
-    PromptTemplateInput:
-      type: object
-      properties:
-        developerName:
-          type: string
-        masterLabel:
-          type: string
-        description:
-          type: string
-        promptText:
-          type: string
-        type:
-          type: string
-          enum:
-          - salesGeneration
-          - fieldGeneration
-          - recordSummary
-          - chatGeneration
-          - flexibleGeneration
-        relatedEntity:
-          type: string
-      required:
-      - developerName
-      - masterLabel
-      - promptText
-      - type
+            type: string
     PromptTemplate:
       type: object
       properties:
@@ -215,18 +189,58 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    Error:
+    PromptTemplateInput:
       type: object
       properties:
-        message:
+        developerName:
           type: string
-        errorCode:
+        masterLabel:
           type: string
-        fields:
+        description:
+          type: string
+        promptText:
+          type: string
+        type:
+          type: string
+          enum:
+          - salesGeneration
+          - fieldGeneration
+          - recordSummary
+          - chatGeneration
+          - flexibleGeneration
+        relatedEntity:
+          type: string
+      required:
+      - developerName
+      - masterLabel
+      - promptText
+      - type
+    PromptTemplateCollection:
+      type: object
+      properties:
+        promptTemplates:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+  parameters:
+    TemplateId:
+      name: templateId
+      in: path
+      required: true
+      description: Unique identifier for the prompt template.
+      schema:
+        type: string
   responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
@@ -239,20 +253,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    TemplateId:
-      name: templateId
-      in: path
-      required: true
-      description: Unique identifier for the prompt template.
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

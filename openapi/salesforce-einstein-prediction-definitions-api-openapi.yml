@@ -126,6 +126,26 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    PredictionDefinitionList:
+      type: object
+      properties:
+        predictionDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionDefinition'
+        totalSize:
+          type: integer
     Outcome:
       type: object
       properties:
@@ -141,6 +161,33 @@ components:
         label:
           type: string
           description: Label for the outcome.
+    PredictionDefinitionInput:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Display label for the prediction.
+        name:
+          type: string
+          description: API name of the prediction definition.
+        outcome:
+          $ref: '#/components/schemas/Outcome'
+        predictionType:
+          type: string
+          enum:
+          - Boolean
+          - Categorical
+          - Numeric
+        sobjectType:
+          type: string
+          description: Salesforce object to predict on.
+        pushbackField:
+          type: string
+          description: Field to write prediction scores to.
+      required:
+      - label
+      - sobjectType
+      - predictionType
     PredictionDefinition:
       type: object
       properties:
@@ -184,62 +231,13 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    PredictionDefinitionInput:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Display label for the prediction.
-        name:
-          type: string
-          description: API name of the prediction definition.
-        outcome:
-          $ref: '#/components/schemas/Outcome'
-        predictionType:
-          type: string
-          enum:
-          - Boolean
-          - Categorical
-          - Numeric
-        sobjectType:
-          type: string
-          description: Salesforce object to predict on.
-        pushbackField:
-          type: string
-          description: Field to write prediction scores to.
-      required:
-      - label
-      - sobjectType
-      - predictionType
-    PredictionDefinitionList:
-      type: object
-      properties:
-        predictionDefinitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionDefinition'
-        totalSize:
-          type: integer
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-  parameters:
-    PredictionDefinitionId:
-      name: predictionDefinitionId
-      in: path
-      required: true
-      description: Unique identifier for the prediction definition.
-      schema:
-        type: string
   responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
@@ -252,12 +250,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    PredictionDefinitionId:
+      name: predictionDefinitionId
+      in: path
+      required: true
+      description: Unique identifier for the prediction definition.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

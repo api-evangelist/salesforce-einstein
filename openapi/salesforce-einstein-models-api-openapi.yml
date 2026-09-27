@@ -108,7 +108,7 @@ paths:
           description: Your Salesforce instance domain.
   /einstein/llm/models:
     get:
-      operationId: listModels
+      operationId: getEinsteinLlmModels
       summary: Salesforce Einstein List available models
       description: Returns a list of available generative AI models that can be used for content generation.
       tags:
@@ -124,6 +124,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: listModels
     servers:
     - url: https://{instance}.salesforce.com/services/data/v58.0
       description: Salesforce Instance
@@ -133,7 +135,7 @@ paths:
           description: Your Salesforce instance domain.
   /einstein/llm/models/{modelId}:
     get:
-      operationId: getModel
+      operationId: getEinsteinLlmModelsByModelId
       summary: Salesforce Einstein Get model details
       description: Returns details of a specific generative AI model.
       tags:
@@ -153,6 +155,8 @@ paths:
           $ref: '#/components/responses/NotFound'
       security:
       - oauth2: []
+      x-operation-id-source: normalized
+      x-operation-id-original: getModel
     servers:
     - url: https://{instance}.salesforce.com/services/data/v58.0
       description: Salesforce Instance
@@ -274,7 +278,7 @@ paths:
       description: Einstein Language Production Server
   /models/{modelId}:
     get:
-      operationId: getModel
+      operationId: getModelsByModelId
       summary: Salesforce Einstein Get model details
       description: Returns the details and metrics of a trained model.
       tags:
@@ -294,8 +298,10 @@ paths:
           $ref: '#/components/responses/NotFound'
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: getModel
     delete:
-      operationId: deleteModel
+      operationId: deleteModelsByModelId
       summary: Salesforce Einstein Delete a model
       description: Deletes a trained model.
       tags:
@@ -311,6 +317,8 @@ paths:
           $ref: '#/components/responses/NotFound'
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteModel
     servers:
     - url: https://api.einstein.ai/v2/language
       description: Einstein Language Production Server
@@ -340,44 +348,18 @@ paths:
     - url: https://api.einstein.ai/v2/vision
       description: Einstein Vision Production Server
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_2:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    Unauthorized_3:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
-    BadRequest_2:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     ModelCollection:
       type: object
       properties:
@@ -420,17 +402,6 @@ components:
         url:
           type: string
           format: uri
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     GenerativeModel:
       type: object
       properties:
@@ -470,6 +441,42 @@ components:
             $ref: '#/components/schemas/GenerativeModel'
         totalSize:
           type: integer
+    Error_2:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    TrainResponse:
+      type: object
+      properties:
+        modelId:
+          type: string
+        datasetId:
+          type: integer
+        datasetVersionId:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+        progress:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        epochs:
+          type: integer
+        learningRate:
+          type: number
+        object:
+          type: string
     Model:
       type: object
       properties:
@@ -507,11 +514,21 @@ components:
           type: string
         failureMsg:
           type: string
-    TrainResponse:
+    Error_3:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    TrainResponse_2:
       type: object
       properties:
         modelId:
           type: string
+          description: ID of the model being trained.
         datasetId:
           type: integer
         datasetVersionId:
@@ -534,15 +551,6 @@ components:
           type: number
         object:
           type: string
-    Error_2:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
     Model_2:
       type: object
       properties:
@@ -619,43 +627,6 @@ components:
                       type: number
         object:
           type: string
-    TrainResponse_2:
-      type: object
-      properties:
-        modelId:
-          type: string
-          description: ID of the model being trained.
-        datasetId:
-          type: integer
-        datasetVersionId:
-          type: integer
-        name:
-          type: string
-        status:
-          type: string
-        progress:
-          type: number
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        epochs:
-          type: integer
-        learningRate:
-          type: number
-        object:
-          type: string
-    Error_3:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
   parameters:
     ModelId:
       name: modelId
@@ -678,6 +649,43 @@ components:
       description: Unique identifier for the dataset.
       schema:
         type: integer
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_2:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    Unauthorized_3:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+    BadRequest_2:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
   securitySchemes:
     oauth2:
       type: oauth2

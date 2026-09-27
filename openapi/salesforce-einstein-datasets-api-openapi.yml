@@ -131,6 +131,22 @@ paths:
       description: Einstein Language Production Server
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    LabelSummary:
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Label'
     Dataset:
       type: object
       properties:
@@ -164,13 +180,6 @@ components:
           type: string
         object:
           type: string
-    LabelSummary:
-      type: object
-      properties:
-        labels:
-          type: array
-          items:
-            $ref: '#/components/schemas/Label'
     DatasetList:
       type: object
       properties:
@@ -191,15 +200,6 @@ components:
           type: string
         numExamples:
           type: integer
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
     Dataset_2:
       type: object
       properties:
@@ -256,7 +256,21 @@ components:
         numExamples:
           type: integer
           description: Number of examples with this label.
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
   responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized. Invalid or missing bearer token.
       content:
@@ -269,20 +283,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    DatasetId:
-      name: datasetId
-      in: path
-      required: true
-      description: Unique identifier for the dataset.
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http

@@ -74,45 +74,17 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    BotMessage:
+    Error:
       type: object
       properties:
-        type:
+        message:
           type: string
-          enum:
-          - Text
-          - Choices
-          - Transfer
-          - EscalateToAgent
-          - SessionEnded
-          description: Type of bot message.
-        text:
+        errorCode:
           type: string
-          description: Text content of the message.
-        choices:
+        fields:
           type: array
-          description: Available choices (for Choices type messages).
           items:
-            type: object
-            properties:
-              label:
-                type: string
-              value:
-                type: string
-              index:
-                type: integer
-        scheduleItem:
-          type: object
-          description: Schedule information for appointment-related responses.
-          properties:
-            startDate:
-              type: string
-              format: date-time
-            endDate:
-              type: string
-              format: date-time
-        sequenceId:
-          type: integer
+            type: string
     MessageResponse:
       type: object
       properties:
@@ -153,18 +125,52 @@ components:
           - type
       required:
       - message
-    Error:
+    BotMessage:
       type: object
       properties:
-        message:
+        type:
           type: string
-        errorCode:
+          enum:
+          - Text
+          - Choices
+          - Transfer
+          - EscalateToAgent
+          - SessionEnded
+          description: Type of bot message.
+        text:
           type: string
-        fields:
+          description: Text content of the message.
+        choices:
           type: array
+          description: Available choices (for Choices type messages).
           items:
-            type: string
+            type: object
+            properties:
+              label:
+                type: string
+              value:
+                type: string
+              index:
+                type: integer
+        scheduleItem:
+          type: object
+          description: Schedule information for appointment-related responses.
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+        sequenceId:
+          type: integer
   responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
@@ -173,12 +179,6 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
       content:
         application/json:
           schema:

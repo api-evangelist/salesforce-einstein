@@ -74,29 +74,18 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    DashboardCollection:
+    Error:
       type: object
       properties:
-        dashboards:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Dashboard'
-        totalSize:
-          type: integer
+            type: string
     Dashboard:
       type: object
       properties:
@@ -119,17 +108,28 @@ components:
         url:
           type: string
           format: uri
-    Error:
+    DashboardCollection:
       type: object
       properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
+        dashboards:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Dashboard'
+        totalSize:
+          type: integer
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2
