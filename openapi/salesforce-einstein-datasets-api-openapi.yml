@@ -131,15 +131,17 @@ paths:
       description: Einstein Language Production Server
 components:
   schemas:
-    Error:
+    Label:
       type: object
       properties:
-        message:
+        id:
+          type: integer
+        datasetId:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
+        numExamples:
+          type: integer
     LabelSummary:
       type: object
       properties:
@@ -189,17 +191,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dataset'
-    Label:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    Label_2:
       type: object
       properties:
         id:
           type: integer
+          description: Unique label identifier.
         datasetId:
           type: integer
+          description: Dataset the label belongs to.
         name:
           type: string
+          description: Label name.
         numExamples:
           type: integer
+          description: Number of examples with this label.
     Dataset_2:
       type: object
       properties:
@@ -241,21 +256,6 @@ components:
         object:
           type: string
           description: Object type identifier.
-    Label_2:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique label identifier.
-        datasetId:
-          type: integer
-          description: Dataset the label belongs to.
-        name:
-          type: string
-          description: Label name.
-        numExamples:
-          type: integer
-          description: Number of examples with this label.
   parameters:
     DatasetId:
       name: datasetId
@@ -265,14 +265,14 @@ components:
       schema:
         type: integer
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized. Invalid or missing bearer token.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

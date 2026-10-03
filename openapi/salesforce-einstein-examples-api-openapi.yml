@@ -104,15 +104,26 @@ paths:
       description: Einstein Language Production Server
 components:
   schemas:
-    Error:
+    Label:
       type: object
       properties:
-        message:
+        id:
+          type: integer
+        datasetId:
+          type: integer
+        name:
           type: string
-          description: Human-readable error message.
-        errorCode:
+        numExamples:
+          type: integer
+    ExampleList:
+      type: object
+      properties:
+        object:
           type: string
-          description: Machine-readable error code.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Example'
     Example:
       type: object
       properties:
@@ -127,26 +138,30 @@ components:
           format: date-time
         object:
           type: string
-    ExampleList:
+    Error:
       type: object
       properties:
-        object:
+        message:
           type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Example'
-    Label:
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    Label_2:
       type: object
       properties:
         id:
           type: integer
+          description: Unique label identifier.
         datasetId:
           type: integer
+          description: Dataset the label belongs to.
         name:
           type: string
+          description: Label name.
         numExamples:
           type: integer
+          description: Number of examples with this label.
     Example_2:
       type: object
       properties:
@@ -167,21 +182,6 @@ components:
           description: Timestamp when the example was created.
         object:
           type: string
-    Label_2:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique label identifier.
-        datasetId:
-          type: integer
-          description: Dataset the label belongs to.
-        name:
-          type: string
-          description: Label name.
-        numExamples:
-          type: integer
-          description: Number of examples with this label.
   parameters:
     DatasetId:
       name: datasetId
@@ -191,14 +191,14 @@ components:
       schema:
         type: integer
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized. Invalid or missing bearer token.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

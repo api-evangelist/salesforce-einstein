@@ -137,18 +137,71 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    TemplateId:
+      name: templateId
+      in: path
+      required: true
+      description: Unique identifier for the prompt template.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    PromptTemplateCollection:
       type: object
       properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
+        promptTemplates:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    PromptTemplateInput:
+      type: object
+      properties:
+        developerName:
+          type: string
+        masterLabel:
+          type: string
+        description:
+          type: string
+        promptText:
+          type: string
+        type:
+          type: string
+          enum:
+          - salesGeneration
+          - fieldGeneration
+          - recordSummary
+          - chatGeneration
+          - flexibleGeneration
+        relatedEntity:
+          type: string
+      required:
+      - developerName
+      - masterLabel
+      - promptText
+      - type
     PromptTemplate:
       type: object
       properties:
@@ -189,70 +242,17 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    PromptTemplateInput:
+    Error:
       type: object
       properties:
-        developerName:
+        message:
           type: string
-        masterLabel:
+        errorCode:
           type: string
-        description:
-          type: string
-        promptText:
-          type: string
-        type:
-          type: string
-          enum:
-          - salesGeneration
-          - fieldGeneration
-          - recordSummary
-          - chatGeneration
-          - flexibleGeneration
-        relatedEntity:
-          type: string
-      required:
-      - developerName
-      - masterLabel
-      - promptText
-      - type
-    PromptTemplateCollection:
-      type: object
-      properties:
-        promptTemplates:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/PromptTemplate'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
-  parameters:
-    TemplateId:
-      name: templateId
-      in: path
-      required: true
-      description: Unique identifier for the prompt template.
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+            type: string
   securitySchemes:
     oauth2:
       type: oauth2

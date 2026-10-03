@@ -97,47 +97,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    GenerationRequest:
-      type: object
-      properties:
-        promptTemplateDevName:
-          type: string
-          description: Developer name of the prompt template to use.
-        inputParams:
-          type: object
-          description: Key-value pairs of input parameters for the template.
-          additionalProperties:
-            type: string
-        isPreview:
-          type: boolean
-          description: If true, returns the resolved prompt without calling the LLM.
-          default: false
-        additionalConfig:
-          type: object
-          properties:
-            maxTokens:
-              type: integer
-              description: Maximum number of tokens in the response.
-            temperature:
-              type: number
-              description: Sampling temperature (0.0 to 2.0).
-            applicationName:
-              type: string
-              description: Application context for the generation.
-      required:
-      - promptTemplateDevName
-      - inputParams
     GenerationResponse:
       type: object
       properties:
@@ -246,6 +205,47 @@ components:
               type: number
       required:
       - messages
+    GenerationRequest:
+      type: object
+      properties:
+        promptTemplateDevName:
+          type: string
+          description: Developer name of the prompt template to use.
+        inputParams:
+          type: object
+          description: Key-value pairs of input parameters for the template.
+          additionalProperties:
+            type: string
+        isPreview:
+          type: boolean
+          description: If true, returns the resolved prompt without calling the LLM.
+          default: false
+        additionalConfig:
+          type: object
+          properties:
+            maxTokens:
+              type: integer
+              description: Maximum number of tokens in the response.
+            temperature:
+              type: number
+              description: Sampling temperature (0.0 to 2.0).
+            applicationName:
+              type: string
+              description: Application context for the generation.
+      required:
+      - promptTemplateDevName
+      - inputParams
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
   responses:
     Unauthorized:
       description: Unauthorized.

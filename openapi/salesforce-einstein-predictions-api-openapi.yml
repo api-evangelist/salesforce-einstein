@@ -285,199 +285,6 @@ paths:
     - url: https://api.einstein.ai/v2/vision
       description: Einstein Vision Production Server
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    PredictionOutput:
-      type: object
-      properties:
-        predictionResults:
-          type: array
-          items:
-            type: object
-            properties:
-              prediction:
-                type: object
-                properties:
-                  total:
-                    type: number
-                    description: Predicted value.
-                  baseLine:
-                    type: number
-                    description: Baseline prediction value.
-              prescriptions:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    action:
-                      type: string
-                    description:
-                      type: string
-                    impact:
-                      type: number
-              middleValues:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    columnName:
-                      type: string
-                    value:
-                      type: string
-                    impact:
-                      type: number
-    PredictionInput:
-      type: object
-      properties:
-        predictionDefinition:
-          type: string
-          description: ID of the prediction definition or model.
-        columnNames:
-          type: array
-          description: Names of the input columns.
-          items:
-            type: string
-        rows:
-          type: array
-          description: Input data rows for prediction.
-          items:
-            type: array
-            items:
-              type: string
-      required:
-      - predictionDefinition
-      - columnNames
-      - rows
-    Error_2:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-    PredictionResponse:
-      type: object
-      properties:
-        probabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Probability'
-        object:
-          type: string
-    Probability:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Predicted label.
-        probability:
-          type: number
-          description: Confidence score (0.0 to 1.0).
-    PredictionFactor:
-      type: object
-      properties:
-        featureName:
-          type: string
-          description: Name of the feature contributing to the prediction.
-        featureValue:
-          type: string
-          description: Value of the feature.
-        importance:
-          type: number
-          description: Importance weight of the factor.
-        direction:
-          type: string
-          enum:
-          - Positive
-          - Negative
-          description: Whether the factor positively or negatively affects the prediction.
-    PredictionResult:
-      type: object
-      properties:
-        recordId:
-          type: string
-          description: Salesforce record ID.
-        prediction:
-          type: object
-          properties:
-            score:
-              type: number
-              description: Prediction score.
-            label:
-              type: string
-              description: Predicted label (for categorical predictions).
-            factors:
-              type: array
-              description: Top factors influencing the prediction.
-              items:
-                $ref: '#/components/schemas/PredictionFactor'
-        predictionDefinitionId:
-          type: string
-    PredictionResultList:
-      type: object
-      properties:
-        predictions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionResult'
-        totalSize:
-          type: integer
-    Error_3:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-    DetectionResponse:
-      type: object
-      properties:
-        probabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/DetectionResult'
-        object:
-          type: string
-    DetectionResult:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Detected object label.
-        probability:
-          type: number
-          description: Confidence score.
-        boundingBox:
-          $ref: '#/components/schemas/BoundingBox'
-    BoundingBox:
-      type: object
-      properties:
-        minX:
-          type: integer
-          description: Minimum X coordinate.
-        minY:
-          type: integer
-          description: Minimum Y coordinate.
-        maxX:
-          type: integer
-          description: Maximum X coordinate.
-        maxY:
-          type: integer
-          description: Maximum Y coordinate.
   responses:
     Unauthorized:
       description: Unauthorized.
@@ -521,6 +328,199 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error_3'
+  schemas:
+    PredictionInput:
+      type: object
+      properties:
+        predictionDefinition:
+          type: string
+          description: ID of the prediction definition or model.
+        columnNames:
+          type: array
+          description: Names of the input columns.
+          items:
+            type: string
+        rows:
+          type: array
+          description: Input data rows for prediction.
+          items:
+            type: array
+            items:
+              type: string
+      required:
+      - predictionDefinition
+      - columnNames
+      - rows
+    PredictionOutput:
+      type: object
+      properties:
+        predictionResults:
+          type: array
+          items:
+            type: object
+            properties:
+              prediction:
+                type: object
+                properties:
+                  total:
+                    type: number
+                    description: Predicted value.
+                  baseLine:
+                    type: number
+                    description: Baseline prediction value.
+              prescriptions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                    description:
+                      type: string
+                    impact:
+                      type: number
+              middleValues:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    columnName:
+                      type: string
+                    value:
+                      type: string
+                    impact:
+                      type: number
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    Probability:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Predicted label.
+        probability:
+          type: number
+          description: Confidence score (0.0 to 1.0).
+    PredictionResponse:
+      type: object
+      properties:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Probability'
+        object:
+          type: string
+    Error_2:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
+    PredictionResultList:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionResult'
+        totalSize:
+          type: integer
+    PredictionFactor:
+      type: object
+      properties:
+        featureName:
+          type: string
+          description: Name of the feature contributing to the prediction.
+        featureValue:
+          type: string
+          description: Value of the feature.
+        importance:
+          type: number
+          description: Importance weight of the factor.
+        direction:
+          type: string
+          enum:
+          - Positive
+          - Negative
+          description: Whether the factor positively or negatively affects the prediction.
+    PredictionResult:
+      type: object
+      properties:
+        recordId:
+          type: string
+          description: Salesforce record ID.
+        prediction:
+          type: object
+          properties:
+            score:
+              type: number
+              description: Prediction score.
+            label:
+              type: string
+              description: Predicted label (for categorical predictions).
+            factors:
+              type: array
+              description: Top factors influencing the prediction.
+              items:
+                $ref: '#/components/schemas/PredictionFactor'
+        predictionDefinitionId:
+          type: string
+    DetectionResponse:
+      type: object
+      properties:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectionResult'
+        object:
+          type: string
+    DetectionResult:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Detected object label.
+        probability:
+          type: number
+          description: Confidence score.
+        boundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+    BoundingBox:
+      type: object
+      properties:
+        minX:
+          type: integer
+          description: Minimum X coordinate.
+        minY:
+          type: integer
+          description: Minimum Y coordinate.
+        maxX:
+          type: integer
+          description: Maximum X coordinate.
+        maxY:
+          type: integer
+          description: Maximum Y coordinate.
+    Error_3:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
   parameters:
     PredictionDefinitionId:
       name: predictionDefinitionId

@@ -163,53 +163,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    StoryCollection:
-      type: object
-      properties:
-        stories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Story'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
-    StoryStats:
-      type: object
-      properties:
-        insights:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              description:
-                type: string
-              impact:
-                type: number
-              variable:
-                type: string
-        modelMetrics:
-          type: object
-          properties:
-            r2:
-              type: number
-            rmse:
-              type: number
-            accuracy:
-              type: number
     Story:
       type: object
       properties:
@@ -250,13 +203,6 @@ components:
         url:
           type: string
           format: uri
-    UserReference:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     StoryInput:
       type: object
       properties:
@@ -281,6 +227,60 @@ components:
       - name
       - sourceDatasetId
       - outcomeVariable
+    UserReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    StoryStats:
+      type: object
+      properties:
+        insights:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              description:
+                type: string
+              impact:
+                type: number
+              variable:
+                type: string
+        modelMetrics:
+          type: object
+          properties:
+            r2:
+              type: number
+            rmse:
+              type: number
+            accuracy:
+              type: number
+    StoryCollection:
+      type: object
+      properties:
+        stories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
   parameters:
     StoryId:
       name: storyId
@@ -290,14 +290,14 @@ components:
       schema:
         type: string
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Unauthorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

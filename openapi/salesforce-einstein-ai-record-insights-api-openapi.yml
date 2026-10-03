@@ -65,35 +65,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    PredictionFactor:
-      type: object
-      properties:
-        featureName:
-          type: string
-          description: Name of the feature contributing to the prediction.
-        featureValue:
-          type: string
-          description: Value of the feature.
-        importance:
-          type: number
-          description: Importance weight of the factor.
-        direction:
-          type: string
-          enum:
-          - Positive
-          - Negative
-          description: Whether the factor positively or negatively affects the prediction.
     AIRecordInsightsResponse:
       type: object
       properties:
@@ -119,6 +90,35 @@ components:
                       type: array
                       items:
                         $ref: '#/components/schemas/PredictionFactor'
+    PredictionFactor:
+      type: object
+      properties:
+        featureName:
+          type: string
+          description: Name of the feature contributing to the prediction.
+        featureValue:
+          type: string
+          description: Value of the feature.
+        importance:
+          type: number
+          description: Importance weight of the factor.
+        direction:
+          type: string
+          enum:
+          - Positive
+          - Negative
+          description: Whether the factor positively or negatively affects the prediction.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
   responses:
     Unauthorized:
       description: Unauthorized.

@@ -90,17 +90,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Error:
+    SessionInput:
       type: object
       properties:
-        message:
+        forceConfig:
+          type: object
+          description: Configuration settings for the session.
+          properties:
+            endpoint:
+              type: string
+              description: Messaging endpoint for the bot.
+        externalSessionKey:
           type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
+          description: External key to associate with the session.
+      required:
+      - forceConfig
     Session:
       type: object
       properties:
@@ -123,29 +127,18 @@ components:
         lastActiveDate:
           type: string
           format: date-time
-    SessionInput:
+    Error:
       type: object
       properties:
-        forceConfig:
-          type: object
-          description: Configuration settings for the session.
-          properties:
-            endpoint:
-              type: string
-              description: Messaging endpoint for the bot.
-        externalSessionKey:
+        message:
           type: string
-          description: External key to associate with the session.
-      required:
-      - forceConfig
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
   parameters:
-    SessionId:
-      name: sessionId
-      in: path
-      required: true
-      description: Unique identifier for the bot session.
-      schema:
-        type: string
     BotId:
       name: botId
       in: path
@@ -153,15 +146,22 @@ components:
       description: Unique identifier for the Einstein Bot.
       schema:
         type: string
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier for the bot session.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Unauthorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:
