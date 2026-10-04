@@ -142,13 +142,24 @@ components:
           type: string
         numExamples:
           type: integer
-    LabelSummary:
+    DatasetList:
       type: object
       properties:
-        labels:
+        object:
+          type: string
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/Label'
+            $ref: '#/components/schemas/Dataset'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     Dataset:
       type: object
       properties:
@@ -182,24 +193,13 @@ components:
           type: string
         object:
           type: string
-    DatasetList:
+    LabelSummary:
       type: object
       properties:
-        object:
-          type: string
-        data:
+        labels:
           type: array
           items:
-            $ref: '#/components/schemas/Dataset'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
+            $ref: '#/components/schemas/Label'
     Label_2:
       type: object
       properties:
@@ -256,14 +256,6 @@ components:
         object:
           type: string
           description: Object type identifier.
-  parameters:
-    DatasetId:
-      name: datasetId
-      in: path
-      required: true
-      description: Unique identifier for the dataset.
-      schema:
-        type: integer
   responses:
     Unauthorized:
       description: Unauthorized. Invalid or missing bearer token.
@@ -283,6 +275,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

@@ -42,6 +42,15 @@ paths:
       description: Einstein Language Production Server
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     ApiUsageList:
       type: object
       properties:
@@ -75,15 +84,6 @@ components:
           type: integer
         object:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
   responses:
     Unauthorized:
       description: Unauthorized. Invalid or missing bearer token.

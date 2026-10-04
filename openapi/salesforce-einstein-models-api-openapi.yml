@@ -348,66 +348,18 @@ paths:
     - url: https://api.einstein.ai/v2/vision
       description: Einstein Vision Production Server
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_2:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    Unauthorized_3:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
-    BadRequest_2:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
-  parameters:
-    ModelId:
-      name: modelId
-      in: path
-      required: true
-      description: Unique identifier for the model.
-      schema:
-        type: string
-    ModelId_2:
-      name: modelId
-      in: path
-      required: true
-      description: Unique identifier for the generative AI model.
-      schema:
-        type: string
-    DatasetId:
-      name: datasetId
-      in: path
-      required: true
-      description: Unique identifier for the dataset.
-      schema:
-        type: integer
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     ModelCollection:
       type: object
       properties:
@@ -450,17 +402,6 @@ components:
         url:
           type: string
           format: uri
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     GenerativeModel:
       type: object
       properties:
@@ -500,6 +441,15 @@ components:
             $ref: '#/components/schemas/GenerativeModel'
         totalSize:
           type: integer
+    Error_2:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     TrainResponse:
       type: object
       properties:
@@ -564,7 +514,7 @@ components:
           type: string
         failureMsg:
           type: string
-    Error_2:
+    Error_3:
       type: object
       properties:
         message:
@@ -573,33 +523,6 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code.
-    LearningCurve:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              epoch:
-                type: integer
-              metricsData:
-                type: object
-                properties:
-                  f1:
-                    type: array
-                    items:
-                      type: number
-                  testAccuracy:
-                    type: array
-                    items:
-                      type: number
-                  trainingLoss:
-                    type: array
-                    items:
-                      type: number
-        object:
-          type: string
     TrainResponse_2:
       type: object
       properties:
@@ -626,6 +549,33 @@ components:
           type: integer
         learningRate:
           type: number
+        object:
+          type: string
+    LearningCurve:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              epoch:
+                type: integer
+              metricsData:
+                type: object
+                properties:
+                  f1:
+                    type: array
+                    items:
+                      type: number
+                  testAccuracy:
+                    type: array
+                    items:
+                      type: number
+                  trainingLoss:
+                    type: array
+                    items:
+                      type: number
         object:
           type: string
     Model_2:
@@ -677,15 +627,65 @@ components:
         failureMsg:
           type: string
           description: Failure message if training failed.
-    Error_3:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_2:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    Unauthorized_3:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+    BadRequest_2:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+  parameters:
+    ModelId:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the model.
+      schema:
+        type: string
+    ModelId_2:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the generative AI model.
+      schema:
+        type: string
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

@@ -65,44 +65,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    BotId:
-      name: botId
-      in: path
-      required: true
-      description: Unique identifier for the Einstein Bot.
-      schema:
-        type: string
-    VersionId:
-      name: versionId
-      in: path
-      required: true
-      description: Unique identifier for the bot version.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    BotVersionCollection:
-      type: object
-      properties:
-        versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/BotVersion'
-        totalSize:
-          type: integer
     BotVersion:
       type: object
       properties:
@@ -124,6 +87,15 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
+    BotVersionCollection:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotVersion'
+        totalSize:
+          type: integer
     Error:
       type: object
       properties:
@@ -135,6 +107,34 @@ components:
           type: array
           items:
             type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    VersionId:
+      name: versionId
+      in: path
+      required: true
+      description: Unique identifier for the bot version.
+      schema:
+        type: string
+    BotId:
+      name: botId
+      in: path
+      required: true
+      description: Unique identifier for the Einstein Bot.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

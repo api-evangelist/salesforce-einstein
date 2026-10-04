@@ -89,22 +89,41 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier for the bot session.
+      schema:
+        type: string
+    BotId:
+      name: botId
+      in: path
+      required: true
+      description: Unique identifier for the Einstein Bot.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    SessionInput:
-      type: object
-      properties:
-        forceConfig:
-          type: object
-          description: Configuration settings for the session.
-          properties:
-            endpoint:
-              type: string
-              description: Messaging endpoint for the bot.
-        externalSessionKey:
-          type: string
-          description: External key to associate with the session.
-      required:
-      - forceConfig
     Session:
       type: object
       properties:
@@ -138,40 +157,21 @@ components:
           type: array
           items:
             type: string
-  parameters:
-    BotId:
-      name: botId
-      in: path
-      required: true
-      description: Unique identifier for the Einstein Bot.
-      schema:
-        type: string
-    SessionId:
-      name: sessionId
-      in: path
-      required: true
-      description: Unique identifier for the bot session.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    SessionInput:
+      type: object
+      properties:
+        forceConfig:
+          type: object
+          description: Configuration settings for the session.
+          properties:
+            endpoint:
+              type: string
+              description: Messaging endpoint for the bot.
+        externalSessionKey:
+          type: string
+          description: External key to associate with the session.
+      required:
+      - forceConfig
   securitySchemes:
     oauth2:
       type: oauth2

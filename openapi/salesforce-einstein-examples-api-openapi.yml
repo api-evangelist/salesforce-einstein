@@ -115,6 +115,15 @@ components:
           type: string
         numExamples:
           type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     ExampleList:
       type: object
       properties:
@@ -138,15 +147,6 @@ components:
           format: date-time
         object:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
     Label_2:
       type: object
       properties:
@@ -182,23 +182,9 @@ components:
           description: Timestamp when the example was created.
         object:
           type: string
-  parameters:
-    DatasetId:
-      name: datasetId
-      in: path
-      required: true
-      description: Unique identifier for the dataset.
-      schema:
-        type: integer
   responses:
     Unauthorized:
       description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
       content:
         application/json:
           schema:
@@ -209,6 +195,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

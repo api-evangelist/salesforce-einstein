@@ -137,45 +137,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    TemplateId:
-      name: templateId
-      in: path
-      required: true
-      description: Unique identifier for the prompt template.
-      schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    PromptTemplateCollection:
-      type: object
-      properties:
-        promptTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromptTemplate'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
     PromptTemplateInput:
       type: object
       properties:
@@ -202,6 +164,28 @@ components:
       - masterLabel
       - promptText
       - type
+    PromptTemplateCollection:
+      type: object
+      properties:
+        promptTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     PromptTemplate:
       type: object
       properties:
@@ -242,17 +226,33 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    TemplateId:
+      name: templateId
+      in: path
+      required: true
+      description: Unique identifier for the prompt template.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

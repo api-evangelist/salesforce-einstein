@@ -162,6 +162,14 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    StoryId:
+      name: storyId
+      in: path
+      required: true
+      description: Unique identifier for the story.
+      schema:
+        type: string
   schemas:
     Story:
       type: object
@@ -203,6 +211,13 @@ components:
         url:
           type: string
           format: uri
+    UserReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
     StoryInput:
       type: object
       properties:
@@ -227,13 +242,6 @@ components:
       - name
       - sourceDatasetId
       - outcomeVariable
-    UserReference:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     StoryStats:
       type: object
       properties:
@@ -259,17 +267,6 @@ components:
               type: number
             accuracy:
               type: number
-    StoryCollection:
-      type: object
-      properties:
-        stories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Story'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
     Error:
       type: object
       properties:
@@ -281,14 +278,17 @@ components:
           type: array
           items:
             type: string
-  parameters:
-    StoryId:
-      name: storyId
-      in: path
-      required: true
-      description: Unique identifier for the story.
-      schema:
-        type: string
+    StoryCollection:
+      type: object
+      properties:
+        stories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
   responses:
     Unauthorized:
       description: Unauthorized.

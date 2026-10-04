@@ -329,28 +329,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error_3'
   schemas:
-    PredictionInput:
-      type: object
-      properties:
-        predictionDefinition:
-          type: string
-          description: ID of the prediction definition or model.
-        columnNames:
-          type: array
-          description: Names of the input columns.
-          items:
-            type: string
-        rows:
-          type: array
-          description: Input data rows for prediction.
-          items:
-            type: array
-            items:
-              type: string
-      required:
-      - predictionDefinition
-      - columnNames
-      - rows
     PredictionOutput:
       type: object
       properties:
@@ -390,6 +368,28 @@ components:
                       type: string
                     impact:
                       type: number
+    PredictionInput:
+      type: object
+      properties:
+        predictionDefinition:
+          type: string
+          description: ID of the prediction definition or model.
+        columnNames:
+          type: array
+          description: Names of the input columns.
+          items:
+            type: string
+        rows:
+          type: array
+          description: Input data rows for prediction.
+          items:
+            type: array
+            items:
+              type: string
+      required:
+      - predictionDefinition
+      - columnNames
+      - rows
     Error:
       type: object
       properties:
@@ -401,15 +401,6 @@ components:
           type: array
           items:
             type: string
-    Probability:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Predicted label.
-        probability:
-          type: number
-          description: Confidence score (0.0 to 1.0).
     PredictionResponse:
       type: object
       properties:
@@ -428,6 +419,15 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code.
+    Probability:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Predicted label.
+        probability:
+          type: number
+          description: Confidence score (0.0 to 1.0).
     PredictionResultList:
       type: object
       properties:
@@ -477,15 +477,6 @@ components:
                 $ref: '#/components/schemas/PredictionFactor'
         predictionDefinitionId:
           type: string
-    DetectionResponse:
-      type: object
-      properties:
-        probabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/DetectionResult'
-        object:
-          type: string
     DetectionResult:
       type: object
       properties:
@@ -512,6 +503,15 @@ components:
         maxY:
           type: integer
           description: Maximum Y coordinate.
+    DetectionResponse:
+      type: object
+      properties:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectionResult'
+        object:
+          type: string
     Error_3:
       type: object
       properties:

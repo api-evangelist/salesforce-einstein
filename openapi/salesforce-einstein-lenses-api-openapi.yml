@@ -88,15 +88,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    LensCollection:
-      type: object
-      properties:
-        lenses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Lens'
-        totalSize:
-          type: integer
     Lens:
       type: object
       properties:
@@ -130,6 +121,15 @@ components:
           type: array
           items:
             type: string
+    LensCollection:
+      type: object
+      properties:
+        lenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lens'
+        totalSize:
+          type: integer
   securitySchemes:
     oauth2:
       type: oauth2
