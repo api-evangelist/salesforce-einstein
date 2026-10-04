@@ -1,0 +1,110 @@
+slug: salesforce-einstein
+provider: Salesforce Einstein
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Models
+  spec_file: salesforce-einstein-models-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.92
+  evidence: '"Train a model", "Retrain a model", "Get model learning curve", schemas DiscoveryModel, GenerativeModel,
+    TrainResponse'
+  reason: Full ML model lifecycle operations (list, train, retrain, delete, learning curve) across vision/language/LLM
+    definitions — plainly AI/ML model lifecycle management.
+- tag: Predictions
+  spec_file: salesforce-einstein-predictions-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.85
+  evidence: '"Make a prediction", "Analyze sentiment", "Detect intent", "Detect objects in an image"'
+  reason: Inference endpoints for ML models (scoring, NLP sentiment/intent, computer vision) — model serving
+    within AI management; not tied to a specific business domain.
+- tag: Prediction Definitions
+  spec_file: salesforce-einstein-prediction-definitions-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.82
+  evidence: '"Create custom AI predictions on Salesforce data without code using Einstein Prediction Builder";
+    createPredictionDefinition'
+  reason: CRUD over predictive model definitions (outcome, prediction settings) is configuration of ML
+    models, i.e. AI/ML lifecycle management rather than any line-of-business capability.
+- tag: AI Record Insights
+  spec_file: salesforce-einstein-ai-record-insights-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: 'POST /einstein/ai-record-insights  getAIRecordInsights; schemas: AIRecordInsightsResponse,
+    PredictionFactor'
+  reason: Operation returns AI prediction insights with prediction factors from Einstein Prediction Builder
+    — AI/ML model consumption, mapping to Artificial Intelligence Management.
+- tag: Dashboards
+  spec_file: salesforce-einstein-dashboards-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.8
+  evidence: 'GET /wave/dashboards  listDashboards; schemas: DashboardCollection, Dashboard'
+  reason: Analytics (Wave) dashboard listing and retrieval — business intelligence/analytics delivery
+    artefacts, mapping to Analytics & BI Management.
+- tag: Datasets
+  spec_file: salesforce-einstein-datasets-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: 'POST /datasets  createDataset; schemas: Label, LabelSummary, Dataset, DatasetList (language
+    and vision definitions)'
+  reason: Datasets with labels for Einstein language/vision model training — ML training data lifecycle,
+    part of AI/ML model lifecycle management.
+- tag: Generations
+  spec_file: salesforce-einstein-generations-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: POST /einstein/llm/prompt/generations  generateFromPrompt; POST /einstein/llm/prompt/chat/generations  chatGeneration
+  reason: LLM prompt completion and chat generation endpoints — operational use of generative AI models,
+    mapping to Artificial Intelligence Management.
+- tag: Prompt Templates
+  spec_file: salesforce-einstein-prompt-templates-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: '"List prompt templates", "Create a prompt template"; "Generative AI API powered by large
+    language model integration"'
+  reason: Lifecycle management of LLM prompt templates is generative-AI asset management, falling under
+    AI/ML model lifecycle and responsible AI operations.
+- tag: Examples
+  spec_file: salesforce-einstein-examples-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /datasets/{datasetId}/examples  addExample  Salesforce Einstein Add an example to a dataset
+  reason: Adding labelled training examples to ML datasets for language/vision models — AI/ML lifecycle
+    (training data curation).
+- tag: Lenses
+  spec_file: salesforce-einstein-lenses-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.75
+  evidence: 'GET /wave/lenses  listLenses; schemas: LensCollection, Lens'
+  reason: Wave/CRM Analytics lenses are saved exploration views over datasets — analytics and BI delivery
+    artefacts.

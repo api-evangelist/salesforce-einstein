@@ -824,6 +824,9 @@ apis:
   - type: Trust & Safety
     url: https://www.salesforce.com/company/ethical-and-humane-use/
 common:
+  - type: CapabilityMap
+    url: capabilities/salesforce-einstein-capability-edges.yml
+    name: Salesforce Einstein Business Capability Map
   - type: Website
     url: https://www.salesforce.com/
   - type: AgenticAccess
