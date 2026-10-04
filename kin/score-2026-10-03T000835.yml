@@ -1,22 +1,20 @@
-# Kin Score artifact — salesforce-einstein — 2026-08-25T154045
+# Kin Score artifact — salesforce-einstein — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: salesforce-einstein
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T154045
-  composite: 41.7
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 48.6
   band: developing
   facets:
-    discoverability: 59.3
-    contract_quality: 65.2
-    governance: 28.8
-    operational_transparency: 7.9
-    developer_ergonomics: 40.5
-    commercial_clarity: 34.2
-    contract_governance: 28.8
-    access_clarity: 34.2
+    discoverability: 57.1
+    contract_quality: 59.7
+    contract_governance: 27.3
+    operational_transparency: 15.8
+    developer_ergonomics: 57.1
+    access_clarity: 47.4
   agent_readiness:
     score: 27.3
     band: agent-aware
@@ -40,6 +38,12 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  regulatory:
+    applies: true
+    regime: Horizontal (data, software, accessibility, platform)
+    regime_id: horizontal
+    score: 31.8
+    matched_via: fallback
   provenance:
     agentic_access: derived
     contracts:
