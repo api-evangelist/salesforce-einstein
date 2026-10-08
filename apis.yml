@@ -824,6 +824,12 @@ apis:
   - type: Trust & Safety
     url: https://www.salesforce.com/company/ethical-and-humane-use/
 common:
+  - type: Plans
+    url: plans/salesforce-einstein-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/salesforce-einstein-rate-limits.yml
+  - type: FinOps
+    url: finops/salesforce-einstein-finops.yml
   - type: CapabilityMap
     url: capabilities/salesforce-einstein-capability-edges.yml
     name: Salesforce Einstein Business Capability Map
