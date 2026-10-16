@@ -2,6 +2,10 @@
   "repo": "salesforce-einstein",
   "feeds": [
     {
+      "source": "https://developer.salesforce.com/blogs",
+      "error": "HTTPError"
+    },
+    {
       "source": "https://help.salesforce.com/",
       "feed_url": "https://help.salesforce.com/",
       "title": "",
@@ -9,7 +13,7 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 16,
   "agent_pulled": "2026-06-27",
   "feed_nature": "vendor-blog",
