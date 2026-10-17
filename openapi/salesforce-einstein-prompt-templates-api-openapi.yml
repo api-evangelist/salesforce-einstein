@@ -137,7 +137,37 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     PromptTemplateInput:
       type: object
       properties:
@@ -164,28 +194,6 @@ components:
       - masterLabel
       - promptText
       - type
-    PromptTemplateCollection:
-      type: object
-      properties:
-        promptTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromptTemplate'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     PromptTemplate:
       type: object
       properties:
@@ -226,25 +234,17 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    PromptTemplateCollection:
+      type: object
+      properties:
+        promptTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromptTemplate'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
   parameters:
     TemplateId:
       name: templateId

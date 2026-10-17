@@ -75,6 +75,26 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    DashboardCollection:
+      type: object
+      properties:
+        dashboards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dashboard'
+        totalSize:
+          type: integer
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     Dashboard:
       type: object
       properties:
@@ -97,26 +117,6 @@ components:
         url:
           type: string
           format: uri
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    DashboardCollection:
-      type: object
-      properties:
-        dashboards:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dashboard'
-        totalSize:
-          type: integer
   responses:
     Unauthorized:
       description: Unauthorized.

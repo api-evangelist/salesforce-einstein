@@ -125,7 +125,88 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Outcome:
+      type: object
+      properties:
+        field:
+          type: string
+          description: Field that stores the outcome value.
+        goal:
+          type: string
+          enum:
+          - Maximize
+          - Minimize
+          description: Optimization goal for the prediction.
+        label:
+          type: string
+          description: Label for the outcome.
+    PredictionDefinitionInput:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Display label for the prediction.
+        name:
+          type: string
+          description: API name of the prediction definition.
+        outcome:
+          $ref: '#/components/schemas/Outcome'
+        predictionType:
+          type: string
+          enum:
+          - Boolean
+          - Categorical
+          - Numeric
+        sobjectType:
+          type: string
+          description: Salesforce object to predict on.
+        pushbackField:
+          type: string
+          description: Field to write prediction scores to.
+      required:
+      - label
+      - sobjectType
+      - predictionType
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    PredictionDefinitionList:
+      type: object
+      properties:
+        predictionDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionDefinition'
+        totalSize:
+          type: integer
     PredictionDefinition:
       type: object
       properties:
@@ -169,87 +250,6 @@ components:
         lastModifiedDate:
           type: string
           format: date-time
-    Outcome:
-      type: object
-      properties:
-        field:
-          type: string
-          description: Field that stores the outcome value.
-        goal:
-          type: string
-          enum:
-          - Maximize
-          - Minimize
-          description: Optimization goal for the prediction.
-        label:
-          type: string
-          description: Label for the outcome.
-    PredictionDefinitionInput:
-      type: object
-      properties:
-        label:
-          type: string
-          description: Display label for the prediction.
-        name:
-          type: string
-          description: API name of the prediction definition.
-        outcome:
-          $ref: '#/components/schemas/Outcome'
-        predictionType:
-          type: string
-          enum:
-          - Boolean
-          - Categorical
-          - Numeric
-        sobjectType:
-          type: string
-          description: Salesforce object to predict on.
-        pushbackField:
-          type: string
-          description: Field to write prediction scores to.
-      required:
-      - label
-      - sobjectType
-      - predictionType
-    PredictionDefinitionList:
-      type: object
-      properties:
-        predictionDefinitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionDefinition'
-        totalSize:
-          type: integer
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     PredictionDefinitionId:
       name: predictionDefinitionId

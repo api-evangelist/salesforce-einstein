@@ -78,6 +78,17 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     PredictionFactor:
       type: object
       properties:
@@ -96,17 +107,6 @@ components:
           - Positive
           - Negative
           description: Whether the factor positively or negatively affects the prediction.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
     AIRecordInsightsResponse:
       type: object
       properties:

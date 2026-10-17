@@ -48,6 +48,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     FeedbackResponse:
       type: object
@@ -61,6 +74,17 @@ components:
         createdDate:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     FeedbackInput:
       type: object
       properties:
@@ -82,30 +106,6 @@ components:
       required:
       - generationId
       - feedback
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     oauth2:
       type: oauth2

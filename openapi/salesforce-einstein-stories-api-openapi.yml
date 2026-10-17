@@ -162,15 +162,61 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    StoryId:
-      name: storyId
-      in: path
-      required: true
-      description: Unique identifier for the story.
-      schema:
-        type: string
   schemas:
+    UserReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    StoryCollection:
+      type: object
+      properties:
+        stories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalSize:
+          type: integer
+        nextPageUrl:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    StoryStats:
+      type: object
+      properties:
+        insights:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              description:
+                type: string
+              impact:
+                type: number
+              variable:
+                type: string
+        modelMetrics:
+          type: object
+          properties:
+            r2:
+              type: number
+            rmse:
+              type: number
+            accuracy:
+              type: number
     Story:
       type: object
       properties:
@@ -211,13 +257,6 @@ components:
         url:
           type: string
           format: uri
-    UserReference:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     StoryInput:
       type: object
       properties:
@@ -242,53 +281,6 @@ components:
       - name
       - sourceDatasetId
       - outcomeVariable
-    StoryStats:
-      type: object
-      properties:
-        insights:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              description:
-                type: string
-              impact:
-                type: number
-              variable:
-                type: string
-        modelMetrics:
-          type: object
-          properties:
-            r2:
-              type: number
-            rmse:
-              type: number
-            accuracy:
-              type: number
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    StoryCollection:
-      type: object
-      properties:
-        stories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Story'
-        totalSize:
-          type: integer
-        nextPageUrl:
-          type: string
   responses:
     Unauthorized:
       description: Unauthorized.
@@ -308,6 +300,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    StoryId:
+      name: storyId
+      in: path
+      required: true
+      description: Unique identifier for the story.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

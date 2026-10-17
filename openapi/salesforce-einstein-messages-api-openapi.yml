@@ -73,7 +73,50 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    MessageResponse:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/BotMessage'
+        sessionEnded:
+          type: boolean
+          description: Whether the session has ended.
+        processedSequenceId:
+          type: integer
+          description: Last processed sequence ID.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     BotMessage:
       type: object
       properties:
@@ -140,38 +183,7 @@ components:
           - type
       required:
       - message
-    MessageResponse:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/BotMessage'
-        sessionEnded:
-          type: boolean
-          description: Whether the session has ended.
-        processedSequenceId:
-          type: integer
-          description: Last processed sequence ID.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
   parameters:
-    SessionId:
-      name: sessionId
-      in: path
-      required: true
-      description: Unique identifier for the bot session.
-      schema:
-        type: string
     BotId:
       name: botId
       in: path
@@ -179,25 +191,13 @@ components:
       description: Unique identifier for the Einstein Bot.
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique identifier for the bot session.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

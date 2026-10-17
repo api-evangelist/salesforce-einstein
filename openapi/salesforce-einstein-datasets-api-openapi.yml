@@ -130,6 +130,25 @@ paths:
     - url: https://api.einstein.ai/v2/language
       description: Einstein Language Production Server
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Label:
       type: object
@@ -142,15 +161,6 @@ components:
           type: string
         numExamples:
           type: integer
-    DatasetList:
-      type: object
-      properties:
-        object:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dataset'
     Error:
       type: object
       properties:
@@ -160,6 +170,22 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code.
+    DatasetList:
+      type: object
+      properties:
+        object:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+    LabelSummary:
+      type: object
+      properties:
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Label'
     Dataset:
       type: object
       properties:
@@ -193,13 +219,6 @@ components:
           type: string
         object:
           type: string
-    LabelSummary:
-      type: object
-      properties:
-        labels:
-          type: array
-          items:
-            $ref: '#/components/schemas/Label'
     Label_2:
       type: object
       properties:
@@ -256,25 +275,6 @@ components:
         object:
           type: string
           description: Object type identifier.
-  responses:
-    Unauthorized:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     DatasetId:
       name: datasetId

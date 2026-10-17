@@ -329,6 +329,39 @@ components:
           schema:
             $ref: '#/components/schemas/Error_3'
   schemas:
+    PredictionInput:
+      type: object
+      properties:
+        predictionDefinition:
+          type: string
+          description: ID of the prediction definition or model.
+        columnNames:
+          type: array
+          description: Names of the input columns.
+          items:
+            type: string
+        rows:
+          type: array
+          description: Input data rows for prediction.
+          items:
+            type: array
+            items:
+              type: string
+      required:
+      - predictionDefinition
+      - columnNames
+      - rows
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
     PredictionOutput:
       type: object
       properties:
@@ -368,48 +401,6 @@ components:
                       type: string
                     impact:
                       type: number
-    PredictionInput:
-      type: object
-      properties:
-        predictionDefinition:
-          type: string
-          description: ID of the prediction definition or model.
-        columnNames:
-          type: array
-          description: Names of the input columns.
-          items:
-            type: string
-        rows:
-          type: array
-          description: Input data rows for prediction.
-          items:
-            type: array
-            items:
-              type: string
-      required:
-      - predictionDefinition
-      - columnNames
-      - rows
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errorCode:
-          type: string
-        fields:
-          type: array
-          items:
-            type: string
-    PredictionResponse:
-      type: object
-      properties:
-        probabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Probability'
-        object:
-          type: string
     Error_2:
       type: object
       properties:
@@ -428,15 +419,15 @@ components:
         probability:
           type: number
           description: Confidence score (0.0 to 1.0).
-    PredictionResultList:
+    PredictionResponse:
       type: object
       properties:
-        predictions:
+        probabilities:
           type: array
           items:
-            $ref: '#/components/schemas/PredictionResult'
-        totalSize:
-          type: integer
+            $ref: '#/components/schemas/Probability'
+        object:
+          type: string
     PredictionFactor:
       type: object
       properties:
@@ -477,6 +468,24 @@ components:
                 $ref: '#/components/schemas/PredictionFactor'
         predictionDefinitionId:
           type: string
+    PredictionResultList:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionResult'
+        totalSize:
+          type: integer
+    Error_3:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     DetectionResult:
       type: object
       properties:
@@ -488,6 +497,15 @@ components:
           description: Confidence score.
         boundingBox:
           $ref: '#/components/schemas/BoundingBox'
+    DetectionResponse:
+      type: object
+      properties:
+        probabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetectionResult'
+        object:
+          type: string
     BoundingBox:
       type: object
       properties:
@@ -503,24 +521,6 @@ components:
         maxY:
           type: integer
           description: Maximum Y coordinate.
-    DetectionResponse:
-      type: object
-      properties:
-        probabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/DetectionResult'
-        object:
-          type: string
-    Error_3:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
   parameters:
     PredictionDefinitionId:
       name: predictionDefinitionId

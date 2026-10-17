@@ -348,6 +348,65 @@ paths:
     - url: https://api.einstein.ai/v2/vision
       description: Einstein Vision Production Server
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_2:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_2'
+    Unauthorized_3:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+    BadRequest_2:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error_3'
+  parameters:
+    ModelId:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the model.
+      schema:
+        type: string
+    ModelId_2:
+      name: modelId
+      in: path
+      required: true
+      description: Unique identifier for the generative AI model.
+      schema:
+        type: string
+    DatasetId:
+      name: datasetId
+      in: path
+      required: true
+      description: Unique identifier for the dataset.
+      schema:
+        type: integer
   schemas:
     Error:
       type: object
@@ -402,6 +461,15 @@ components:
         url:
           type: string
           format: uri
+    ModelCollection_2:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerativeModel'
+        totalSize:
+          type: integer
     GenerativeModel:
       type: object
       properties:
@@ -432,15 +500,6 @@ components:
           enum:
           - Active
           - Inactive
-    ModelCollection_2:
-      type: object
-      properties:
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenerativeModel'
-        totalSize:
-          type: integer
     Error_2:
       type: object
       properties:
@@ -450,33 +509,6 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code.
-    TrainResponse:
-      type: object
-      properties:
-        modelId:
-          type: string
-        datasetId:
-          type: integer
-        datasetVersionId:
-          type: integer
-        name:
-          type: string
-        status:
-          type: string
-        progress:
-          type: number
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        epochs:
-          type: integer
-        learningRate:
-          type: number
-        object:
-          type: string
     Model:
       type: object
       properties:
@@ -514,21 +546,11 @@ components:
           type: string
         failureMsg:
           type: string
-    Error_3:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        errorCode:
-          type: string
-          description: Machine-readable error code.
-    TrainResponse_2:
+    TrainResponse:
       type: object
       properties:
         modelId:
           type: string
-          description: ID of the model being trained.
         datasetId:
           type: integer
         datasetVersionId:
@@ -551,6 +573,15 @@ components:
           type: number
         object:
           type: string
+    Error_3:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        errorCode:
+          type: string
+          description: Machine-readable error code.
     LearningCurve:
       type: object
       properties:
@@ -627,65 +658,34 @@ components:
         failureMsg:
           type: string
           description: Failure message if training failed.
-  responses:
-    Unauthorized:
-      description: Unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_2:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_2'
-    Unauthorized_3:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
-    BadRequest_2:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error_3'
-  parameters:
-    ModelId:
-      name: modelId
-      in: path
-      required: true
-      description: Unique identifier for the model.
-      schema:
-        type: string
-    ModelId_2:
-      name: modelId
-      in: path
-      required: true
-      description: Unique identifier for the generative AI model.
-      schema:
-        type: string
-    DatasetId:
-      name: datasetId
-      in: path
-      required: true
-      description: Unique identifier for the dataset.
-      schema:
-        type: integer
+    TrainResponse_2:
+      type: object
+      properties:
+        modelId:
+          type: string
+          description: ID of the model being trained.
+        datasetId:
+          type: integer
+        datasetVersionId:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+        progress:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        epochs:
+          type: integer
+        learningRate:
+          type: number
+        object:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2

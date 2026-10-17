@@ -103,6 +103,25 @@ paths:
     - url: https://api.einstein.ai/v2/language
       description: Einstein Language Production Server
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request. Invalid parameters or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Label:
       type: object
@@ -182,25 +201,6 @@ components:
           description: Timestamp when the example was created.
         object:
           type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized. Invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request. Invalid parameters or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     DatasetId:
       name: datasetId
